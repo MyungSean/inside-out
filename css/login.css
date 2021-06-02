@@ -6,7 +6,7 @@
     display: flex;
     flex-flow: column wrap;
     position: absolute;
-    top: 50vh;
+    top: 45vh;
     left: 50vw;
     width: 360px;
     transform: translate(-50%, -50%);
@@ -19,7 +19,6 @@
 .login_area #login_form {
     display: flex;
     flex-flow: column wrap;
-    margin-bottom: 10px;
 }
 .login_area #login_form input {
     border: 1px solid #000000;

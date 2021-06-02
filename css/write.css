@@ -1,0 +1,73 @@
+.board_info {
+    margin-bottom: 10px;
+}
+.board_info h2 {
+    font-size: 30px;
+}
+.editor {
+    border: 1px solid #000000;
+    display: flex;
+    flex-flow: column wrap;
+    padding: var(--content-padding);
+}
+
+.editor > div {
+    flex-grow: 1;
+}
+.editor #subject {
+    width: 100%;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #000000;
+}
+.editor #content {
+    width: 100%;
+    min-height: 400px;
+    resize: none;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.editor hr {
+    width: 100%;
+    border-top: 1px solid rgb(189, 189, 189);
+    margin-bottom: 20px;
+}
+
+.editor .option {
+    display: flex;
+    justify-content: space-between;
+}
+.editor label[for=anonymity] {
+    font-size: 16px;
+}
+.editor .option #submit_post {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: inherit;
+    border: 1px solid #000000;
+    cursor: pointer;
+}
+
+.backToList {
+    margin-top: 20px;
+    display: flex;
+}
+.backToList > div {    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000000;
+    padding: 5px 10px;
+    margin-left: auto;
+    cursor: pointer;
+}
+.backToList > div i {
+    font-size: 20px;
+    margin-right: 5px;
+}

@@ -17,6 +17,23 @@ function setupHeader(user) {
     });
 }
 
+// 헤더 유저 메뉴 토글
+function toggleUserMenu() {
+    $('header .user_menu ul').toggle();
+}
+
+
+// 존재하는 보드인지 아이디 체크
+function boardIdCheck(id) {
+    database.ref('board/'+id).once('value').then(function(snapshot) {
+        if ( snapshot.val() == null ) {
+            alert('잘못된 경로입니다.');
+            window.history.back();        
+        }
+    })
+}
+
+
 // 밀리초를 얼마나 지났는지 반환
 function getPastTime(millisecond) {
     // 지난 시간 분단위로 구하기

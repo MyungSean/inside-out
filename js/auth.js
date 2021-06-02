@@ -18,6 +18,13 @@ $('#login_form #login_submit').click(function(e) {
     auth.signInWithEmailAndPassword(email, password).then(cred => {
         // console.log(cred.user);
     })
+    .catch((error) => {
+        console.log(error.code);
+        console.log(error.message);
+        alert("아이디나 비밀번호를 바르게 입력해 주세요.");
+        $('#pw').val("");
+        $('#pw').focus();
+    });      
 })
 
 
@@ -41,13 +48,13 @@ function signupFormCheck() {
         $('#signup_name').focus();
         return false;
     }
-    database.ref('users').orderByChild('name').equalTo(name).once('value').then(function(snapshot) {
-        if ( snapshot.val() !== null ) {
-            $('#signup_name').siblings('span').html('이미 존재하는 닉네임입니다.');
-            $('#signup_name').focus();
-            return false;
-        }
-    })
+    // database.ref('users').orderByChild('name').equalTo(name).once('value').then(function(snapshot) {
+    //     if ( snapshot.val() !== null ) {
+    //         $('#signup_name').siblings('span').html('이미 존재하는 닉네임입니다.');
+    //         $('#signup_name').focus();
+    //         return false;
+    //     }
+    // })
 
     if ( password !== password_check ) {
         $('#signup_pw_check').siblings('span').html('비밀번호가 일치하지 않습니다.');

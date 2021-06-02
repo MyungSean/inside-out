@@ -25,7 +25,7 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
         var upload_date = childSnapshot.val().upload_date;
         var content = childSnapshot.val().content;
         var number = childSnapshot.val().number;
-        var recommendations = childSnapshot.val().recommendations;
+        var likes = childSnapshot.val().likes;
         var views = childSnapshot.val().views;
         
         $('#postId').val(postId);
@@ -49,10 +49,10 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
             var thumbnail = reply.thumbnail;
             var comment = reply.comment;
             var uid = reply.uid;
-            var recommendations = reply.recommendations;
+            var likes = reply.likes;
             var reports = reply.reports;
             var reply_upload_date = reply.upload_date;
-            // console.log(artist, title, videoId, thumbnail, comment, uid, anonymity, recommendations, reports, reply_upload_date);
+            // console.log(artist, title, videoId, thumbnail, comment, uid, anonymity, likes, reports, reply_upload_date);
 
             var li =
             `<li>
@@ -187,6 +187,7 @@ $('.video_confirm').on('click', '.cancelBtn', function() {
 $('.video_confirm').on('click', '.confirmBtn', function() {
 })
 
+// 댓글 등록
 $('#submit_reply').click(function(e) {
     e.preventDefault();
 
@@ -221,9 +222,12 @@ $('#submit_reply').click(function(e) {
         thumbnail: thumbnail,
         comment: comment,
         uid: uid,
-        recommendations: 0,
+        likes: 0,
         reports: 0,
         upload_date: upload_date
+    })
+    .then(function() {
+        window.location.reload();
     })
 })
 

@@ -20,6 +20,9 @@
 .board th {
     padding: 5px 0;
 }
+.board th:nth-child(2) {
+    width: 600px;
+}
 .board tbody tr td {
     padding: 8px 0;
 }
@@ -31,7 +34,6 @@
 }
 .board tbody td:nth-child(2) {
     text-align: left;
-    width: 600px;
 }
 .board tbody td a:hover {
     text-decoration: underline;

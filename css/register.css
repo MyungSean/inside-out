@@ -1,7 +1,9 @@
 .signup_area {
     width: 500px;
-    margin: 0 auto;
-    margin-top: 50px;
+    position: absolute;
+    top: 45vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
 }
 
 .signup_area .logo {

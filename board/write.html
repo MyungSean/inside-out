@@ -6,36 +6,38 @@
     <title>Inside Out write</title>
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/write.css">
 
 </head>
 <body>
     <div class="wrap">
-        <header>
-            <div class="head_wrap">
-                <h1>inside out</h1>
-            </div>
-        </header>
+        <header></header>
         <div class="container">
-            <div>
-                <form>
+            <div class="board_info">
+                <h2>ㅤ</h2>
+            </div>
+            <div class="editor">
+                <div>
+                    <input type="text" id="subject" placeholder="제목" maxlength="50">
+                    <textarea id="content" placeholder="당신의 이야기를 해주세요."></textarea>
+                </div>
+                <hr>
+                <div class="option">
                     <div>
-                        <label for="password">비밀번호</label>
-                        <input type="password" id="password">
+                        <label for="anonymity">익명</label>
+                        <input type="checkbox" id="anonymity">
+                        <input type="hidden" id="uid">
+                        <input type="hidden" id="name">
                     </div>
                     <div>
-                        <label for="name">닉네임</label>
-                        <input type="text" id="name">
+                        <button id="submit_post">등록</button>
                     </div>
-                    <div>
-                        <label for="subject">제목</label>
-                        <input type="text" id="subject">
-                    </div>
-                    <div>
-                        <label for="content">내용</label>
-                        <textarea id="content"></textarea>
-                    </div>
-                    <button id="submit_post">등록</button>
-                </form>
+                </div>
+            </div>
+            <div class="backToList">
+                <div class="backToListBtn">
+                    <i class="ri-menu-fill"></i><span>목록</span>
+                </div>
             </div>
         </div>
         <footer>

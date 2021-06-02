@@ -4,10 +4,8 @@ const urlParams = url.searchParams;
 id = urlParams.get('id');
 page = urlParams.get('page');
 
-if ( id == null ) {
-    alert('잘못된 경로입니다.');
-    window.history.go(-1);
-}
+boardIdCheck(id);
+
 if ( page == null ) {
     page = 1;
 }
@@ -33,7 +31,7 @@ function loadPosts(total_posts, load_pages) {
             var reply_cnt = Object.keys(reply).length;
             var upload_date = childSnapshot.val().upload_date;
             var views = childSnapshot.val().views;
-            var recommendations = childSnapshot.val().recommendations;
+            var likes = childSnapshot.val().likes;
     
             var tr = `
             <tr>
@@ -43,7 +41,7 @@ function loadPosts(total_posts, load_pages) {
             <td>${reply_cnt}</td>
             <td>${getPastTime(upload_date)}</td>
             <td>${views}</td>
-            <td>${recommendations}</td>
+            <td>${likes}</td>
             </tr>`
     
             $('.board table tbody').prepend(tr);
