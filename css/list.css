@@ -4,7 +4,7 @@
     margin-bottom: 30px;
 }
 .board_info h2 {
-    font-size: 20px;
+    font-size: 24px;
 }
     
 
@@ -18,13 +18,13 @@
     text-align: center;
 }
 .board th {
-    padding: 5px 0;
+    padding: 8px 0;
 }
 .board th:nth-child(2) {
     width: 600px;
 }
 .board tbody tr td {
-    padding: 8px 0;
+    padding: 12px 0;
 }
 .board tbody tr {
     border-top: 1px solid #000000;

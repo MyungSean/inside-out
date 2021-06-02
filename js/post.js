@@ -55,7 +55,7 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
             // console.log(artist, title, videoId, thumbnail, comment, uid, anonymity, likes, reports, reply_upload_date);
 
             var li =
-            `<li>
+            `<li name="${videoId}">
                 <div class="reply_music">
                     <div>
                         <div class="img_wrap">
@@ -88,6 +88,11 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
           }
     });
 })
+// Inject YouTube API script
+var tag = document.createElement('script');
+tag.src = "//www.youtube.com/player_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 
 // 댓글 입력을 위한 음악 검색
@@ -241,9 +246,16 @@ $('.replies').on('click', '.play', function() {
     $(this).removeClass('active');
     $(this).siblings('.pause').addClass('active');
     $(this).siblings('img').addClass('active');
+
+    var videoId = $(this).closest('li').attr('name');
+    console.log(videoId);
+    player.loadVideoById(videoId, 5, "large");
+    // player.playVideo();
 })
 $('.replies').on('click', '.pause', function() {
     $(this).removeClass('active');
     $(this).siblings('img').removeClass('active');
     $(this).siblings('.play').addClass('active');
+
+    player.pauseVideo();
 })
