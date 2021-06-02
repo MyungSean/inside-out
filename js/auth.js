@@ -71,6 +71,7 @@ $('#loginWithGoogle').click(function() {
 $('#loginWithFacebook').click(function() {
     var provider = new firebase.auth.FacebookAuthProvider();
     auth.signInWithPopup(provider).then((result) => {
+        console.log(result);
         /** @type {firebase.auth.OAuthCredential} */
         var credential = result.credential;
     
