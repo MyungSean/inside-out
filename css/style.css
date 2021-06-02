@@ -57,6 +57,7 @@ a:active {
 
 /* 변수 */
 :root {
+    --header-height: 70px; 
     --content-padding: 20px;
     --content-width: 1000px;
     --hover-gray: rgb(235, 235, 235);
@@ -73,10 +74,17 @@ a:active {
 .container {
     width: var(--content-width);
     margin: 0 auto;
+    margin-top: var(--header-height);
 }
 
 
 /* 헤더 */
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: var(--header-height);
+}
 header nav {
     display: flex;
     flex-flow: row nowrap;
@@ -84,7 +92,7 @@ header nav {
     -webkit-align-items: center;
     align-items: center;
     width: var(--content-width);
-    padding: 12px 0;
+    height: var(--header-height);
     margin: 0 auto;
 }
 header .home {
@@ -133,13 +141,17 @@ header .user .img_wrap img {
     object-fit: cover;
 }
 header .user .user_menu {
+    position: relative;
+}
+header .user .user_menu i {
     border-radius: 50%;
     font-size: 22px;
+    padding: 5px;
     margin-left: 5px;
     transition: .2s;
     cursor: pointer;
 }
-header .user .user_menu:hover {
+header .user .user_menu i:hover {
     background-color: var(--hover-gray);
 }
 header .user a {
@@ -149,5 +161,26 @@ header .user a {
     transition: .2s;
 }
 header .user a:hover {
+    background-color: var(--hover-gray);
+}
+
+/* 유저 메뉴 */
+header .user .user_menu ul {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    width: 100px;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    padding: 5px;
+    text-align: right;
+    font-size: 14px;
+}
+header .user .user_menu ul li {
+    padding: 5px;
+    cursor: pointer;
+    transition: .2s;
+}
+header .user .user_menu ul li:hover {
     background-color: var(--hover-gray);
 }

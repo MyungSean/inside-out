@@ -2,7 +2,11 @@
 function setupHeader(user) {
     $('header').load('/html/header.html', function() {
         if (user) {
-            console.log('로그인 됨. 헤더 설정');
+            var uid = user.uid;
+            database.ref('users/'+uid).once('value').then(function(snapshot) {
+                var photoURL = snapshot.val().photoURL;
+                $('header .profile img').attr('src', photoURL);
+            })
         } else {
             var html = `
             <a href="/user/login.html">로그인</a>

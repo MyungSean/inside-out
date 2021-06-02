@@ -22,7 +22,7 @@ $('#login_form #login_submit').click(function(e) {
 
 
 // 로그아웃
-$('.logoutBtn').click(function(e) {
+$(document).on('click', '.logoutBtn', function(e) {
     e.preventDefault();
 
     auth.signOut();

@@ -6,6 +6,7 @@ function write() {
     var content = $('#content').val();
     var upload_date = Date.now();
 
+    console.log(0);
     database.ref('board/music/posts').orderByChild('number').limitToLast(1).once('value').then(function(snapshot){
         // 게시물 넘버 설정
         if ( snapshot.val() == null ) {
@@ -32,6 +33,8 @@ function write() {
     })
 }
 
-$('h1').click( function(){
+$('#submit_post').click( function(e){
+    e.preventDefault();
+    
     write();
 });
