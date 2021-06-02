@@ -5,6 +5,9 @@ auth.onAuthStateChanged(user => {
     } else {
         console.log('user logged out');
     }
+    
+    user = firebase.auth().currentUser;
+
     setupHeader(user);
 })
 

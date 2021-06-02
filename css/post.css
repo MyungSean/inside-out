@@ -5,6 +5,7 @@
 
 /* 게시글 */
 .post {
+    position: relative;
     border: 1px solid black;
     padding: var(--content-padding);
     margin-bottom: 20px;
@@ -40,6 +41,10 @@
     white-space: pre-wrap;
     line-height: 25px;
 }
+
+/* .post .delete_post {
+} */
+
 
 /* 댓글 */
 .reply {
@@ -157,6 +162,7 @@
     flex-flow: row wrap;
 }
 .replies li {
+    position: relative;
     display: flex;
     flex-flow: column wrap;
     border: 1px solid #000000;
@@ -268,7 +274,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
 
+.reply .delete_reply {
+    font-size: 16px;
 }
 
 

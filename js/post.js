@@ -20,8 +20,9 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
         })
         
         // 게시물 불러오기
-        var subject = childSnapshot.val().subject;
+        var uid = childSnapshot.val().uid;
         var name = childSnapshot.val().name;
+        var subject = childSnapshot.val().subject;
         var upload_date = childSnapshot.val().upload_date;
         var content = childSnapshot.val().content;
         var number = childSnapshot.val().number;
@@ -34,6 +35,13 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
         $('.views').html(views);
         $('.upload_date').html(getPastTime(upload_date));
         $('.content').html(content);
+
+        // 유저 상태 확인후 포스트 삭제 버튼 추가
+        var user = auth.currentUser;
+        if ( user.uid == uid ) {
+            $('.post').append('<i class="ri-close-fill delete delete_post"></i>');
+        }
+
         
         
         // 댓글 불러오기
@@ -54,8 +62,16 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
             var reply_upload_date = reply.upload_date;
             // console.log(artist, title, videoId, thumbnail, comment, uid, anonymity, likes, reports, reply_upload_date);
 
+            // 유저 상태 확인후 댓글 삭제 버튼 추가
+            if ( user.uid == uid ) {
+                var deleteBtn = `<i class="ri-close-fill delete delete_reply"></i>`;
+            } else {
+                var deleteBtn = "";
+            }
+
             var li =
-            `<li name="${videoId}">
+            `<li name="${videoId}" id="${key}">
+                ${deleteBtn}
                 <div class="reply_music">
                     <div>
                         <div class="img_wrap">
@@ -85,15 +101,11 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
             </li>`;
 
             $('.replies ul').prepend(li);
-          }
+            
+        }
+        
     });
 })
-// Inject YouTube API script
-var tag = document.createElement('script');
-tag.src = "//www.youtube.com/player_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
 
 // 댓글 입력을 위한 음악 검색
 function addMusicList() {
@@ -196,6 +208,11 @@ $('.video_confirm').on('click', '.confirmBtn', function() {
 $('#submit_reply').click(function(e) {
     e.preventDefault();
 
+    var user = auth.currentUser;
+    if ( user ) {
+        var uid = user.uid;
+    }
+
     var postId = $('#postId').val();
     var artist = $('#artist').val();
     var title = $('#title').val();
@@ -203,7 +220,7 @@ $('#submit_reply').click(function(e) {
     var thumbnail = $('#thumbnail').val();
     var comment = $('#my_comment').val();
     var upload_date = Date.now();
-    var uid = 'uid sample';
+    var uid = uid;
 
     if ( postId == "" ) {
         return alert('등록 과정에서 오류가 발생했습니다.');
@@ -265,4 +282,30 @@ $('.replies').on('click', '.pause', function() {
     $(this).siblings('.play').addClass('active');
 
     player.pauseVideo();
+})
+
+
+// 포스트 삭제
+$(document).on('click', '.delete_post', function() {
+    var result = confirm('삭제한 게시글과 댓글은 다시 복구할 수 없습니다. 게시글을 삭제하시겠습니까?');
+    if(result) {
+        var postId = $('#postId').val();
+        database.ref('board/'+id+'/posts/'+postId).remove()
+        .then(function() {
+            window.history.back();
+        });
+    }
+})
+
+// 댓글 삭제
+$(document).on('click', '.delete_reply', function() {
+    var result = confirm('삭제한 댓글은 다시 복구할 수 없습니다. 댓글을 삭제하시겠습니까?');
+    if(result) {
+        var postId = $('#postId').val();
+        var replyId = $(this).closest('li').attr('id');
+        database.ref('board/'+id+'/posts/'+postId+'/reply/'+replyId).remove()
+        .then(function() {
+            window.location.reload();
+        });
+    }
 })

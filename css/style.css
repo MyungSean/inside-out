@@ -124,7 +124,7 @@ header .user .notice {
     font-size: 25px;
     padding: 8px;
     border-radius: 50%;
-    transition: .2s;
+    transition: .1s;
     cursor: pointer;
 }
 header .user .notice:hover {
@@ -149,7 +149,7 @@ header .user .user_menu i {
     border-radius: 50%;
     font-size: 22px;
     padding: 5px;
-    transition: .2s;
+    transition: .1s;
     cursor: pointer;
 }
 header .user .user_menu i:hover {
@@ -159,7 +159,7 @@ header .user a {
     /* margin-left: 5px; */
     padding: 10px;
     border-radius: 20px;
-    transition: .2s;
+    transition: .1s;
 }
 header .user a:hover {
     background-color: var(--hover-gray);
@@ -180,8 +180,18 @@ header .user .user_menu ul {
 header .user .user_menu ul li {
     padding: 5px;
     cursor: pointer;
-    transition: .2s;
+    transition: .1s;
 }
 header .user .user_menu ul li:hover {
     background-color: var(--hover-gray);
+}
+
+/* 삭제 버튼 */
+.delete {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 20px;
+    border: 1px solid #000000;
+    cursor: pointer;
 }
