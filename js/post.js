@@ -247,10 +247,19 @@ $('.replies').on('click', '.play', function() {
     $(this).siblings('.pause').addClass('active');
     $(this).siblings('img').addClass('active');
 
+    const curr_videoUrl = new URL(player.getVideoUrl());
+    const urlParams = curr_videoUrl.searchParams;
+    var curr_videoId = urlParams.get('v');
+
     var videoId = $(this).closest('li').attr('name');
-    console.log(videoId);
-    player.loadVideoById(videoId, 5, "large");
-    // player.playVideo();
+    console.log(curr_videoId, videoId);
+
+    if ( curr_videoId == videoId) {
+        player.playVideo();
+    } else {
+        player.loadVideoById(videoId, 0, "large");
+    }
+
 })
 $('.replies').on('click', '.pause', function() {
     $(this).removeClass('active');
