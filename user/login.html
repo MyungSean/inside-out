@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inside Out login</title>
+
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <div class="wrap">
+        <!-- <header></header> -->
+        <div class="container">
+            <div>
+                <div class="login_area">
+                    <div class="logo">
+                        <h1>inside out</h1>
+                    </div>
+                    <div>
+                        <form id="login_form">
+                            <input type="text" id="email" placeholder="이메일">
+                            <input type="password" id="pw" placeholder="비밀번호">
+                            <button id="login_submit">로그인</button>
+                        </form>
+                    </div>
+                    <div class="option">
+                        <div>
+                            <input type="checkbox" id="autoLogin">
+                            <label for="autoLogin">로그인 유지</label>
+                        </div>
+                        <div>
+                            <a href="#">아이디/비밀번호 찾기</a>
+                        </div>
+                    </div>
+                    <span>또는</span>
+                    <div class="social_login">
+                        <div id="loginWithGoogle">
+                            <i class="ri-google-fill"></i>
+                            <span>구글계정으로 로그인</span>
+                        </div>
+                        <div id="loginWithFacebook">
+                            <i class="ri-facebook-fill"></i>
+                            <span>페이스북 계정으로 로그인</span>
+                        </div>
+                        <div>
+                            <a href="/user/register.html"><span>회원가입</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="register_area"></div>
+            </div>
+        </div>
+        <footer></footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyBUIQhpDle9ZcA-IBwQEYy-lz8uM2RdFhQ",
+        authDomain: "inside-out-f6b7d.firebaseapp.com",
+        projectId: "inside-out-f6b7d",
+        storageBucket: "inside-out-f6b7d.appspot.com",
+        messagingSenderId: "42086150347",
+        appId: "1:42086150347:web:ee76f1b2fb15ec5cbb6b4e",
+        measurementId: "G-94VRFGG4R1"
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      const database = firebase.database();
+      const auth = firebase.auth();
+      const firestore = firebase.firestore();
+      firestore.settings({ timestampsInSnapshots: true });
+    </script>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>

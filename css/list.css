@@ -1,0 +1,59 @@
+/* 게시판 정보 */
+.board_info {
+    margin: 40px 0;
+}
+.board_info h2 {
+    font-size: 20px;
+}
+    
+
+/* 게시글 리스트 */
+.board .table_wrap {
+    position: relative;
+}
+.board table {
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+}
+.board th {
+    padding: 5px 0;
+}
+.board tbody tr td {
+    padding: 8px 0;
+}
+.board tbody tr {
+    border-top: 1px solid #000000;
+}
+.board tbody td:nth-child(1) {
+    font-size: 12px;
+}
+.board tbody td:nth-child(2) {
+    text-align: left;
+    width: 600px;
+}
+.board tbody td a:hover {
+    text-decoration: underline;
+}
+
+.board .writeBtn {
+    position: absolute;
+    right: 0;
+    top: -40px;
+    border: 1px solid #000000;
+    float: right;
+    padding: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.page_nav {
+    text-align: center;
+}
+.page_nav span {
+    margin-right: 5px;
+    cursor: pointer;
+}
+.page_nav span:last-child {
+    margin-right: 0;
+}

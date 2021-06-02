@@ -1,0 +1,271 @@
+/* 게시글 */
+.post {
+    border: 1px solid black;
+    padding: var(--content-padding);
+    margin-bottom: 20px;
+}
+.post_info h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.post_info .bar {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+.post_info .bar > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.post_info .bar div i {
+    margin-right: 5px;
+}
+.post_info .bar .left span {
+    margin-right: 15px;
+}
+.post .content {
+    clear: both;
+}
+.content {
+    white-space: pre-wrap;
+}
+
+/* 댓글 */
+.reply {
+    border: 1px solid black;
+    padding: var(--content-padding);
+}
+
+.reply_info p {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.my_reply form {
+    display: flex;
+    flex-flow: column wrap;
+    margin-bottom: 20px;
+}
+.my_reply .search_area {
+    position: relative;
+}
+.my_reply input[type=text] {
+    width: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid rgb(59, 59, 59);
+    padding: 8px 0;
+}
+.my_reply #close_search_result {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    font-size: 22px;
+    cursor: pointer;
+}
+.my_reply #search_result {
+    display: none;
+    position: absolute;
+    width: 100%;
+    border: 1px solid black;
+    background-color: #ffffff;
+    padding: 10px;
+    font-size: 14px;
+    z-index: 1;
+}
+.my_reply #search_result li {
+    border-bottom: 1px solid rgb(224, 224, 224);
+    padding: 10px 5px;
+    cursor: pointer;
+}
+.my_reply #search_result li:hover:not(.noResult) {
+    background-color: var(--hover-gray);
+}
+.my_reply #search_result li:last-child {
+    margin-bottom: 0;
+    border: none;
+}
+.my_reply #search_result .noResult {
+    font-style: italic;
+    color: gray;
+}
+.my_reply .video_confirm {
+    display: none;
+}
+.my_reply .embed_youtube {
+    position: relative;
+    width: 420px;
+    height: 236px;
+    flex-shrink: 0;
+}
+.my_reply .embed_youtube iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.my_reply .video_info {
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    padding-left: 20px;
+}
+.my_reply .video_info input[type=text] {
+    margin-bottom: 15px;
+}
+.my_reply .comment_area {
+    position: relative;
+}
+.my_reply .comment_area p {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    text-align: right;
+    font-size: 12px;
+    color: rgb(160, 160, 160);
+    margin-top: 5px;
+}
+.my_reply .video_info .btns {
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.my_reply .video_info .btns button {
+    margin-left: 10px;
+}
+
+.replies ul {
+    display: flex;
+    flex-flow: row wrap;
+}
+.replies li {
+    border: 1px solid #000000;
+    width: 312px;
+    padding: 12px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.replies li:nth-child(3n) {
+    margin-right: 0;
+}
+.reply_music {
+    display: flex;
+    flex-direction: column;
+}
+.reply_music > div:first-child {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.reply_music .img_wrap {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    flex-shrink: 0;
+    border: 1px solid black;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.reply_music .img_wrap i {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    -webkit-filter: drop-shadow( 0px 0px 5px rgba(0, 0, 0, .7));
+    filter: drop-shadow( 0 0 5px rgba(0, 0, 0, .7));
+    cursor: pointer;
+}
+.reply_music .img_wrap i.active {
+    display: block;
+}
+.reply_music img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: rotate(0deg) scale(1.8);
+}
+.reply_music img.active {
+    -webkit-animation:spin 6s linear infinite;
+    -moz-animation:spin 6s linear infinite;
+    animation:spin 6s linear infinite;
+}
+.reply_music .title {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    margin-bottom: 8px;
+}
+.reply_music .artist {
+    font-size: 14px;
+}
+.reply_music .btns {
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 50px;
+}
+.reply_music .btns > i {
+    font-size: 30px;
+    cursor: pointer;
+}
+.reply_music .likeBtn {
+    display: none;
+}
+.reply_music .likeBtn.active {
+    display: block;
+}
+
+.reply_comment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.reply_comment > * {
+    flex-grow: 1;
+}
+.reply_comment .comment {
+    font-size: 16px;
+    line-height: 25px;
+    padding: 5px 0;
+}
+.reply_comment .time {
+    flex-grow: 0;
+    text-align: right;
+    font-size: 14px;
+}
+.reply_comment .time > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+.reply_comment .comment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+
+.noResult {
+    display: none;
+}
+
+
+/* 게시물이 존재하지 않을 때 알림 표시 */
+.noPost {
+    display: none;
+}

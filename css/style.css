@@ -1,0 +1,153 @@
+/* css 초기화 */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a:link,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
+    color: #000000;
+}
+* {
+    box-sizing: border-box;
+    /* font-family: 'Noto Sans KR'; */
+    /* font-family: 'S-CoreDream-4Regular'; */
+}
+
+
+/* 변수 */
+:root {
+    --content-padding: 20px;
+    --content-width: 1000px;
+    --hover-gray: rgb(235, 235, 235);
+}
+
+
+/* 회전 애니메이션 */
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg) scale(1.8); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg) scale(1.8); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg) scale(1.8); } }
+
+
+/* 레이아웃 */
+.container {
+    width: var(--content-width);
+    margin: 0 auto;
+}
+
+
+/* 헤더 */
+header nav {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    align-items: center;
+    width: var(--content-width);
+    padding: 12px 0;
+    margin: 0 auto;
+}
+header .home {
+    font-size: 25px;
+    font-weight: bold;
+}
+header .board_nav {
+    display: flex;
+}
+header .board_nav > div {
+    padding: 10px;
+    border-radius: 20px;
+    transition: .1s;
+    cursor: pointer;
+}
+header .board_nav > div:hover {
+    background-color: var(--hover-gray);
+}
+header .user {
+    display: flex;
+    flex-flow: row nowrap;
+    -webkit-align-items: center;
+    align-items: center;
+}
+header .user .notice {
+    font-size: 25px;
+    margin-right: 10px;
+    padding: 8px;
+    border-radius: 50%;
+    transition: .2s;
+    cursor: pointer;
+}
+header .user .notice:hover {
+    background-color: var(--hover-gray);
+}
+header .user .img_wrap {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+header .user .img_wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+header .user .user_menu {
+    border-radius: 50%;
+    font-size: 22px;
+    margin-left: 5px;
+    transition: .2s;
+    cursor: pointer;
+}
+header .user .user_menu:hover {
+    background-color: var(--hover-gray);
+}
+header .user a {
+    /* margin-left: 5px; */
+    padding: 10px;
+    border-radius: 20px;
+    transition: .2s;
+}
+header .user a:hover {
+    background-color: var(--hover-gray);
+}

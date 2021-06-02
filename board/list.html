@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inside Out list</title>
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/list.css">
+</head>
+<body>
+    <div class="wrap">
+        <header></header>
+        <div class="container">
+            <div>
+                <div class="board">
+                    <div class="board_info">
+                        <h2></h2>
+                    </div>
+                    <div class="table_wrap">
+                        <div class="writeBtn">
+                            <i class="ri-pencil-fill"></i>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>번호</td>
+                                    <th>제목</td>
+                                    <th>작성자</td>
+                                    <th>음악 수</td>
+                                    <th>작성일</td>
+                                    <th>조회수</td>
+                                    <th>추천</td>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="page_nav"></div>
+            </div>
+        </div>
+        <footer></footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyBUIQhpDle9ZcA-IBwQEYy-lz8uM2RdFhQ",
+        authDomain: "inside-out-f6b7d.firebaseapp.com",
+        projectId: "inside-out-f6b7d",
+        storageBucket: "inside-out-f6b7d.appspot.com",
+        messagingSenderId: "42086150347",
+        appId: "1:42086150347:web:ee76f1b2fb15ec5cbb6b4e",
+        measurementId: "G-94VRFGG4R1"
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      const database = firebase.database();
+      const auth = firebase.auth();
+      const firestore = firebase.firestore();
+      firestore.settings({ timestampsInSnapshots: true });
+    </script>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/list.js"></script>
+</body>
+</html>
