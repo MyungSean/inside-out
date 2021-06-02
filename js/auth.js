@@ -70,27 +70,47 @@ $('#loginWithGoogle').click(function() {
 // 페이스북 계정으로 로그인
 $('#loginWithFacebook').click(function() {
     console.log('login btn clicked');
+    // var provider = new firebase.auth.FacebookAuthProvider();
+    // auth.signInWithPopup(provider).then((result) => {
+    //     console.log(result);
+    //     /** @type {firebase.auth.OAuthCredential} */
+    //     var credential = result.credential;
+    
+    //     // The signed-in user info.
+    //     var user = result.user;
+    
+    //     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    //     var accessToken = credential.accessToken;
+    //     // ...
+    // })
+    // .catch((error) => {
+    //     // Handle Errors here.
+    //     var errorCode = error.code;
+    //     var errorMessage = error.message;
+    //     // The email of the user's account used.
+    //     var email = error.email;
+    //     // The firebase.auth.AuthCredential type that was used.
+    //     var credential = error.credential;
+    //     // ...
+    // });  
     var provider = new firebase.auth.FacebookAuthProvider();
-    auth.signInWithPopup(provider).then((result) => {
-        console.log(result);
-        /** @type {firebase.auth.OAuthCredential} */
-        var credential = result.credential;
-    
-        // The signed-in user info.
-        var user = result.user;
-    
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        var accessToken = credential.accessToken;
-        // ...
+
+    auth.signInWithPopup(provider).then(function(result){
+      console.log(result);
+      console.log("success facebook account linked");
+  
+      var userName = result.user.displayName;
+      var userEmail = result.user.email
+  
+      database.ref('Users/' + result.user.uid + '/info').set({
+        Name: userName,
+        Email: userEmail
+      })
+  
+    }).catch(function(err){
+      console.log('error code : ' +  err.code);
+      console.log('error message : ' +  err.message);
+      // console.log(err);
+      console.log("fail to do");
     })
-    .catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-    });  
 })
