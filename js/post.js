@@ -250,9 +250,7 @@ $('.replies').on('click', '.play', function() {
     const curr_videoUrl = new URL(player.getVideoUrl());
     const urlParams = curr_videoUrl.searchParams;
     var curr_videoId = urlParams.get('v');
-
     var videoId = $(this).closest('li').attr('name');
-    console.log(curr_videoId, videoId);
 
     if ( curr_videoId == videoId) {
         player.playVideo();
