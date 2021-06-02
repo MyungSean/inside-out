@@ -69,6 +69,7 @@ $('#loginWithGoogle').click(function() {
 
 // 페이스북 계정으로 로그인
 $('#loginWithFacebook').click(function() {
+    console.log('login btn clicked');
     var provider = new firebase.auth.FacebookAuthProvider();
     auth.signInWithPopup(provider).then((result) => {
         console.log(result);
