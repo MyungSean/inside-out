@@ -3,6 +3,7 @@ function setupHeader(user) {
     $('header').load('/html/header.html', function() {
         if (user) {
             var uid = user.uid;
+            console.log(uid);
             database.ref('users/'+uid).once('value').then(function(snapshot) {
                 var photoURL = snapshot.val().photoURL;
                 if ( photoURL ) {
