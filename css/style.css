@@ -50,8 +50,6 @@ a:active {
 }
 * {
     box-sizing: border-box;
-    /* font-family: 'Noto Sans KR'; */
-    /* font-family: 'S-CoreDream-4Regular'; */
 }
 
 
@@ -61,6 +59,13 @@ a:active {
     --content-padding: 30px;
     --content-width: 1000px;
     --hover-gray: rgb(235, 235, 235);
+    --font-main-e: 'Montserrat';
+    --font-main-k: 'Noto Sans KR';
+}
+
+
+body, input, textarea, button {
+    font-family: var(--font-main-k), sans-serif;
 }
 
 
@@ -96,11 +101,13 @@ header nav {
     margin: 0 auto;
 }
 header .home {
+    font-family: var(--font-main-e), sans-serif;
     font-size: 25px;
-    font-weight: bold;
+    font-weight: 800;
 }
 header .board_nav {
     display: flex;
+    font-family: var(--font-main-e), sans-serif;
 }
 header .board_nav > div {
     padding: 10px;
@@ -176,6 +183,7 @@ header .user .user_menu ul {
     border: 1px solid #000000;
     padding: 5px;
     font-size: 14px;
+    z-index: 1;
 }
 header .user .user_menu ul li {
     padding: 5px;
@@ -185,6 +193,7 @@ header .user .user_menu ul li {
 header .user .user_menu ul li:hover {
     background-color: var(--hover-gray);
 }
+
 
 /* 삭제 버튼 */
 .delete {

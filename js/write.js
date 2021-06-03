@@ -15,7 +15,8 @@ auth.onAuthStateChanged(user => {
             $('#name').val(name);
         })
     } else {
-        console.log('user logged out');
+        alert('로그인 후 글을 작성하실 수 있습니다.');
+        window.location.href = "/board/list.html?id="+id;
     }
 })
 

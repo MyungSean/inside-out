@@ -7,11 +7,13 @@
 }
 
 .signup_area .logo {
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 .signup_area h1 {
+    font-family: var(--font-main-e), sans-serif;
+    font-weight: 800;
     font-size: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .signup_area h2 {
     font-size: 20px;

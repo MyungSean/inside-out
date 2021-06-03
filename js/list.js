@@ -76,5 +76,10 @@ database.ref('board/'+id+'/info').once('value').then(function(snapshot) {
 
 // 글쓰기
 $('.writeBtn').click(function() {
-    window.location = "/board/write.html?id="+id;
+    var user = auth.currentUser;
+    if ( user ) {
+        window.location = "/board/write.html?id="+id;
+    } else {
+        alert("로그인 후 글을 작성하실 수 있습니다.");
+    }
 })

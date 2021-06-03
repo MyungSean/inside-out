@@ -38,8 +38,10 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
 
         // 유저 상태 확인후 포스트 삭제 버튼 추가
         var user = auth.currentUser;
-        if ( user.uid == uid ) {
-            $('.post').append('<i class="ri-close-fill delete delete_post"></i>');
+        if ( user ) {
+            if ( user.uid == uid ) {
+                $('.post').append('<i class="ri-close-fill delete delete_post"></i>');
+            }            
         }
 
         
@@ -57,14 +59,19 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
             var thumbnail = reply.thumbnail;
             var comment = reply.comment;
             var uid = reply.uid;
+            var name = reply.name;
             var likes = reply.likes;
             var reports = reply.reports;
             var reply_upload_date = reply.upload_date;
             // console.log(artist, title, videoId, thumbnail, comment, uid, anonymity, likes, reports, reply_upload_date);
 
             // 유저 상태 확인후 댓글 삭제 버튼 추가
-            if ( user.uid == uid ) {
-                var deleteBtn = `<i class="ri-close-fill delete delete_reply"></i>`;
+            if ( user ) {
+                if ( user.uid == uid ) {
+                    var deleteBtn = `<i class="ri-close-fill delete delete_reply"></i>`;                
+                } else {
+                    var deleteBtn = "";
+                }
             } else {
                 var deleteBtn = "";
             }
@@ -93,9 +100,14 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
                 </div>
                 <div class="reply_comment">
                     <p class="comment">${comment}</p>
-                    <div class="time">
-                        <i class="ri-time-fill"></i>
-                        <p>${getPastTime(reply_upload_date)}</p>
+                    <div class="reply_author">
+                        <div>
+                            <span>${name}</span>
+                        </div>
+                        <div class="time">
+                            <i class="ri-time-fill"></i>
+                            <p>${getPastTime(reply_upload_date)}</p>
+                        </div>
                     </div>
                 </div>
             </li>`;
@@ -176,6 +188,21 @@ function commentLengthCheck() {
     $('.comment_area p span').html(length);
 }
 
+// 로그인된 유저만 댓글 추가 가능
+$('#keyword').focus(function() {
+    var user = auth.currentUser;
+    if ( user ) {
+        var uid = user.uid;
+        database.ref('users/'+uid).once('value').then(function(snapshot) {
+            var name = snapshot.val().name;
+            $('#name').val(name);
+        })    
+    } else {
+        alert('로그인 후에 음악을 남기실 수 있습니다.');
+        $('#keyword').blur();
+    }
+})
+
 $('#search_result').on('click', 'li', function() {
     var artist = $(this).children('.search_artist').html();
     var title = $(this).children('.search_title').html();
@@ -201,8 +228,6 @@ $('.video_confirm').on('click', '.cancelBtn', function() {
     $('.search_bar').show();
     $('.comment_area').hide();
 })
-$('.video_confirm').on('click', '.confirmBtn', function() {
-})
 
 // 댓글 등록
 $('#submit_reply').click(function(e) {
@@ -221,6 +246,12 @@ $('#submit_reply').click(function(e) {
     var comment = $('#my_comment').val();
     var upload_date = Date.now();
     var uid = uid;
+    
+    if ( $('input:checkbox[id="anonymity"]').is(":checked") ) {
+        var name = '익명';
+    } else {
+        var name = $('#name').val();
+    }
 
     if ( postId == "" ) {
         return alert('등록 과정에서 오류가 발생했습니다.');
@@ -244,6 +275,7 @@ $('#submit_reply').click(function(e) {
         thumbnail: thumbnail,
         comment: comment,
         uid: uid,
+        name: name,
         likes: 0,
         reports: 0,
         upload_date: upload_date

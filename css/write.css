@@ -2,7 +2,9 @@
     margin-bottom: 10px;
 }
 .board_info h2 {
+    font-family: var(--font-main-e), sans-serif;
     font-size: 30px;
+    font-weight: 400;
 }
 .editor {
     border: 1px solid #000000;
@@ -18,7 +20,8 @@
     width: 100%;
     padding-bottom: 15px;
     margin-bottom: 15px;
-    font-size: 20px;
+    font-size: 24px;
+    font-weight: 700;
     border: none;
     outline: none;
     border-bottom: 1px solid #000000;

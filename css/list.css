@@ -4,6 +4,7 @@
     margin-bottom: 30px;
 }
 .board_info h2 {
+    font-family: var(--font-main-e), sans-serif;
     font-size: 24px;
 }
     

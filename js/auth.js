@@ -20,6 +20,7 @@ $('#login_form #login_submit').click(function(e) {
 
     auth.signInWithEmailAndPassword(email, password).then(cred => {
         // console.log(cred.user);
+        window.history.back();
     })
     .catch((error) => {
         console.log(error.code);
@@ -162,26 +163,12 @@ $('.social_login_btn').click(function() {
             name: name,
             photoURL: photoURL
         })
-
-        /** @type {firebase.auth.OAuthCredential} */
-        var credential = result.credential;
-    
-    
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        var accessToken = credential.accessToken;
-        // ...
+        .then(function() {
+            window.history.back();
+        })
     })
     .catch((error) => {
         console.log('error code : ' +  error.code);
         console.log('error message : ' +  error.message);
-
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
     });  
 })
