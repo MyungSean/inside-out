@@ -76,6 +76,12 @@ body, input, textarea, button {
 
 
 /* 레이아웃 */
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: var(--header-height);
+}
 .container {
     width: var(--content-width);
     margin: 0 auto;
@@ -83,13 +89,8 @@ body, input, textarea, button {
 }
 
 
-/* 헤더 */
-header {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: var(--header-height);
-}
+
+/* header */
 header nav {
     display: flex;
     flex-flow: row nowrap;
@@ -193,6 +194,12 @@ header .user .user_menu ul li {
 header .user .user_menu ul li:hover {
     background-color: var(--hover-gray);
 }
+
+
+
+
+
+
 
 
 /* 삭제 버튼 */

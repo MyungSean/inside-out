@@ -5,7 +5,9 @@ function setupHeader(user) {
             var uid = user.uid;
             database.ref('users/'+uid).once('value').then(function(snapshot) {
                 var photoURL = snapshot.val().photoURL;
-                $('header .profile img').attr('src', photoURL);
+                if ( photoURL ) {
+                    $('header .profile img').attr('src', photoURL);
+                }
             })
         } else {
             var html = `
