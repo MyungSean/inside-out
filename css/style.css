@@ -58,6 +58,8 @@ a:active {
     --header-height: 70px; 
     --content-padding: 30px;
     --content-width: 1000px;
+    --border-radius-content: 10px;
+    --border-radius-btn: 5px;
     --hover-gray: rgb(235, 235, 235);
     --font-main-e: 'Montserrat';
     --font-main-k: 'Noto Sans KR';
@@ -110,13 +112,13 @@ header .board_nav {
     display: flex;
     font-family: var(--font-main-e), sans-serif;
 }
-header .board_nav > div {
+header .board_nav > a {
     padding: 10px;
     border-radius: 20px;
     transition: .1s;
     cursor: pointer;
 }
-header .board_nav > div:hover {
+header .board_nav > a:hover {
     background-color: var(--hover-gray);
 }
 header .user {
@@ -182,12 +184,14 @@ header .user .user_menu ul {
     width: 100px;
     background-color: #ffffff;
     border: 1px solid #000000;
+    border-radius: 8px;
     padding: 5px;
     font-size: 14px;
     z-index: 1;
 }
 header .user .user_menu ul li {
     padding: 5px;
+    border-radius: 5px;
     cursor: pointer;
     transition: .1s;
 }

@@ -25,15 +25,7 @@
     align-items: center;
     margin-bottom: 40px;
 }
-#signup_form label {
-    width: 120px;
-}
-#signup_form input {
-    flex-grow: 1;
-    border: 1px solid #000000;
-    padding: 10px 10px;
-    font-size: 16px;
-}
+
 #signup_form > div > span {
     position: absolute;
     left: 120px;
@@ -51,5 +43,6 @@
     background-color: inherit;
     padding: 5px 10px;
     border: 1px solid #000000;
+    border-radius: var(--border-radius-btn);
     cursor: pointer;
 }

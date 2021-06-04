@@ -37,11 +37,12 @@ function write() {
     var subject = $('#subject').val();
     var content = $('#content').val();
     var upload_date = Date.now();
-
+    var name = $('#name').val();
+    
     if ( $('input:checkbox[id="anonymity"]').is(":checked") ) {
-        var name = '익명';
+        var anonymity = true;
     } else {
-        var name = $('#name').val();
+        var anonymity = false;
     }
     
     var uid = $('#uid').val();
@@ -60,6 +61,7 @@ function write() {
         database.ref('board/'+id+'/posts').push().set({
             name: name,
             uid: uid,
+            anonymity: anonymity,
             number: curr_number,
             subject: subject,
             content: content,

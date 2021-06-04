@@ -22,12 +22,17 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
         // 게시물 불러오기
         var uid = childSnapshot.val().uid;
         var name = childSnapshot.val().name;
+        var anonymity = childSnapshot.val().anonymity;
         var subject = childSnapshot.val().subject;
         var upload_date = childSnapshot.val().upload_date;
         var content = childSnapshot.val().content;
         var number = childSnapshot.val().number;
         var likes = childSnapshot.val().likes;
         var views = childSnapshot.val().views;
+
+        if ( anonymity ) {
+            name = "익명";
+        }
         
         $('#postId').val(postId);
         $('.post_info h3').html(subject);
@@ -35,6 +40,7 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
         $('.views').html(views);
         $('.upload_date').html(getPastTime(upload_date));
         $('.content').html(content);
+        $('#post_likes').html(likes);
 
         // 유저 상태 확인후 포스트 삭제 버튼 추가
         var user = auth.currentUser;
@@ -44,10 +50,33 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
             }            
         }
 
+        // 내가 좋아요 표시했는지 확인
+        database.ref('users/'+user.uid+'/likes/posts').once('value').then(function(snapshot) {
+            var postId = $('#postId').val();
+            console.log(Object.keys(snapshot.val()));
+            var postIds = Object.keys(snapshot.val());
+            for (let i = 0; i < postIds.length; i++) {
+                const target_id = postIds[i];
+                if ( target_id == postId ) {
+                    $('.post .ri-heart-line').removeClass('active');
+                    $('.post .ri-heart-fill').addClass('active');
+                    break;
+                }
+            }
+        })
+
+
+        $('.post').show();
         
         
         // 댓글 불러오기
         var replies = childSnapshot.val().reply;
+        
+        if ( replies == undefined ) {
+            $('.reply').show();
+            return;
+        }
+
         var reply_cnt = Object.keys(replies).length;
         $('.reply_cnt').html(reply_cnt);
         $('.reply_info span').html(reply_cnt);
@@ -60,10 +89,15 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
             var comment = reply.comment;
             var uid = reply.uid;
             var name = reply.name;
+            var anonymity = reply.anonymity;
             var likes = reply.likes;
             var reports = reply.reports;
             var reply_upload_date = reply.upload_date;
             // console.log(artist, title, videoId, thumbnail, comment, uid, anonymity, likes, reports, reply_upload_date);
+
+            if ( anonymity ) {
+                var name = "익명";
+            }
 
             // 유저 상태 확인후 댓글 삭제 버튼 추가
             if ( user ) {
@@ -115,6 +149,8 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
             $('.replies ul').prepend(li);
             
         }
+
+        $('.reply').show();
         
     });
 })
@@ -229,6 +265,26 @@ $('.video_confirm').on('click', '.cancelBtn', function() {
     $('.comment_area').hide();
 })
 
+// 게시글 좋아요
+$('.post .ri-heart-line').click(function() {
+    $('.post .ri-heart-line').removeClass('active');
+    $('.post .ri-heart-fill').addClass('active');
+
+    var postId = $('#postId').val();
+    database.ref('board/'+id+'/posts/'+postId).update({
+        likes: firebase.database.ServerValue.increment(1)
+    })
+    var user = auth.currentUser;
+    var uid = user.uid;
+    database.ref('users/'+uid+'/likes/posts').update({
+        [postId]: true
+    })
+
+    var likes = $('#post_likes').html();
+    var likes = Number(likes) + 1;
+    $('#post_likes').html(likes);
+})
+
 // 댓글 등록
 $('#submit_reply').click(function(e) {
     e.preventDefault();
@@ -246,11 +302,12 @@ $('#submit_reply').click(function(e) {
     var comment = $('#my_comment').val();
     var upload_date = Date.now();
     var uid = uid;
+    var name = $('#name').val();
     
     if ( $('input:checkbox[id="anonymity"]').is(":checked") ) {
-        var name = '익명';
+        var anonymity = true;
     } else {
-        var name = $('#name').val();
+        var anonymity = false;
     }
 
     if ( postId == "" ) {
@@ -276,6 +333,7 @@ $('#submit_reply').click(function(e) {
         comment: comment,
         uid: uid,
         name: name,
+        anonymity: anonymity,
         likes: 0,
         reports: 0,
         upload_date: upload_date

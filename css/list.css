@@ -7,6 +7,10 @@
     font-family: var(--font-main-e), sans-serif;
     font-size: 24px;
 }
+.board_info p {
+    padding: 8px 0;
+    font-weight: 400;
+}
     
 
 /* 게시글 리스트 */
@@ -45,6 +49,7 @@
     right: 0;
     top: -40px;
     border: 1px solid #000000;
+    border-radius: var(--border-radius-btn);
     float: right;
     padding: 6px;
     font-size: 18px;
@@ -53,6 +58,7 @@
 
 .page_nav {
     text-align: center;
+    margin-top: 20px;
 }
 .page_nav span {
     margin-right: 5px;

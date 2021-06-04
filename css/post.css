@@ -5,8 +5,10 @@
 
 /* 게시글 */
 .post {
+    display: none;
     position: relative;
     border: 1px solid black;
+    border-radius: var(--border-radius-content);
     padding: var(--content-padding);
     margin-bottom: 20px;
 }
@@ -41,6 +43,23 @@
     white-space: pre-wrap;
     line-height: 25px;
 }
+.post .likes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.post .likes i {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+.post .likes i.active {
+    display: inline-block;
+}
+.post .likes span {
+    margin-left: 3px;
+}
 
 /* .post .delete_post {
 } */
@@ -48,7 +67,9 @@
 
 /* 댓글 */
 .reply {
+    display: none;
     border: 1px solid black;
+    border-radius: var(--border-radius-content);
     padding: var(--content-padding);
 }
 
@@ -113,6 +134,8 @@
     width: 420px;
     height: 236px;
     flex-shrink: 0;
+    border-radius: var(--border-radius-content);
+    overflow: hidden;
 }
 .my_reply .embed_youtube iframe {
     position: absolute;
@@ -159,6 +182,7 @@
     font-size: 14px;
     background-color: inherit;
     border: 1px solid #000000;
+    border-radius: var(--border-radius-btn);
     cursor: pointer;
 }
 
@@ -171,6 +195,7 @@
     display: flex;
     flex-flow: column wrap;
     border: 1px solid #000000;
+    border-radius: var(--border-radius-content);
     width: 306px;
     padding: 12px;
     margin-right: 10px;
@@ -192,8 +217,8 @@
 }
 .reply_music .img_wrap {
     position: relative;
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
     flex-shrink: 0;
     border: 1px solid black;
     border-radius: 50%;
@@ -227,10 +252,10 @@
     animation:spin 6s linear infinite;
 }
 .reply_music .title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     line-height: 20px;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 .reply_music .artist {
     font-size: 14px;
@@ -244,7 +269,7 @@
     padding: 4px 50px;
 }
 .reply_music .btns > i {
-    font-size: 30px;
+    font-size: 25px;
     cursor: pointer;
 }
 .reply_music .likeBtn {

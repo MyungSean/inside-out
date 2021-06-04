@@ -21,17 +21,28 @@ database.ref('board/'+id+'/posts').once('value').then(function(snapshot) {
 // 게시글 불러오기
 function loadPosts(total_posts, load_pages) {
     var end = total_posts - ( page - 1 ) * load_pages;
-    var start = end - load_pages + 1;
-    database.ref('board/'+id+'/posts').orderByChild('number').startAt(start).endAt(end).once('value').then(function(snapshot) {
-        snapshot.forEach(childSnapshot => {
-            var number = childSnapshot.val().number;
-            var subject = childSnapshot.val().subject;
-            var name = childSnapshot.val().name;
-            var reply = childSnapshot.val().reply;
+    var start = end - load_pages;
+    if ( start < 0 ) {
+        var start = 0;
+    }
+    database.ref('board/'+id+'/posts').orderByChild('number').once('value').then(function(snapshot) {
+        var keys = Object.keys(snapshot.val()).slice(start, end);
+        for (let i = 0; i < keys.length; i++) {
+            const childSnapshot = snapshot.val()[keys[i]];
+                        
+            var number = childSnapshot.number;
+            var subject = childSnapshot.subject;
+            var name = childSnapshot.name;
+            var anonymity = childSnapshot.anonymity;
+            var reply = childSnapshot.reply;
             var reply_cnt = Object.keys(reply).length;
-            var upload_date = childSnapshot.val().upload_date;
-            var views = childSnapshot.val().views;
-            var likes = childSnapshot.val().likes;
+            var upload_date = childSnapshot.upload_date;
+            var views = childSnapshot.views;
+            var likes = childSnapshot.likes;
+
+            if ( anonymity ) {
+                var name = "익명";
+            }
     
             var tr = `
             <tr>
@@ -45,7 +56,7 @@ function loadPosts(total_posts, load_pages) {
             </tr>`
     
             $('.board table tbody').prepend(tr);
-        });
+        };
     })    
 }
 
@@ -69,8 +80,10 @@ $('.page_nav').on('click', 'span', function() {
 // 게시판 정보 표시
 database.ref('board/'+id+'/info').once('value').then(function(snapshot) {
     var name = snapshot.val().name;
+    var description = snapshot.val().description;
 
-    $('.board h2').html(name);
+    $('.board_info h2').html(name);
+    $('.board_info p').html(description);
 })
 
 

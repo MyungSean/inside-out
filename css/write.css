@@ -8,6 +8,7 @@
 }
 .editor {
     border: 1px solid #000000;
+    border-radius: var(--border-radius-content);
     display: flex;
     flex-flow: column wrap;
     padding: var(--content-padding);
@@ -54,6 +55,7 @@
     font-size: 16px;
     background-color: inherit;
     border: 1px solid #000000;
+    border-radius: var(--border-radius-btn);
     cursor: pointer;
 }
 
@@ -66,7 +68,8 @@
     justify-content: center;
     align-items: center;
     border: 1px solid #000000;
-    padding: 5px 10px;
+    border-radius: var(--border-radius-btn);
+    padding: 8px 10px;
     margin-left: auto;
     cursor: pointer;
 }
