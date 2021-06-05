@@ -28,14 +28,26 @@ database.ref('board/'+id+'/info').once('value').then(function(snapshot) {
 
 // 게시물 업로드
 function write() {
+    var subject = $('#subject').val();
+    var content = $('#content').val();
+
+    if ( subject == "" ) {
+        alert('제목을 입력해주세요.');
+        $('#subject').focus();
+        return;
+    }
+    if ( content == "" ) {
+        alert('내용을 입력해주세요.');
+        $('#content').focus();
+        return;
+    }
+
     var result = confirm('글을 등록하시겠습니까?');
     console.log(result);
     if ( !result ) {
         return
     }
 
-    var subject = $('#subject').val();
-    var content = $('#content').val();
     var upload_date = Date.now();
     var name = $('#name').val();
     

@@ -7,16 +7,43 @@
 
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/index.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+  </head>
+  <body>
+    <script>
+      AOS.init({
+        duration: 1500,
+        offset: 200
+      })
+    </script>
+
     <div class="wrap">
         <header></header>
         <div class="container">
-
+          <div class="intro">
+            <div data-aos="fade-up" class="box">
+              <img src="/img/headphone.png">
+              <p>오늘은 어떤 음악이 필요한 날인가요?</p>
+            </div>
+            <div data-aos="fade-up" class="box">
+              <img src="/img/pen.png">
+              <p>당신의 이야기가 듣고 싶어요</p>
+            </div>
+            <div data-aos="fade-up" class="box">
+              <img src="/img/mail.png">
+              <p>음악으로 답할게요</p>
+            </div>
+            <div data-aos="fade-up" data-aos-offset="100" class="box">
+              <a href="/board/list.html?id=music" class="continueBtn">
+                <span>글 쓰러 가기</span>
+                <i class="ri-arrow-right-s-line"></i>
+              </a>
+            </div>
+          </div>
         </div>
-        <footer>
-
-        </footer>
+        <footer></footer>
     </div>
 
     <script src="https://code.jquery.com/jquery-latest.js"></script>

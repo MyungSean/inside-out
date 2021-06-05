@@ -42,28 +42,32 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
         $('.content').html(content);
         $('#post_likes').html(likes);
 
-        // 유저 상태 확인후 포스트 삭제 버튼 추가
         var user = auth.currentUser;
         if ( user ) {
+
+            // 유저 상태 확인후 포스트 삭제 버튼 추가
             if ( user.uid == uid ) {
                 $('.post').append('<i class="ri-close-fill delete delete_post"></i>');
             }            
+
+            // 내가 좋아요 표시했는지 확인
+            database.ref('users/'+user.uid+'/likes/posts').once('value').then(function(snapshot) {
+                var postId = $('#postId').val();
+                console.log(Object.keys(snapshot.val()));
+                var postIds = Object.keys(snapshot.val());
+                for (let i = 0; i < postIds.length; i++) {
+                    const target_id = postIds[i];
+                    if ( target_id == postId ) {
+                        $('.post .ri-heart-line').removeClass('active');
+                        $('.post .ri-heart-fill').addClass('active');
+                        break;
+                    }
+                }
+            })
+        } else {
+            $('.post .likes').hide();
         }
 
-        // 내가 좋아요 표시했는지 확인
-        database.ref('users/'+user.uid+'/likes/posts').once('value').then(function(snapshot) {
-            var postId = $('#postId').val();
-            console.log(Object.keys(snapshot.val()));
-            var postIds = Object.keys(snapshot.val());
-            for (let i = 0; i < postIds.length; i++) {
-                const target_id = postIds[i];
-                if ( target_id == postId ) {
-                    $('.post .ri-heart-line').removeClass('active');
-                    $('.post .ri-heart-fill').addClass('active');
-                    break;
-                }
-            }
-        })
 
 
         $('.post').show();

@@ -1,0 +1,29 @@
+.intro {
+    display: flex;
+    flex-flow: column wrap;
+}
+.intro .box {
+    text-align: center;
+    margin: 150px 0;
+    font-size: 20px;
+}
+.intro .box img {
+    width: 300px;
+    margin-bottom: 30px;
+}
+.intro .continueBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border: 1px solid #000000;
+    border-radius: var(--border-radius-btn);
+    width: 200px;
+    height: 50px;
+    /* font-size: 20px; */
+}
+.intro .continueBtn i {
+    margin-left: 10px;
+    margin-right: -10px;
+    font-size: 30px;
+}

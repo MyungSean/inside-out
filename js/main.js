@@ -19,6 +19,9 @@ function setupHeader(user) {
     });
 }
 
+// 푸터 로드
+$('footer').load('/html/footer.html');
+
 // 헤더 유저 메뉴 토글
 function toggleUserMenu() {
     $('header .user_menu ul').toggle();

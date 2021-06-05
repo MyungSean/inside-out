@@ -78,30 +78,36 @@ body, input, textarea, button {
 
 
 /* 레이아웃 */
+.wrap {
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
+}
 header {
-    position: absolute;
-    top: 0;
-    width: 100%;
     height: var(--header-height);
 }
 .container {
     width: var(--content-width);
     margin: 0 auto;
-    margin-top: var(--header-height);
+}
+footer {
+    margin-top: auto;
 }
 
 
 
 /* header */
+.header_wrap {
+    width: var(--content-width);
+    margin: 0 auto;
+}
 header nav {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     -webkit-align-items: center;
     align-items: center;
-    width: var(--content-width);
     height: var(--header-height);
-    margin: 0 auto;
 }
 header .home {
     font-family: var(--font-main-e), sans-serif;
@@ -201,8 +207,37 @@ header .user .user_menu ul li:hover {
 
 
 
-
-
+/* footer */
+.footer_wrap {
+    width: var(--content-width);
+    padding: 30px;
+    margin: 0 auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+}
+footer .logo {
+    font-family: var(--font-main-e);
+    font-size: 30px;
+    font-weight: 800;
+}
+footer .menu {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+footer .menu li {
+    padding: 0 20px;
+    margin: 15px 0;
+    border-right: 1px solid #000000;
+    cursor: pointer;
+}
+footer .menu li:last-child {
+    border-right: none;
+}
+footer .site_info p {
+    padding: 5px;
+}
 
 
 
