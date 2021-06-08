@@ -25,6 +25,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+    background-color: #faf2e9;
+    /* color: rgb(37, 14, 3); */
 }
 ol, ul {
 	list-style: none;
@@ -60,7 +62,8 @@ a:active {
     --content-width: 1000px;
     --border-radius-content: 10px;
     --border-radius-btn: 5px;
-    --hover-gray: rgb(235, 235, 235);
+    --border-color: #8f8f8f;
+    --hover-gray: rgba(223, 223, 223, 0.7);
     --font-main-e: 'Montserrat';
     --font-main-k: 'Noto Sans KR';
 }
@@ -210,15 +213,16 @@ header .user .user_menu ul li:hover {
 /* footer */
 .footer_wrap {
     width: var(--content-width);
-    padding: 30px;
+    padding: 20px;
     margin: 0 auto;
     margin-top: auto;
     margin-bottom: auto;
     text-align: center;
+    font-size: 14px;
 }
 footer .logo {
     font-family: var(--font-main-e);
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 800;
 }
 footer .menu {
@@ -227,13 +231,21 @@ footer .menu {
     justify-content: center;
 }
 footer .menu li {
-    padding: 0 20px;
+    padding: 0 10px;
     margin: 15px 0;
     border-right: 1px solid #000000;
-    cursor: pointer;
 }
 footer .menu li:last-child {
     border-right: none;
+}
+footer .menu li a {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: .1s;
+}
+footer .menu li a:hover {
+    background-color: var(--hover-gray);
 }
 footer .site_info p {
     padding: 5px;

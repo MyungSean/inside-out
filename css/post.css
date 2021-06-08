@@ -7,7 +7,7 @@
 .post {
     display: none;
     position: relative;
-    border: 1px solid black;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-content);
     padding: var(--content-padding);
     margin-bottom: 20px;
@@ -68,7 +68,7 @@
 /* 댓글 */
 .reply {
     display: none;
-    border: 1px solid black;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-content);
     padding: var(--content-padding);
 }
@@ -90,6 +90,7 @@
     width: 100%;
     outline: none;
     border: none;
+    background-color: inherit;
     border-bottom: 1px solid rgb(59, 59, 59);
     padding: 8px 0;
 }
@@ -194,7 +195,7 @@
     position: relative;
     display: flex;
     flex-flow: column wrap;
-    border: 1px solid #000000;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-content);
     width: 306px;
     padding: 12px;
@@ -220,7 +221,7 @@
     width: 100px;
     height: 100px;
     flex-shrink: 0;
-    border: 1px solid black;
+    border: 1px solid var(--border-color);
     border-radius: 50%;
     overflow: hidden;
     margin-right: 10px;
@@ -327,4 +328,5 @@
 /* 게시물이 존재하지 않을 때 알림 표시 */
 .noPost {
     display: none;
+    padding: 30px 0;
 }

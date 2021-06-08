@@ -81,6 +81,7 @@ function write() {
             reports: 0,
             likes: 0,
             upload_date: upload_date,
+            state: 'active',
             reply: false
         })
         .then(function() {

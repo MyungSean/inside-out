@@ -13,7 +13,7 @@ if ( page == null ) {
 // 전체 게시글 정보 확인
 database.ref('board/'+id+'/posts').once('value').then(function(snapshot) {
     var total_posts = Object.keys(snapshot.val()).length; // 전체 게시글 수
-    var load_pages = 10; // 한 번에 로드하는 게시글 수
+    var load_pages = 20; // 한 번에 로드하는 게시글 수
     loadPosts(total_posts, load_pages);
     createPageNav(total_posts, load_pages);
 })
@@ -21,25 +21,41 @@ database.ref('board/'+id+'/posts').once('value').then(function(snapshot) {
 // 게시글 불러오기
 function loadPosts(total_posts, load_pages) {
     var end = total_posts - ( page - 1 ) * load_pages;
-    var start = end - load_pages;
+    var start = end - load_pages + 1;
     if ( start < 0 ) {
         var start = 0;
     }
-    database.ref('board/'+id+'/posts').orderByChild('number').once('value').then(function(snapshot) {
-        var keys = Object.keys(snapshot.val()).slice(start, end);
-        for (let i = 0; i < keys.length; i++) {
-            const childSnapshot = snapshot.val()[keys[i]];
-                        
-            var number = childSnapshot.number;
-            var subject = childSnapshot.subject;
-            var name = childSnapshot.name;
-            var anonymity = childSnapshot.anonymity;
-            var reply = childSnapshot.reply;
+    database.ref('board/'+id+'/posts').orderByChild('number').startAt(start).endAt(end).once('value').then(function(snapshot) {
+            snapshot.forEach(childSnapshot => {
+                
+            var number = childSnapshot.val().number;
+            var subject = childSnapshot.val().subject;
+            var name = childSnapshot.val().name;
+            var anonymity = childSnapshot.val().anonymity;
+            var reply = childSnapshot.val().reply;
             var reply_cnt = Object.keys(reply).length;
-            var upload_date = childSnapshot.upload_date;
-            var views = childSnapshot.views;
-            var likes = childSnapshot.likes;
+            var upload_date = childSnapshot.val().upload_date;
+            var views = childSnapshot.val().views;
+            var likes = childSnapshot.val().likes;
 
+            // 삭제된 게시물 표시하지 않기
+            var state = childSnapshot.val().state;
+            if ( state == 'deleted') {
+                var tr = `
+                <tr>
+                <td>${number}</td>
+                <td class="deleted">삭제된 글입니다.</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                </tr>
+                `;
+                $('.board table tbody').prepend(tr);
+                return;
+            }
+            // 익명 처리
             if ( anonymity ) {
                 var name = "익명";
             }
@@ -53,10 +69,10 @@ function loadPosts(total_posts, load_pages) {
             <td>${getPastTime(upload_date)}</td>
             <td>${views}</td>
             <td>${likes}</td>
-            </tr>`
+            </tr>`;
     
             $('.board table tbody').prepend(tr);
-        };
+        });
     })    
 }
 

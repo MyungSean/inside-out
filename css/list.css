@@ -32,7 +32,7 @@
     padding: 12px 0;
 }
 .board tbody tr {
-    border-top: 1px solid #000000;
+    border-top: 1px solid var(--border-color);
 }
 .board tbody td:nth-child(1) {
     font-size: 12px;
@@ -42,6 +42,9 @@
 }
 .board tbody td a:hover {
     text-decoration: underline;
+}
+.board .deleted {
+    color: rgb(177, 177, 177);
 }
 
 .board .writeBtn {

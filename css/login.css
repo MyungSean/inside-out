@@ -23,7 +23,7 @@
     flex-flow: column wrap;
 }
 .login_area #login_form input {
-    border: 1px solid #000000;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
     height: var(--btn-height);
     padding: 0 10px;
@@ -34,7 +34,7 @@
     height: var(--btn-height);
     font-size: 18px;
     background-color: inherit;
-    border: 1px solid #000000;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
     cursor: pointer;
 }
@@ -81,7 +81,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #000000;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
     height: var(--btn-height);
     margin-bottom: 10px;

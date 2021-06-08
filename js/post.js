@@ -8,7 +8,7 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
     // 존재하지 않는 게시물일 경우
     if ( snapshot.val() == null ) {
         $('.noPost').show();
-        return
+        return;
     }
 
     snapshot.forEach(childSnapshot => {
@@ -29,7 +29,15 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
         var number = childSnapshot.val().number;
         var likes = childSnapshot.val().likes;
         var views = childSnapshot.val().views;
+        var state = childSnapshot.val().state;
 
+        // 삭제된 게시물 표시하지 않기
+        if ( state == 'deleted' ) {
+            $('.noPost').show();
+            return;
+        }
+
+        // 익명 처리
         if ( anonymity ) {
             name = "익명";
         }
@@ -53,7 +61,7 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
             // 내가 좋아요 표시했는지 확인
             database.ref('users/'+user.uid+'/likes/posts').once('value').then(function(snapshot) {
                 var postId = $('#postId').val();
-                console.log(Object.keys(snapshot.val()));
+                // console.log(Object.keys(snapshot.val()));
                 var postIds = Object.keys(snapshot.val());
                 for (let i = 0; i < postIds.length; i++) {
                     const target_id = postIds[i];
@@ -130,10 +138,10 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
                         </div>
                     </div>
                     <div class="btns">
-                        <i class="ri-play-list-add-fill"></i>
+                        <i class="ri-play-list-add-fill listAddBtn"></i>
                         <i class="ri-heart-line likeBtn active"></i>
                         <i class="ri-heart-fill likeBtn"></i>
-                        <i class="ri-share-forward-fill"></i>
+                        <i class="ri-share-forward-fill shareBtn"></i>
                     </div>
                 </div>
                 <div class="reply_comment">
@@ -149,6 +157,26 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
                     </div>
                 </div>
             </li>`;
+
+            if ( user ) {     
+                // 내가 좋아요 표시했는지 확인
+                var postId = $('#postId').val();
+                database.ref('users/'+user.uid+'/likes/replies/'+postId).once('value').then(function(snapshot) {
+                    if ( snapshot.val() == null ) {
+                        return;
+                    }
+                    // console.log(Object.keys(snapshot.val()));
+                    var postIds = Object.keys(snapshot.val());
+                    for (let i = 0; i < postIds.length; i++) {
+                        const target_id = postIds[i];
+                        if ( target_id == key ) {
+                            $('.replies #'+target_id+' .ri-heart-line').removeClass('active');
+                            $('.replies #'+target_id+' .ri-heart-fill').addClass('active');
+                            break;
+                        }
+                    }
+                })
+            }
 
             $('.replies ul').prepend(li);
             
@@ -288,6 +316,22 @@ $('.post .ri-heart-line').click(function() {
     var likes = Number(likes) + 1;
     $('#post_likes').html(likes);
 })
+$('.post .ri-heart-fill').click(function() {
+    $('.post .ri-heart-line').addClass('active');
+    $('.post .ri-heart-fill').removeClass('active');
+
+    var postId = $('#postId').val();
+    database.ref('board/'+id+'/posts/'+postId).update({
+        likes: firebase.database.ServerValue.increment(-1)
+    })
+    var user = auth.currentUser;
+    var uid = user.uid;
+    database.ref('users/'+uid+'/likes/posts/'+postId).remove();
+
+    var likes = $('#post_likes').html();
+    var likes = Number(likes) - 1;
+    $('#post_likes').html(likes);
+})
 
 // 댓글 등록
 $('#submit_reply').click(function(e) {
@@ -379,12 +423,76 @@ $('.replies').on('click', '.pause', function() {
 })
 
 
+
+// 댓글 좋아요
+$('.replies').on('click', '.ri-heart-line', function() {
+    var user = auth.currentUser;
+    if ( !user ) {
+        alert('로그인 후 이용하실 수 있습니다.');
+        return;
+    }
+    $(this).closest('li').find('.ri-heart-line').removeClass('active');
+    $(this).closest('li').find('.ri-heart-fill').addClass('active');
+    
+    var postId = $('#postId').val();
+    var replyId = $(this).closest('li').attr('id');
+    database.ref('board/'+id+'/posts/'+postId+'/reply/'+replyId).update({
+        likes: firebase.database.ServerValue.increment(1)
+    })
+    var user = auth.currentUser;
+    var uid = user.uid;
+    database.ref('users/'+uid+'/likes/replies/'+postId).update({
+        [replyId]: true
+    })
+})
+$('.replies').on('click', '.ri-heart-fill', function() {
+    $(this).closest('li').find('.ri-heart-line').addClass('active');
+    $(this).closest('li').find('.ri-heart-fill').removeClass('active');
+    
+    var postId = $('#postId').val();
+    var replyId = $(this).closest('li').attr('id');
+    database.ref('board/'+id+'/posts/'+postId+'/reply/'+replyId).update({
+        likes: firebase.database.ServerValue.increment(-1)
+    })
+    var user = auth.currentUser;
+    var uid = user.uid;
+    database.ref('users/'+uid+'/likes/replies/'+postId+'/'+replyId).remove();
+})
+
+
+// 음악 공유
+$('.replies').on('click', '.shareBtn', function() {
+    var videoId = $(this).closest('li').attr('name');
+    var link = 'https://youtu.be/'+videoId;
+    
+    if (navigator.share) {
+        var title = $(this).closest('.title').html();
+
+        navigator.share({
+            title: `${title}`,
+            url: `${link}`
+        })
+        .catch(console.error);
+    } else {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val(link).select();
+        document.execCommand("copy");
+        $temp.remove();
+        alert('링크가 복사됐습니다.');
+    }
+})
+
+
+
 // 포스트 삭제
 $(document).on('click', '.delete_post', function() {
     var result = confirm('삭제한 게시글과 댓글은 다시 복구할 수 없습니다. 게시글을 삭제하시겠습니까?');
     if(result) {
         var postId = $('#postId').val();
-        database.ref('board/'+id+'/posts/'+postId).remove()
+        database.ref('board/'+id+'/posts/'+postId).update({
+            state: 'deleted'
+        })
         .then(function() {
             window.history.back();
         });
