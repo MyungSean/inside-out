@@ -49,7 +49,6 @@ function loadPosts(total_posts, load_pages) {
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
                 </tr>
                 `;
                 $('.board table tbody').prepend(tr);
@@ -59,13 +58,17 @@ function loadPosts(total_posts, load_pages) {
             if ( anonymity ) {
                 var name = "익명";
             }
+            if ( reply_cnt > 0 ) {
+                var reply_cnt = '<i class="ri-music-fill"></i>' + reply_cnt;
+            } else {
+                var reply_cnt = "";
+            }
     
             var tr = `
             <tr>
             <td>${number}</td>
-            <td><a href="/board/post.html?id=music&no=${number}">${subject}</a></td>
+            <td><a href="/board/post.html?id=music&no=${number}">${subject}</a>${reply_cnt}</td>
             <td>${name}</td>
-            <td>${reply_cnt}</td>
             <td>${getPastTime(upload_date)}</td>
             <td>${views}</td>
             <td>${likes}</td>

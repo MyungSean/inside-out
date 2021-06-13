@@ -50,7 +50,7 @@
                     <form>
                         <div class="search_area">
                             <div class="search_bar">
-                                <input type="text" id="keyword" placeholder="음악 추가하기" onkeyup="addMusicList()">
+                                <input type="text" id="keyword" placeholder="추가할 음악 검색하기" onkeyup="addMusicList()">
                                 <i class="ri-close-line" id="close_search_result"></i>
                             </div>
                             <ul id="search_result">
@@ -70,7 +70,7 @@
                                         <input type="text" id="artist" value="">
                                     </div>
                                     <div class="comment_area">
-                                        <input type="text" id="my_comment" placeholder="댓글 추가" maxlength="100" oninput="commentLengthCheck()">
+                                        <input type="text" id="my_comment" placeholder="댓글 추가" maxlength="100" autocomplete="off" oninput="commentLengthCheck(this)">
                                         <p><span>0</span>/100</p>
                                     </div>      
                                     <div>
@@ -97,6 +97,45 @@
 
             <div class="noPost">
                 <p>해당 게시물이 존재하지 않습니다.</p>
+            </div>
+
+            <div class="modal addToPlaylistModal">
+                <input type="hidden" id="targetVideoId">
+                <input type="hidden" id="targetTitle">
+                <input type="hidden" id="targetArtist">
+                <input type="hidden" id="targetThumbnail">
+                <div class="modal_content">
+                    <p class="modal_title">플레이리스트에 추가</p>
+                    <div class="playlists">
+                    </div>
+                </div>
+            </div>
+            <div class="modal editReplyModal">
+                <input type="hidden" id="edit_replyId">
+                <div class="modal_content">
+                    <p class="modal_title">음악 정보 수정</p>
+                    <div class="video_info">
+                        <div>
+                            <label for="edit_title">title</label>
+                            <input type="text" id="edit_title" value="">
+                        </div>
+                        <div>
+                            <label for="edit_artist">artist</label>
+                            <input type="text" id="edit_artist" value="">
+                        </div>
+                        <div class="comment_area">
+                            <input type="text" id="edit_my_comment" placeholder="댓글 추가" maxlength="100" autocomplete="off" oninput="commentLengthCheck(this)">
+                            <p><span>0</span>/100</p>
+                        </div>      
+                        <div>
+                            <label for="edit_anonymity">익명</label>
+                            <input type="checkbox" id="edit_anonymity">
+                        </div>      
+                        <div class="btns">
+                            <button id="edit_reply">수정</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <footer></footer>

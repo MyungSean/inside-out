@@ -159,12 +159,18 @@ $('.social_login_btn').click(function() {
         var name = user.displayName;
         var photoURL = user.photoURL;
 
-        database.ref('users/'+uid).set({
-            name: name,
-            photoURL: photoURL
-        })
-        .then(function() {
-            window.history.back();
+        database.ref('users/'+uid).once('value').then(function(snapshot) {
+            if ( snapshot.val() == null ) {
+                database.ref('users/'+uid).update({
+                    name: name,
+                    photoURL: photoURL
+                })
+                .then(function() {
+                    window.history.back();
+                })
+            } else {
+                window.history.back();
+            }
         })
     })
     .catch((error) => {

@@ -315,8 +315,43 @@
     font-size: 14px;
 }
 
-.reply .delete_reply {
-    font-size: 14px;
+
+
+/* 수정 메뉴 */
+.edit_menu {
+    position: absolute;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    top: 8px;
+    right: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-btn);
+    border-radius: 20px;
+    background-color: #faf2e9;
+    padding: 3px 8px;
+    overflow: hidden;
+    transition: .2s;
+}
+.reply .edit_menu {
+    opacity: .5;
+}
+.reply .edit_menu:hover {
+    opacity: 1;
+}
+.edit_menu i {
+    border-radius: 50%;
+    padding: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .1s;
+}
+.reply .edit_menu i {
+    padding: 4px;
+    font-size: 16px;
+}
+.edit_menu i:hover {
+    background-color: var(--hover-gray);
 }
 
 
@@ -329,4 +364,86 @@
 .noPost {
     display: none;
     padding: 30px 0;
+}
+
+
+/* 플레이리스트에 추가 모달 */
+.addToPlaylistModal .playlists > div {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.addToPlaylistModal .playlists > div:last-child {
+    margin-bottom: 0;
+}
+.addToPlaylistModal .playlists input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+.addToPlaylistModal .playlists i {
+    font-size: 20px;
+    margin-left: 10px;
+}
+.addToPlaylistModal .noPlaylist p {
+    font-size: 18px;
+    line-height: 25px;
+}
+.addToPlaylistModal .noPlaylist a {
+    text-decoration: underline;
+    transition: .1s;
+}
+.addToPlaylistModal .noPlaylist a:hover {
+    color: var(--hover-gray);
+}
+
+/* 댓글 수정 모달 */
+.editReplyModal .modal_content {
+    width: 500px;
+}
+.editReplyModal .video_info {
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+}
+.editReplyModal .video_info label {
+    font-size: 14px;
+    font-family: var(--font-main-e), sans-serif;
+    font-weight: 400;
+}
+.editReplyModal .video_info input[type=text] {
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    outline: none;
+    width: 100%;
+    padding: 8px 0;
+    margin-bottom: 20px;
+}
+.editReplyModal .comment_area {
+    position: relative;
+}
+.editReplyModal .comment_area p {
+    position: absolute;
+    right: 0;
+    top: 35px;
+    text-align: right;
+    font-size: 12px;
+    color: rgb(160, 160, 160);
+    margin-top: 5px;
+}
+.editReplyModal .video_info .btns {
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.editReplyModal .video_info .btns button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: inherit;
+    border: 1px solid #000000;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
 }

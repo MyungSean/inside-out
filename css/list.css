@@ -19,11 +19,14 @@
 }
 .board table {
     width: 100%;
-    font-size: 14px;
+    font-size: 15px;
     text-align: center;
 }
 .board th {
     padding: 8px 0;
+}
+.board th:nth-child(1) {
+    width: 80px;
 }
 .board th:nth-child(2) {
     width: 600px;
@@ -39,6 +42,9 @@
 }
 .board tbody td:nth-child(2) {
     text-align: left;
+}
+.board tbody td a {
+    margin-right: 10px;
 }
 .board tbody td a:hover {
     text-decoration: underline;

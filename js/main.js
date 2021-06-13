@@ -9,6 +9,8 @@ function setupHeader(user) {
                     $('header .profile img').attr('src', photoURL);
                 }
             })
+
+            $('header .profile a').attr('href', '/user/my.html?u='+uid);
         } else {
             var html = `
             <a href="/user/login.html">로그인</a>
@@ -104,3 +106,13 @@ function onPlayerStateChange(event) {
         player.clearVideo();
     }
 }
+
+
+
+// 모달 설정
+$('.modal').click(function() {
+    $(this).fadeOut(100);
+})
+$('.modal_content').click(function(e) {
+    e.stopPropagation();
+})

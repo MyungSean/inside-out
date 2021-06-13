@@ -50,6 +50,7 @@ a:active {
     text-decoration: none;
     color: #000000;
 }
+
 * {
     box-sizing: border-box;
 }
@@ -121,13 +122,13 @@ header .board_nav {
     display: flex;
     font-family: var(--font-main-e), sans-serif;
 }
-header .board_nav > a {
+header .board_nav a {
     padding: 10px;
     border-radius: 20px;
     transition: .1s;
     cursor: pointer;
 }
-header .board_nav > a:hover {
+header .board_nav a:hover {
     background-color: var(--hover-gray);
 }
 header .user {
@@ -135,6 +136,15 @@ header .user {
     flex-flow: row nowrap;
     -webkit-align-items: center;
     align-items: center;
+}
+header .user > a {
+    margin-left: 5px;
+    padding: 10px;
+    border-radius: 20px;
+    transition: .1s;
+}
+header .user a:hover {
+    background-color: var(--hover-gray);
 }
 header .user > div {
     margin-left: 10px;
@@ -172,15 +182,6 @@ header .user .user_menu i {
     cursor: pointer;
 }
 header .user .user_menu i:hover {
-    background-color: var(--hover-gray);
-}
-header .user a {
-    /* margin-left: 5px; */
-    padding: 10px;
-    border-radius: 20px;
-    transition: .1s;
-}
-header .user a:hover {
     background-color: var(--hover-gray);
 }
 
@@ -253,12 +254,29 @@ footer .site_info p {
 
 
 
-/* 삭제 버튼 */
-.delete {
+
+/* 모달 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0000007e;
+    z-index: 999;
+}
+.modal_content {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    font-size: 20px;
-    border: 1px solid #000000;
-    cursor: pointer;
+    top: 50%;
+    left: 50%;
+    transform: translate( -50%, -50%);
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+}
+.modal_title {
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 25px;
 }

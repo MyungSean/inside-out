@@ -52,7 +52,7 @@
 .editor label[for=anonymity] {
     font-size: 16px;
 }
-.editor .option #submit_post {
+.editor .option button {
     padding: 5px 10px;
     font-size: 16px;
     background-color: inherit;
@@ -60,7 +60,9 @@
     border-radius: var(--border-radius-btn);
     cursor: pointer;
 }
-
+.editor .option #edit_post {
+    display: none;
+}
 .backToList {
     margin-top: 20px;
     display: flex;

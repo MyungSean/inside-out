@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inside Out</title>
+
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/my.css">
+  </head>
+  <body>
+    <div class="wrap">
+        <header></header>
+        <div class="container">
+            <div class="user_info_wrap">
+                <div class="user_info">
+                    <div class="img_area">
+                        <div class="img_wrap">
+                            <img src="/img/default_profile_img.jpg">
+                        </div>
+                    </div>
+                    <div class="name_wrap">
+                        <p class="name">ㅤ</p>
+                        <div class="menu">
+                            <i class="ri-pencil-fill editBtn"></i>
+                            <i class="ri-settings-fill settingBtn"></i>
+                            <!-- <i class="ri-heart-line"></i>
+                            <i class="ri-heart-fill"></i> -->
+                            <i class="ri-share-forward-fill shareBtn"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <ul class="nav">
+                    <li class="active" id="playlistsBtn">플레이리스트</li>
+                    <li id="myPostsBtn">내가 쓴 글</li>
+                    <li id="likePostsBtn">좋아요 표시한 글</li>
+                </ul>
+                <div class="myActivity playlists">
+                    <div>
+                        <div class="addPlaylistBtn">
+                            <i class="ri-add-fill"></i>
+                        </div>
+                    </div>
+                    <div class="lists"></div>
+                </div>
+                <div class="myActivity myPosts">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>번호</td>
+                                <th>제목</td>
+                                <th>익명</td>
+                                <th>작성일</td>
+                                <th>조회수</td>
+                                <th>추천</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="myActivity likePosts">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>번호</td>
+                                <th>제목</td>
+                                <th>작성자</td>
+                                <th>작성일</td>
+                                <th>조회수</td>
+                                <th>추천</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal addPlaylistModal">
+                <div class="modal_content">
+                    <p class="modal_title">플레이리스트 만들기</p>
+                    <div class="playlistName">
+                        <label for="newPlaylistName">이름</label>
+                        <input type="text" id="newPlaylistName" placeholder="my playlist" maxlength="50">
+                    </div>
+                    <div class="playlistSecret">
+                        <input type="checkbox" id="secret">
+                        <label for="secret">비공개</label>
+                        <span>나에게만 이 플레이리스트가 보입니다.</span>
+                    </div>
+                    <button id="makeNewPlaylist">만들기</button>
+                </div>
+            </div>
+        </div>
+        <footer></footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyBUIQhpDle9ZcA-IBwQEYy-lz8uM2RdFhQ",
+        authDomain: "inside-out-f6b7d.firebaseapp.com",
+        projectId: "inside-out-f6b7d",
+        storageBucket: "inside-out-f6b7d.appspot.com",
+        messagingSenderId: "42086150347",
+        appId: "1:42086150347:web:ee76f1b2fb15ec5cbb6b4e",
+        measurementId: "G-94VRFGG4R1"
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      const database = firebase.database();
+      const auth = firebase.auth();
+    </script>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/my.js"></script>
+</body>
+</html>

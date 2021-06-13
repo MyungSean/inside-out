@@ -32,13 +32,14 @@
     flex-grow: 1;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
+    background-color: inherit;
     padding: 10px 10px;
     font-size: 16px;
 }
 #signup_form > div > span {
     position: absolute;
     left: 120px;
-    top: 45px;
+    top: 50px;
     font-size: 14px;
     color: rgb(209, 0, 0);
 }

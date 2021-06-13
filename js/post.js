@@ -25,6 +25,7 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
         var anonymity = childSnapshot.val().anonymity;
         var subject = childSnapshot.val().subject;
         var upload_date = childSnapshot.val().upload_date;
+        var edit_date = childSnapshot.val().edit_date;
         var content = childSnapshot.val().content;
         var number = childSnapshot.val().number;
         var likes = childSnapshot.val().likes;
@@ -41,7 +42,7 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
         if ( anonymity ) {
             name = "익명";
         }
-        
+
         $('#postId').val(postId);
         $('.post_info h3').html(subject);
         $('.author').html(name);
@@ -49,13 +50,24 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
         $('.upload_date').html(getPastTime(upload_date));
         $('.content').html(content);
         $('#post_likes').html(likes);
-
+        
+        // 수정 확인
+        if ( edit_date ) {
+            $('.upload_date').append(' (수정됨)')
+        }
+        
         var user = auth.currentUser;
         if ( user ) {
 
             // 유저 상태 확인후 포스트 삭제 버튼 추가
             if ( user.uid == uid ) {
-                $('.post').append('<i class="ri-close-fill delete delete_post"></i>');
+                var menu = `
+                    <div class="edit_menu">
+                        <i class="ri-pencil-fill edit edit_post"></i>
+                        <i class="ri-close-fill delete delete_post"></i>
+                    </div>
+                `;
+                $('.post').append(menu);
             }            
 
             // 내가 좋아요 표시했는지 확인
@@ -105,26 +117,38 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
             var likes = reply.likes;
             var reports = reply.reports;
             var reply_upload_date = reply.upload_date;
+            var reply_edit_date = reply.edit_date;
             // console.log(artist, title, videoId, thumbnail, comment, uid, anonymity, likes, reports, reply_upload_date);
 
             if ( anonymity ) {
                 var name = "익명";
             }
 
-            // 유저 상태 확인후 댓글 삭제 버튼 추가
             if ( user ) {
-                if ( user.uid == uid ) {
-                    var deleteBtn = `<i class="ri-close-fill delete delete_reply"></i>`;                
+                // 유저 상태 확인후 댓글 삭제 버튼 추가
+                if ( user.uid == uid ) {           
+                    var menu = `
+                        <div class="edit_menu">
+                            <i class="ri-pencil-fill edit edit_reply"></i>
+                            <i class="ri-close-fill delete delete_reply"></i>
+                        </div>
+                    `;
                 } else {
-                    var deleteBtn = "";
+                    var menu = "";
                 }
             } else {
-                var deleteBtn = "";
+                var menu = "";
+            }
+
+            if ( reply_edit_date ) {
+                var edit_indicator = ' (수정됨)';
+            } else {
+                var edit_indicator = '';
             }
 
             var li =
             `<li name="${videoId}" id="${key}">
-                ${deleteBtn}
+                ${menu}
                 <div class="reply_music">
                     <div>
                         <div class="img_wrap">
@@ -152,7 +176,7 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
                         </div>
                         <div class="time">
                             <i class="ri-time-fill"></i>
-                            <p>${getPastTime(reply_upload_date)}</p>
+                            <p>${getPastTime(reply_upload_date)}${edit_indicator}</p>
                         </div>
                     </div>
                 </div>
@@ -251,9 +275,11 @@ function searchMusic(artist, title) {
 }
 
 // 댓글 글자 수 체크
-function commentLengthCheck() {
-    var length = $('#my_comment').val().length;
-    $('.comment_area p span').html(length);
+function commentLengthCheck(e) {
+    var el_id = e.id;
+    var length = e.value.length;
+    // $('.comment_area p span').html(length);
+    $('#'+el_id).siblings('p').children('span').html(length);
 }
 
 // 로그인된 유저만 댓글 추가 가능
@@ -294,7 +320,6 @@ $('.video_confirm').on('click', '.cancelBtn', function() {
     $('#thumbnail').val("");
     $('.video_confirm').hide();
     $('.search_bar').show();
-    $('.comment_area').hide();
 })
 
 // 게시글 좋아요
@@ -338,9 +363,7 @@ $('#submit_reply').click(function(e) {
     e.preventDefault();
 
     var user = auth.currentUser;
-    if ( user ) {
-        var uid = user.uid;
-    }
+    var uid = user.uid;
 
     var postId = $('#postId').val();
     var artist = $('#artist').val();
@@ -349,7 +372,6 @@ $('#submit_reply').click(function(e) {
     var thumbnail = $('#thumbnail').val();
     var comment = $('#my_comment').val();
     var upload_date = Date.now();
-    var uid = uid;
     var name = $('#name').val();
     
     if ( $('input:checkbox[id="anonymity"]').is(":checked") ) {
@@ -384,7 +406,8 @@ $('#submit_reply').click(function(e) {
         anonymity: anonymity,
         likes: 0,
         reports: 0,
-        upload_date: upload_date
+        upload_date: upload_date,
+        edit_date: false
     })
     .then(function() {
         window.location.reload();
@@ -422,6 +445,96 @@ $('.replies').on('click', '.pause', function() {
     player.pauseVideo();
 })
 
+
+
+// 플레이리스트에 추가
+$('.replies').on('click', '.listAddBtn', function() {
+    var user = auth.currentUser;
+    if ( !user ) {
+        alert('로그인 후 사용하실 수 있습니다.')
+        return;
+    }
+
+    var videoId = $(this).closest('li').attr('name');
+    var title = $(this).closest('li').find('.title').html();
+    var artist = $(this).closest('li').find('.artist').html();
+    var thumbnail = $(this).closest('li').find('img').attr('src');
+    $('#targetVideoId').val(videoId);
+    $('#targetTitle').val(title);
+    $('#targetArtist').val(artist);
+    $('#targetThumbnail').val(thumbnail);
+
+    $('.addToPlaylistModal .playlists').html("");
+
+    database.ref('users/'+user.uid+'/playlists').once('value').then(function(snapshot) {
+        if ( snapshot.val() == null ) {
+            var div = `
+                <div class="noPlaylist">
+                    <p>플레이리스트가 없습니다. <a href="/user/my.html">내 페이지</a>에서 새로운 플레이리스트를 만드세요.</p>
+                </div>
+            `
+            $('.addToPlaylistModal .playlists').append(div);
+        }
+        
+        snapshot.forEach(childSnapshot => {
+            var playlistId = childSnapshot.key;
+            var playlistName = childSnapshot.val().info.name;
+            var playlistSecret = childSnapshot.val().info.secret;
+            var icon = "";
+            if ( playlistSecret ) {
+                var icon = `<i class="ri-lock-fill"></i>`;
+            }
+            var playlist = `
+                <div>
+                    <input type="checkbox" id="${playlistId}" onchange="applyPlaylist(this)">
+                    <label for="${playlistId}">${playlistName}</label>
+                    ${icon}
+                </div>
+            `;
+
+            $('.addToPlaylistModal .playlists').append(playlist);
+
+            database.ref('users/'+user.uid+'/playlists/'+playlistId+'/musics/').orderByChild('videoId').equalTo(videoId).once('value').then(function(snapshot) {
+                var len = Object.keys(snapshot.val()).length;
+                if ( len ) {
+                    $('#'+playlistId).prop("checked", true); 
+                }
+            });
+
+        });
+
+        $('.addToPlaylistModal').fadeIn(100);
+    })
+});
+
+// 플레이리스트에 반영
+function applyPlaylist(e) {
+    var postId = $('#postId').val();
+    var playlistId = e.id;
+    var videoId = $('#targetVideoId').val();
+    var title = $('#targetTitle').val();
+    var artist = $('#targetArtist').val();
+    var thumbnail = $('#targetThumbnail').val();
+
+    var user = auth.currentUser;
+
+    if ( e.checked ) {
+        database.ref('users/'+user.uid+'/playlists/'+playlistId+'/musics').push().set({
+            videoId: videoId,
+            title: title,
+            artist: artist,
+            thumbnail: thumbnail,
+            from: postId
+        })
+    } else {
+        database.ref('users/'+user.uid+'/playlists/'+playlistId+'/musics/').orderByChild('videoId').equalTo(videoId).once('value').then(function(snapshot) {
+            snapshot.forEach(childSnapshot => {
+                var musicId = childSnapshot.key;
+                database.ref('users/'+user.uid+'/playlists/'+playlistId+'/musics/'+musicId).remove();
+            });
+        });
+    }
+}
 
 
 // 댓글 좋아요
@@ -499,6 +612,13 @@ $(document).on('click', '.delete_post', function() {
     }
 })
 
+// 포스트 수정
+$(document).on('click', '.edit_post', function() {
+    var user = auth.currentUser;
+    var postId = $('#postId').val();
+    location.href = `/board/write.html?id=${id}&for=edit&p=${postId}`;
+})
+
 // 댓글 삭제
 $(document).on('click', '.delete_reply', function() {
     var result = confirm('삭제한 댓글은 다시 복구할 수 없습니다. 댓글을 삭제하시겠습니까?');
@@ -510,4 +630,65 @@ $(document).on('click', '.delete_reply', function() {
             window.location.reload();
         });
     }
+})
+
+// 댓글 수정
+$(document).on('click', '.edit_reply', function() {
+    var postId = $('#postId').val();
+    var replyId = $(this).closest('li').attr('id');
+    $('#edit_replyId').val(replyId);
+    console.log(postId, replyId, id);
+    database.ref('board/'+id+'/posts/'+postId+'/reply/'+replyId).once('value').then(function(snapshot) {
+        var title = snapshot.val().title;
+        var artist = snapshot.val().artist;
+        var anonymity = snapshot.val().anonymity;
+        var comment = snapshot.val().comment;
+
+        $('#edit_title').val(title);
+        $('#edit_artist').val(artist);
+        $('#edit_my_comment').val(comment);
+        if ( anonymity ) {
+            $("input:checkbox[id='edit_anonymity']").prop("checked", true);
+        } else {
+            $("input:checkbox[id='edit_anonymity']").prop("checked", false);
+        }
+    })
+    .then(function(){
+        $('.editReplyModal').fadeIn(100);
+    })
+})
+$('#edit_reply').click(function() {
+    var postId = $('#postId').val();
+    var replyId = $('#edit_replyId').val();
+    
+    var title = $('#edit_title').val();
+    var artist = $('#edit_artist').val();
+    var comment = $('#edit_my_comment').val();
+    var edit_date = Date.now();
+    if ( $('input:checkbox[id="edit_anonymity"]').is(":checked") ) {
+        var anonymity = true;
+    } else {
+        var anonymity = false;
+    }
+    
+    if ( title == "" ) {
+        $('#title').focus();
+        return alert('제목을 입력해주세요.')
+    }
+    if ( artist == "" ) {
+        $('#artist').focus();
+        return alert('아티스트 정보를 입력해주세요.')
+    }
+
+    database.ref('board/'+id+'/posts/'+postId+'/reply/'+replyId).update({
+        title: title,
+        artist: artist,
+        comment: comment,
+        anonymity: anonymity,
+        edit_date: edit_date
+    })
+    .then(function() {
+        window.location.reload();
+    })
+
 })
