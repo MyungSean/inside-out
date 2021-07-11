@@ -29,7 +29,7 @@
     width: 80px;
 }
 .board th:nth-child(2) {
-    width: 600px;
+    width: 650px;
 }
 .board tbody tr td {
     padding: 12px 0;
@@ -43,8 +43,8 @@
 .board tbody td:nth-child(2) {
     text-align: left;
 }
-.board tbody td a {
-    margin-right: 10px;
+.board tbody td i {
+    margin-left: 7px;
 }
 .board tbody td a:hover {
     text-decoration: underline;

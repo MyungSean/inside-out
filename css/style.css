@@ -106,6 +106,7 @@ footer {
     margin: 0 auto;
 }
 header nav {
+    position: relative;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -149,15 +150,76 @@ header .user a:hover {
 header .user > div {
     margin-left: 10px;
 }
-header .user .notice {
+header .user .notice i {
+    position: relative;
     font-size: 25px;
     padding: 8px;
     border-radius: 50%;
     transition: .1s;
     cursor: pointer;
 }
-header .user .notice:hover {
+header .user .notice i:hover {
     background-color: var(--hover-gray);
+}
+header .user .notice i .notice_cnt {
+    display: none;
+}
+header .user .notice i .notice_cnt.active {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    top: 0;
+    right: 0;
+    font-family: var(--font-main-e);
+    font-size: 10px;
+    color: #fff;
+    background-color: #ff5e58;
+    border-radius: 20px;
+}
+header .user .noticeModal {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    display: none;
+    height: 80vh;
+    width: 350px;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-content);
+    padding: 0 10px;
+    z-index: 99;
+    overflow: scroll;
+}
+header .user .noticeModal li {
+    padding: 8px;
+    margin-top: 10px;
+    border-radius: var(--border-radius-content);
+    transition: .1s;
+    cursor: pointer;
+}
+header .user .noticeModal li:last-child {
+    border-bottom: none;
+    margin-bottom: 10px;
+}
+header .user .noticeModal li:hover {
+    background-color: var(--hover-gray);
+}
+header .user .noticeModal li.checked {
+    opacity: .5;
+}
+header .user .noticeModal .title {
+    font-size: 16px;
+}
+header .user .noticeModal .description {
+    padding: 8px 0;
+    color: #616161;
+    font-size: 14px;
+}
+header .user .noticeModal .date {
+    color: #616161;
+    font-size: 14px;
 }
 header .user .img_wrap {
     width: 40px;
@@ -170,9 +232,6 @@ header .user .img_wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-header .user .user_menu {
-    position: relative;
 }
 header .user .user_menu i {
     border-radius: 50%;
@@ -189,15 +248,15 @@ header .user .user_menu i:hover {
 header .user .user_menu ul {
     display: none;
     position: absolute;
-    top: 30px;
+    top: 70px;
     right: 0;
     width: 100px;
     background-color: #ffffff;
-    border: 1px solid #000000;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 5px;
     font-size: 14px;
-    z-index: 1;
+    z-index: 99;
 }
 header .user .user_menu ul li {
     padding: 5px;

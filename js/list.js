@@ -31,6 +31,7 @@ function loadPosts(total_posts, load_pages) {
             var number = childSnapshot.val().number;
             var subject = childSnapshot.val().subject;
             var name = childSnapshot.val().name;
+            var uid = childSnapshot.val().uid;
             var anonymity = childSnapshot.val().anonymity;
             var reply = childSnapshot.val().reply;
             var reply_cnt = Object.keys(reply).length;
@@ -57,8 +58,13 @@ function loadPosts(total_posts, load_pages) {
             // 익명 처리
             if ( anonymity ) {
                 var name = "익명";
-            }
-            if ( reply_cnt > 0 ) {
+            } else {
+                var name = `
+                    <a href="/user/my.html?u=${uid}">
+                        ${name}
+                    </a>
+                `;
+            }            if ( reply_cnt > 0 ) {
                 var reply_cnt = '<i class="ri-music-fill"></i>' + reply_cnt;
             } else {
                 var reply_cnt = "";

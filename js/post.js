@@ -40,7 +40,13 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
 
         // 익명 처리
         if ( anonymity ) {
-            name = "익명";
+            var name = "익명";
+        } else {
+            var name = `
+                <a href="/user/my.html?u=${uid}">
+                    ${name}
+                </a>
+            `;
         }
 
         $('#postId').val(postId);
@@ -122,6 +128,12 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
 
             if ( anonymity ) {
                 var name = "익명";
+            } else {
+                var name = `
+                    <a href="/user/my.html?u=${uid}">
+                        ${name}
+                    </a>
+                `;
             }
 
             if ( user ) {
@@ -410,7 +422,20 @@ $('#submit_reply').click(function(e) {
         edit_date: false
     })
     .then(function() {
-        window.location.reload();
+        database.ref('board/'+id+'/posts/'+postId).once('value').then(function(snapshot) {
+            var author = snapshot.val().uid;
+            database.ref('users/'+author+'/notifications').push().set({
+                title: '새로운 댓글이 있습니다.',
+                description: $('.post_info h3').html(),
+                targetURL: window.location.pathname + window.location.search,
+                checked: false,
+                type: 'newReply',
+                date: Date.now()
+            })
+            .then(function() {
+                window.location.reload();
+            })
+        })
     })
 })
 
@@ -418,30 +443,26 @@ $('#submit_reply').click(function(e) {
 
 // 음악 재생
 $('.replies').on('click', '.play', function() {
-    $('.replies .pause').removeClass('active');
-    $('.replies img').removeClass('active');
-    $('.replies .play').addClass('active');
-    $(this).removeClass('active');
-    $(this).siblings('.pause').addClass('active');
-    $(this).siblings('img').addClass('active');
+    $('.replies li').removeClass('nowPlaying');
+    $(this).closest('li').addClass('nowPlaying');
 
     const curr_videoUrl = new URL(player.getVideoUrl());
     const urlParams = curr_videoUrl.searchParams;
     var curr_videoId = urlParams.get('v');
     var videoId = $(this).closest('li').attr('name');
+    var title = $(this).closest('li').find('.title').html();
+    var artist = $(this).closest('li').find('.artist').html();
 
     if ( curr_videoId == videoId) {
         player.playVideo();
     } else {
         player.loadVideoById(videoId, 0, "large");
+        $('.player_bar .title').html(title);
+        $('.player_bar .artist').html(artist);
     }
 
 })
 $('.replies').on('click', '.pause', function() {
-    $(this).removeClass('active');
-    $(this).siblings('img').removeClass('active');
-    $(this).siblings('.play').addClass('active');
-
     player.pauseVideo();
 })
 
@@ -691,4 +712,90 @@ $('#edit_reply').click(function() {
         window.location.reload();
     })
 
+})
+
+
+
+// 플레이어
+function setPause() {
+    $('.replies .pause').removeClass('active');
+    $('.replies .pause').siblings('img').removeClass('active');
+    $('.replies .pause').siblings('.play').addClass('active');
+
+    $('.player_bar .pauseBtn').removeClass('active');
+    $('.player_bar .pauseBtn').siblings('.playBtn').addClass('active');
+}
+function setPlay() {
+    $('.replies .nowPlaying .play').removeClass('active');
+    $('.replies .nowPlaying .play').siblings('img').addClass('active');
+    $('.replies .nowPlaying .play').siblings('.pause').addClass('active');
+
+    $('.player_bar .playBtn').removeClass('active');
+    $('.player_bar .playBtn').siblings('.pauseBtn').addClass('active');
+}
+
+// 유튜브 iframe 컨트롤
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var player ;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+    height: '281',
+    width: '500',
+    // videoId: 'M7lc1UVf-VE',
+    events: {
+        // 'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+    }
+    });
+}
+
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
+
+var done = false;
+function onPlayerStateChange(event) {
+    if ( event.data == YT.PlayerState.ENDED ) {
+        setPause();
+        player.clearVideo();
+    } else if ( event.data == YT.PlayerState.PAUSED ) {
+        setPause();
+    } else if ( event.data == YT.PlayerState.PLAYING ) {
+        setPlay();
+    }
+}
+
+// 플레이어 바
+// 유튜브 플레이어 컨트롤
+$(document).on('click', '.player_bar .playBtn', function() {
+    if ( player.getVideoUrl() == 'https://www.youtube.com/watch' ) {
+        return
+    }
+    player.playVideo();
+    $(this).removeClass('active');
+    $(this).siblings('.pauseBtn').addClass('active');
+})
+$(document).on('click', '.player_bar .pauseBtn', function() {
+    player.pauseVideo()
+    $(this).removeClass('active');
+    $(this).siblings('.playBtn').addClass('active');
+})
+
+// 플레이어 progress bar
+function markProgressBar() {
+    var progress = player.getCurrentTime() / player.getDuration() * 100;
+    // console.log( player.getCurrentTime(), player.getDuration() );
+    // console.log(progress);
+    $('.player_bar_progress_wrap .progress').css('width', progress + '%');
+}
+setInterval(markProgressBar, 100);
+
+// 유튜브 플레이어 토글
+$(document).on('click', '.video_toggleBtn', function() {
+    $('#player').toggle();
+    $(this).toggleClass('active');
 })

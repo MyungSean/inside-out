@@ -7,12 +7,17 @@
         </div>
         <div class="board_nav">
             <a href="/board/list.html?id=music">
-                Music Board
+                Music
             </a>
         </div>
         <div class="user">
             <div class="notice">
-                <i class="ri-notification-2-fill"></i>
+                <i class="ri-notification-2-fill" id="notification_toggle">
+                    <span class="notice_cnt">35</span>
+                </i>
+                <div class="noticeModal">
+                    <ul></ul>
+                </div>
             </div>
             <div class="profile">
                 <a href="/user/my.html">
@@ -22,7 +27,7 @@
                 </a>
             </div>
             <div class="user_menu">
-                <i class="ri-arrow-down-s-fill" id="user_menu_toggle" onclick="toggleUserMenu()"></i>
+                <i class="ri-arrow-down-s-fill" id="user_menu_toggle"></i>
                 <ul>
                     <li class="logoutBtn">로그아웃</li>
                 </ul>

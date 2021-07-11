@@ -25,9 +25,80 @@ function setupHeader(user) {
 $('footer').load('/html/footer.html');
 
 // 헤더 유저 메뉴 토글
-function toggleUserMenu() {
-    $('header .user_menu ul').toggle();
+$(document).on("click", '.user_menu i', function(e){  
+    e.stopPropagation();
+    $('header .user_menu ul').fadeToggle(50);
+})
+
+// 헤더 알림 토글
+$(document).on("click", '.notice i', function(e){  
+    e.stopPropagation();
+    $('header .notice .noticeModal').fadeToggle(50);
+})
+
+// 타겟영역을 제외하고 클릭했을 시 메뉴 숨김처리.
+$(document).on("click", function(e){  
+    if( !$(".user_menu ul").is(e.target)) {
+        $(".user_menu ul").fadeOut(50);
+    }
+    if( !$(".noticeModal").is(e.target)) {
+        $(".noticeModal").fadeOut(50);
+    }
+});
+
+
+// 알림 표시
+function getNtotification(user) {
+    database.ref('users/'+user.uid+'/notifications').on('child_added', function(snapshot) {
+        var key = snapshot.key;
+        var type = snapshot.val().type;
+        var checked = snapshot.val().checked;
+        if ( checked ) {
+            var checked = 'checked';
+        } else {
+            var checked = "";
+        }
+        
+        var title = snapshot.val().title;
+        var description = snapshot.val().description;
+        var date = snapshot.val().date;
+        var postURL = snapshot.val().postURL;
+        
+        var li = `
+        <li id="${key}" class="${checked}">
+        <p class="title">${title}</p>
+        <p class="description">${description}</p>
+        <p class="date">${getPastTime(date)}</p>
+        </li>
+        `;
+        
+        $('.noticeModal ul').prepend(li);
+    })
+    
+    database.ref('users/'+user.uid+'/notifications').orderByChild('checked').equalTo(false).once('value').then(function(snapshot) {
+        if ( snapshot.val() ) {
+        var notice_cnt = Object.keys(snapshot.val()).length;
+            $('.notice_cnt').html(notice_cnt);
+            $('.notice_cnt').addClass('active');
+        }
+    })
 }
+
+// 알림에 클릭 이벤트
+$(document).on('click', '.noticeModal li', function(){
+    console.log(1);
+    var user = auth.currentUser;
+    var notificationId = $(this).attr('id');
+    database.ref('users/'+user.uid+'/notifications/'+notificationId).update({
+        checked: true
+    })
+    .then(function() {
+        database.ref('users/'+user.uid+'/notifications/'+notificationId).once('value').then(function(snapshot){
+            var targetURL = snapshot.val().targetURL;
+            window.location.href = targetURL;
+        })
+    })
+})
 
 
 // 존재하는 보드인지 아이디 체크
@@ -69,41 +140,6 @@ function getPastTime(millisecond) {
         
         var time = year + '/' + month + '/' + date;
         return time;
-    }
-}
-
-
-// 유튜브 iframe 컨트롤
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-var player ;
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
-    height: '360',
-    width: '640',
-    videoId: 'M7lc1UVf-VE',
-    events: {
-        // 'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
-    }
-    });
-}
-
-function onPlayerReady(event) {
-    event.target.playVideo();
-}
-
-var done = false;
-function onPlayerStateChange(event) {
-    if ( event.data == YT.PlayerState.ENDED ) {
-        $('.replies .pause').removeClass('active');
-        $('.replies .pause').siblings('img').removeClass('active');
-        $('.replies .pause').siblings('.play').addClass('active');
-
-        player.clearVideo();
     }
 }
 

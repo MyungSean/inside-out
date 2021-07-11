@@ -1,6 +1,11 @@
 /* 유튜브 iframe */
 #player {
     display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    border-radius: 15px;
+    z-index: 9;
 }
 
 /* 게시글 */
@@ -37,6 +42,9 @@
 }
 .post_info .bar .left span {
     margin-right: 15px;
+}
+.post_info .bar .author a:hover {
+    text-decoration: underline;
 }
 .post .content {
     clear: both;
@@ -106,14 +114,17 @@
     position: absolute;
     width: 100%;
     border: 1px solid black;
+    border-radius: 0 0 var(--border-radius-content) var(--border-radius-content);
     background-color: #ffffff;
     padding: 10px;
+    margin-bottom: 70px;
     font-size: 14px;
     z-index: 1;
 }
 .my_reply #search_result li {
     border-bottom: 1px solid rgb(224, 224, 224);
     padding: 10px 5px;
+    transition: .1s;
     cursor: pointer;
 }
 .my_reply #search_result li:hover:not(.noResult) {
@@ -290,9 +301,9 @@
     flex-grow: 1;
 }
 .reply_comment .comment {
-    font-size: 16px;
-    line-height: 25px;
-    padding: 5px 0;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 15px 0;
 }
 .reply_comment .time {
     text-align: right;
@@ -314,8 +325,99 @@
     justify-content: space-between;
     font-size: 14px;
 }
+.reply_author a:hover {
+    text-decoration: underline;
+}
 
 
+
+/* 음악 플레이어 */
+.player_bar_wrap {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.player_bar {
+    background-color: #faf2e980;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+.player_bar_progress_wrap {
+    background-color: #bebebe;
+    height: 4px;
+}
+.player_bar_progress_wrap .progress {
+    height: 100%;
+    width: 0;
+    background-color: #000;
+    transition: .1s;
+}
+.player_bar_content {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    width: var(--content-width);
+    height: 67px;
+    margin: 0 auto;
+}
+.player_bar_content i {
+    font-size: 25px;
+}
+.player_bar .control {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    width: 120px;
+}
+.player_bar .control .playBtn,
+.player_bar .control .pauseBtn {
+    display: none;
+    cursor: pointer;
+}
+.player_bar .control .playBtn.active,
+.player_bar .control .pauseBtn.active {
+    display: block;
+}
+.player_bar .control .backBtn,
+.player_bar .control .forwardBtn {
+    opacity: .5;
+}
+.player_bar .control .backBtn.active,
+.player_bar .control .forwardBtn.active {
+    opacity: 1;
+    cursor: pointer;
+}
+.player_bar .track {
+    margin: 0 35px;
+}
+.player_bar .track .title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+.player_bar .track .artist {
+    font-size: 14px;
+    font-weight: 400;
+}
+.player_bar .video_toggle {
+    margin-left: auto;
+}
+.player_bar .video_toggle .video_toggleBtn {
+    opacity: .5;
+    cursor: pointer;
+}
+.player_bar .video_toggle .video_toggleBtn.active {
+    opacity: 1;
+}
+
+
+/* 푸터 */
+footer {
+    margin-bottom: 55px;
+}
+
+
+/* 모달 */
 
 /* 수정 메뉴 */
 .edit_menu {
