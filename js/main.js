@@ -143,7 +143,24 @@ function getPastTime(millisecond) {
     }
 }
 
+// 초를 hh:mm:ss 형식으로 반환
+function secondsToHMS(currS, totS) {
+    var hours   = Math.floor(currS / 3600);
+    var minutes = Math.floor((currS - (hours * 3600)) / 60);
+    var seconds = Math.floor(currS - (hours * 3600) - (minutes * 60));
 
+    // round seconds
+    seconds = Math.round(seconds * 100) / 100
+
+    if ( totS >= 3600 ) {
+        var result = (hours < 10 ? "0" + hours : hours) + ":";
+    } else {
+        var result = "";
+    }
+    result += (minutes < 10 ? "0" + minutes : minutes) + ":";
+    result += (seconds  < 10 ? "0" + seconds : seconds);
+    return result;
+}
 
 // 모달 설정
 $('.modal').click(function() {

@@ -339,3 +339,8 @@ footer .site_info p {
     font-weight: 700;
     margin-bottom: 25px;
 }
+/* .modal input,
+.modal button {
+    background-color: inherit;
+    background: none;
+} */

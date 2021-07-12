@@ -788,12 +788,41 @@ $(document).on('click', '.player_bar .pauseBtn', function() {
 // 플레이어 progress bar
 function markProgressBar() {
     var progress = player.getCurrentTime() / player.getDuration() * 100;
-    // console.log( player.getCurrentTime(), player.getDuration() );
-    // console.log(progress);
     $('.player_bar_progress_wrap .progress').css('width', progress + '%');
 }
 setInterval(markProgressBar, 100);
 
+// 시간 정보 표시
+function markTimeInfo() {
+    var currTime = player.getCurrentTime();
+    var totTime = player.getDuration();
+    
+    $('.player_bar .timeInfo .currTime').html(secondsToHMS(currTime, totTime));
+    $('.player_bar .timeInfo .totTime').html(secondsToHMS(totTime, totTime));
+}
+setInterval(markTimeInfo, 100);
+
+$('.player_bar_progress_wrap').click(function (e) {
+    var pageWidth = $(document).width();
+    var time = player.getDuration() / pageWidth * e.pageX;
+    player.seekTo(time, true);
+})
+$('.player_bar_progress_wrap').mousemove(function(e){
+    $('.timeMarker').css("left", e.pageX);
+
+    var pageWidth = $(document).width();
+    var time = player.getDuration() / pageWidth * e.pageX;
+    var time = secondsToHMS(time, player.getDuration());
+    $(this).find('.timeMarker span').html(time);
+    });
+$('.player_bar_progress_wrap').hover(
+    function() {
+        $('.timeMarker').addClass('active');
+    }, function() {
+        $('.timeMarker').removeClass('active');    
+    }
+);
+    
 // 유튜브 플레이어 토글
 $(document).on('click', '.video_toggleBtn', function() {
     $('#player').toggle();
