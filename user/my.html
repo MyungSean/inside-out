@@ -93,6 +93,39 @@
                     <button id="makeNewPlaylist">만들기</button>
                 </div>
             </div>
+
+            <div class="modal editUserInfoModal">
+                <div class="modal_content">
+                    <p class="modal_title">사용자 정보 수정</p>
+                    <div class="editName">
+                        <h2><label for="newUserName">새로운 이름</label></h2>
+                        <input type="text" id="newUserName" placeholder="새로운 이름을 입력해주세요.">
+                    </div>
+                    <div class="editProfileImg">
+                        <h2>새로운 프로필 사진</h2>
+                        <div class="drag_area active">
+                            <input type="file" id="newProfileImg" accept="image/jpg, image/jpeg, image/png">
+                            <i class="ri-account-circle-fill"></i>
+                            <p>끌어서 새로운 사진 추가</p>
+                            <label for="newProfileImg">직접 선택</label>
+                        </div>
+                        <div class="imgPreview">
+                            <div class="img_wrap">
+                                <img src="" alt="image preview">
+                            </div>
+                            <button id="resetImg">다시 선택</button>
+                        </div>
+                    </div>
+                    <button class="submitBtn">적용</button>
+
+                    <div class="loader">
+                        <i class="ri-loader-4-line"></i>
+                    </div>
+
+                    <input type="hidden" id="nameUpdated" value="false">
+                    <input type="hidden" id="profileImgUpdated" value="false">
+                </div>
+            </div>
         </div>
         <footer></footer>
     </div>
@@ -103,6 +136,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
     <script>
       var firebaseConfig = {
         apiKey: "AIzaSyBUIQhpDle9ZcA-IBwQEYy-lz8uM2RdFhQ",
@@ -117,6 +151,7 @@
       firebase.analytics();
       const database = firebase.database();
       const auth = firebase.auth();
+      const storage = firebase.storage();
     </script>
 
     <script src="/js/main.js"></script>

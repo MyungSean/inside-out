@@ -229,52 +229,6 @@
     cursor: pointer;
 }
 
-/* 플레이리스트 추가 모달 */
-.addPlaylistModal .playlistName label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-.addPlaylistModal .playlistName input[type=text] {
-    width: 100%;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-btn);
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 20px;
-}
-.addPlaylistModal .playlistSecret input[type=checkbox] {
-    width: 20px;
-    height: 20px;
-    margin: 0;
-    margin-right: 8px;
-}
-.addPlaylistModal .playlistSecret {
-    /* display: flex; */
-    flex-flow: row;
-    align-items: center;
-}
-.addPlaylistModal .playlistSecret label {
-    font-size: 18px;
-    font-weight: 400;
-}
-.addPlaylistModal .playlistSecret span {
-    color: #7e7e7e;
-    font-size: 14px;
-}
-.addPlaylistModal #makeNewPlaylist {
-    display: flex;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-btn);
-    padding: 5px 10px;
-    margin-top: 30px;
-    margin-left: auto;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-
-
 .myActivity table {
     width: 100%;
     font-size: 15px;
@@ -319,4 +273,170 @@
 /* 좋아요 표시한 글 */
 .likePosts {
     display: none;
+}
+
+
+
+/* 모달 */
+/* 플레이리스트 추가 모달 */
+.addPlaylistModal .playlistName label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+.addPlaylistModal .playlistName input[type=text] {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-btn);
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+.addPlaylistModal .playlistSecret input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    margin-right: 8px;
+}
+.addPlaylistModal .playlistSecret {
+    /* display: flex; */
+    flex-flow: row;
+    align-items: center;
+}
+.addPlaylistModal .playlistSecret label {
+    font-size: 18px;
+    font-weight: 400;
+}
+.addPlaylistModal .playlistSecret span {
+    color: #7e7e7e;
+    font-size: 14px;
+}
+.addPlaylistModal #makeNewPlaylist {
+    display: flex;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-btn);
+    padding: 5px 10px;
+    margin-top: 30px;
+    margin-left: auto;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* 유저 정보 수정 모달 */
+.editUserInfoModal .modal_content {
+    width: 400px;
+    overflow: hidden;
+}
+.editUserInfoModal h2 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.editUserInfoModal .editName {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+.editUserInfoModal .editName label {
+    display: block;
+}
+.editUserInfoModal .editName input {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-btn);
+    padding: 5px;
+}
+.editUserInfoModal .drag_area {
+    display: none;
+}
+.editUserInfoModal .drag_area.active {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    border: 3px dashed #8b8b8b;
+    border-radius: 20px;
+    font-size: 18px;
+    color: #8b8b8b;
+}
+.editUserInfoModal .drag_area.drag_over {
+    border: 3px solid #8b8b8b;
+    /* background-color: #000000; */
+}
+.editUserInfoModal .drag_area input {
+    display: none;
+}
+.editUserInfoModal .drag_area i {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+.editUserInfoModal .drag_area label {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-btn);
+    background-color: inherit;
+    margin-top: 20px;
+    padding: 6px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.editUserInfoModal .imgPreview {
+    display: none;
+}
+.editUserInfoModal .imgPreview.active {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+.editUserInfoModal .imgPreview .img_wrap {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.editUserInfoModal .imgPreview .img_wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.editUserInfoModal .imgPreview button {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-btn);
+    background-color: inherit;
+    margin: 10px 0;
+    padding: 6px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.editUserInfoModal .submitBtn {
+    display: flex;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-btn);
+    background-color: inherit;
+    margin-top: 20px;
+    margin-left: auto;
+    padding: 4px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.editUserInfoModal .loader {
+    display: none;
+}
+.editUserInfoModal .loader.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+.editUserInfoModal .loader i {
+    font-size: 40px;
+    -webkit-animation:spin 1s linear infinite;
+    -moz-animation:spin 1s linear infinite;
+    animation:spin 1s linear infinite;
 }

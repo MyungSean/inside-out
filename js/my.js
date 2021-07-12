@@ -286,10 +286,189 @@ $('#makeNewPlaylist').click(function() {
 
 
 // 유저 메뉴
-// 프로필 수정
-$('.user_info').on('click', '.editBtn', function() {
 
+// 프로필 수정
+// 프로필 사진 업데이트
+function updateProfileImg(file) {
+    const user = auth.currentUser;
+
+    const name = 'profile_image';
+    const task = storage.ref('users/'+uid+'/profile_image').child(name).put(file);
+
+    task
+    .then(snapshot => snapshot.ref.getDownloadURL())
+    .then(url => {
+        user.updateProfile({
+            photoURL: url
+        }).catch((error) => {
+            console.log(error);
+        });  
+
+        database.ref('users/'+uid).update({
+            photoURL: url
+        })
+        .then(() => {
+            // console.log('image updated');
+            $('#profileImgUpdated').val(true).trigger('change');;
+        })
+    })
+}
+
+// 첨부파일 형식, 용량 체크
+function checkImg(input) {
+    console.log(input.files[0]);
+
+    if (input.files && input.files[0].size > (10 * 1024 * 1024)) {
+        alert("10mb가 넘는 사진은 등록할 수 없습니다.");
+        input.value = null;
+        
+        return false;
+    }
+    
+    let validExtensions = ["image/jpg", "image/jpeg", "image/png"];
+    if (input.files && !validExtensions.includes( input.files[0].type ) ) {
+        alert("jpg, jpeg, png 파일만 등록할 수 있습니다.");
+        input.value = null;
+        
+        return false;
+    }
+
+    return true;
+}
+
+// 새로운 프로필 이미지 미리보기
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('.editProfileImg .imgPreview img').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+
+        $('.drag_area').removeClass('active');
+        $('.imgPreview').addClass('active');        
+    }
+}
+$("#newProfileImg").change(function() {
+    if ( checkImg(this) ) {
+        readURL(this);
+    }
 });
+
+// 유저 이름 업데이트
+function updateName() {
+    var name = $('#newUserName').val();
+    
+    const user = firebase.auth().currentUser;
+    user.updateProfile({
+        displayName: name,
+        photoURL: "https://example.com/jane-q-user/profile.jpg"
+    }).then(() => {
+    }).catch((error) => {
+        console.log(error);
+    });  
+
+    database.ref('users/'+uid).update({
+        name: name
+    })
+    .then(() => {
+        // console.log('name updated');
+        $('#nameUpdated').val(true).trigger('change');;
+    })
+}
+
+// 드래그 앤 드롭으로 이미지 첨부
+var uploadFile = [];
+
+$('.drag_area').on("dragenter", function(e) { //드래그 요소가 들어왔을떄
+        $(this).addClass('drag_over');
+        // console.log('drag enter');
+    })
+    .on("dragleave", function(e) { //드래그 요소가 나갔을때
+        $(this).removeClass('drag_over');
+        // console.log('drag leave');
+    })
+    .on("dragover", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).addClass('drag_over');
+        // console.log('drag over');
+    }).on('drop', function(e) { //드래그한 항목을 떨어뜨렸을때
+        e.preventDefault();
+        $(this).removeClass('drag_over');
+        // console.log('drop');
+
+        if ( checkImg(e.originalEvent.dataTransfer) ) {
+            var file = e.originalEvent.dataTransfer.files[0];
+            uploadFile[0] = file;
+
+            readURL(e.originalEvent.dataTransfer);
+        }
+  
+});
+    
+
+// 수정할 프로필 이미지 다시 선택
+$('#resetImg').click(function() {
+    $('#newProfileImg').val(null);
+    uploadFile = [];
+
+    $('.drag_area').addClass('active');
+    $('.imgPreview').removeClass('active');
+})
+
+// 사용자 정보 수정 적용
+$('.editUserInfoModal .submitBtn').click(function() {
+
+    var name = $('#newUserName').val();
+    if ( name.length < 2 || name.length > 50 ) {
+        alert('이름을 2자 이상, 50자 이하로 입력해주세요.')
+        return
+    }
+
+    $('.editUserInfoModal .loader').addClass('active');
+    
+    updateName();
+    
+    if ($('#newProfileImg')[0].files && $('#newProfileImg')[0].files[0]) {
+        const file = $('#newProfileImg')[0].files[0];
+        updateProfileImg(file);
+    } else if ( uploadFile[0] ) {
+        const file = uploadFile[0];
+        updateProfileImg(file);
+    } else {
+        $('#profileImgUpdated').val(true).trigger('change');;
+    }
+})
+
+// 유저 정보 수정 모달 열기
+$('.user_info').on('click', '.editBtn', function() {
+    $('#nameUpdated').val(false).trigger('change');;
+    $('#profileImgUpdated').val(false).trigger('change');;
+
+    const user = auth.currentUser;
+    var name = user.displayName;
+    $('#newUserName').val(name);
+
+    $('.editUserInfoModal').fadeIn(100);    
+});
+
+// 업데이트 완료 여부 확인
+$('.editUserInfoModal input[type="hidden"]').change(function () {
+    var nameUpdated = $('#nameUpdated').val();
+    var profileImgUpdated = $('#profileImgUpdated').val();
+    
+    // console.log('changed');
+    // console.log(nameUpdated);
+    // console.log(profileImgUpdated);
+
+    if ( nameUpdated == 'true' && profileImgUpdated == 'true' ) {
+        alert('성공적으로 수정되었습니다.');
+        window.location.reload();
+    }    
+ });
+
+
 
 // 설정으로 이동
 

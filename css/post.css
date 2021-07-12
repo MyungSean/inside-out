@@ -259,9 +259,9 @@
     transform: rotate(0deg) scale(1.8);
 }
 .reply_music img.active {
-    -webkit-animation:spin 6s linear infinite;
-    -moz-animation:spin 6s linear infinite;
-    animation:spin 6s linear infinite;
+    -webkit-animation:spinCD 6s linear infinite;
+    -moz-animation:spinCD 6s linear infinite;
+    animation:spinCD 6s linear infinite;
 }
 .reply_music .title {
     font-size: 18px;

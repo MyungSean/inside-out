@@ -76,9 +76,12 @@ body, input, textarea, button {
 
 
 /* 회전 애니메이션 */
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg) scale(1.8); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg) scale(1.8); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg) scale(1.8); } }
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+@-moz-keyframes spinCD { 100% { -moz-transform: rotate(360deg) scale(1.8); } }
+@-webkit-keyframes spinCD { 100% { -webkit-transform: rotate(360deg) scale(1.8); } }
+@keyframes spinCD { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg) scale(1.8); } }
 
 
 /* 레이아웃 */
