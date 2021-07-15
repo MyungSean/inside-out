@@ -55,7 +55,7 @@ function getUserInfo(uid) {
 
 // 플레이리스트 불러오기
 function getPlaylist(uid) {
-    $('.playlists .lists').html('');
+    $('.playlists .lists table').html('');
     database.ref('users/'+uid+'/playlists').once('value').then(function(snapshot) {
         var user = auth.currentUser;
 
@@ -72,6 +72,9 @@ function getPlaylist(uid) {
                 if ( user.uid !== uid ) {
                     continue;
                 }
+                var secretIcon = `<i class="ri-lock-fill"></i>`;
+            } else {
+                var secretIcon = "";
             }
             
             var ul = "";
@@ -82,6 +85,19 @@ function getPlaylist(uid) {
                 for (var i = 0; i < music_ids.length; i++) {
 
                     if ( i == 3 ) { // 미리보기 곡 최대 3개까지 표시
+                        var li = `
+                        <li>
+                            <div class="img_wrap moreTracks">
+                                <p>${music_ids.length - i}</p>
+                            </div>
+                            <div class="music_info">
+                                <p class="artist">외 ${music_ids.length - i}곡</p>
+                            </div>
+                        </li>
+                        `;
+                        
+                        ul += li;
+
                         break;
                     }
 
@@ -90,9 +106,6 @@ function getPlaylist(uid) {
                     var videoId = musics[music_ids[i]].videoId;
                     var from = musics[music_ids[i]].from;
                     var thumbnail = musics[music_ids[i]].thumbnail;
-                    if ( i == 0 ) {
-                        var coverImage = thumbnail;
-                    }
     
                     var li = `
                     <li>
@@ -110,22 +123,40 @@ function getPlaylist(uid) {
                 }
             }
 
+            // 플레이리스트 제작자에게만 수정(드롭다운) 메뉴 표시
+            if ( user && user.uid == uid ) {
+                var menu = `
+                <td class="menu">
+                    <i class="ri-more-fill dropdownBtn"></i>
+                    <ul class="dropdown">
+                        <li class="deletePlaylist">
+                            <i class="ri-delete-bin-7-fill"></i>
+                            <span>플레이리스트 삭제</span>
+                        </li>
+                    </ul>
+                </td>`;
+            } else {
+                var menu = "";
+            }
+
             var playlist = `
-            <div class="playlist" id="${key}">
-                <div class="img_wrap">
-                    <p class="listTitle">${name}</p>
-                    <div class="playBtn_wrap">
-                        <i class="ri-play-fill playBtn"></i>
-                    </div>
-                    <img src="${coverImage}">
-                </div>
-                <ul>
-                    ${ul}
-                </ul>
-            </div>
+            <tr class="playlist" id="${key}">
+                <td class="tracks">
+                    <ul>
+                        ${ul}
+                    </ul>
+                </td>
+                <td class="title">
+                    <a href="#">
+                        <p class="listTitle">${name}</p>
+                    </a>
+                    ${secretIcon}
+                </td>
+                ${menu}
+            </tr>
             `;
 
-            $('.playlists .lists').append(playlist);
+            $('.playlists .lists table').append(playlist);
         };
     })
 }
@@ -229,18 +260,48 @@ function getLikePosts() {
 
 
 // 플레이리스트 호버 액션
-$(document).on('mouseenter','.playlist', function () {
-    $(this).find('ul').addClass('on');
-    $('.playlist').css('z-index', 0);
-    $(this).css('z-index', 10);
-    $(this).find('.playBtn').addClass('on');
-    $(this).find('.playBtn_wrap').addClass('on');
-}).on('mouseleave','.playlist',  function(){
-    $(this).find('ul').removeClass('on');
-    $(this).find('.playBtn').removeClass('on');
-    $(this).find('.playBtn_wrap').removeClass('on');
+$(document).on('mouseenter','.playlist .tracks', function () {
+    $(this).addClass('on');
+    $(this).find('li').addClass('on');
+}).on('mouseleave','.playlist .tracks',  function(){
+    $(this).removeClass('on');
+    $(this).find('li').removeClass('on');
+});
+// 플레이리스트 트랙 호버 액션
+$(document).on('mouseenter','.playlist .tracks li', function () {
+    $(this).find('.music_info').addClass('on');
+}).on('mouseleave','.playlist .tracks li',  function(){
+    $(this).find('.music_info').removeClass('on');
 });
 
+// 플레이리스트 드롭다운 메뉴 열기
+$(document).on('click', '.playlist .menu .dropdownBtn', function(e) {
+    e.stopPropagation();
+    $('.dropdown').not($(this).siblings('.dropdown')).fadeOut(50);
+    $(this).siblings('.dropdown').fadeToggle(50);
+})
+$(document).on('click', function() {
+    $('.dropdown').fadeOut(50);
+})
+
+
+// 플레이리스트 삭제
+$(document).on('click', '.playlist .menu .deletePlaylist', function(e) {
+    e.stopPropagation();
+
+    var title = $(this).closest('tr').find('.listTitle').html();
+    
+    var r = confirm('삭제한 플레이리스트는 복구할 수 없습니다. "'+title+'" 플레이리스트를 삭제하시겠습니까?');
+
+    if ( r ) {
+        var user = auth.currentUser;
+        var playlistId = $(this).closest('tr').attr('id');
+        database.ref('users/'+user.uid+'/playlists/'+playlistId).remove()
+        .then(function(){
+            window.location.reload();
+        });
+    }
+})
 
 // 새로운 플레이리스트 만들기
 $('.addPlaylistBtn').click(function() {
@@ -286,6 +347,9 @@ $('#makeNewPlaylist').click(function() {
 
 
 // 유저 메뉴
+$('.settingBtn').click(function() {
+    alert('준비중');
+})
 
 // 프로필 수정
 // 프로필 사진 업데이트
@@ -316,7 +380,7 @@ function updateProfileImg(file) {
 
 // 첨부파일 형식, 용량 체크
 function checkImg(input) {
-    console.log(input.files[0]);
+    // console.log(input.files[0]);
 
     if (input.files && input.files[0].size > (10 * 1024 * 1024)) {
         alert("10mb가 넘는 사진은 등록할 수 없습니다.");

@@ -78,156 +78,176 @@
 
 
 /* 플레이리스트 */
-.playlists {
-    /* display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between; */
-    min-height: 550px;
+.playlists tr {
+    border-bottom: 1px solid var(--border-color);
 }
-
-.playlist {
+.playlists tr:last-child {
+    border: none;
+}
+.playlists tr td {
+    vertical-align: middle;
+    height: 80px;
+}
+.playlist .tracks {
+    width: 210px;
+}
+.playlist .tracks ul {
     position: relative;
-    display: inline-block;
-    width: 230px;
-    height: 230px;
-    margin-right: 23px;
-    margin-bottom: 23px;
+    height: 70px;
+    margin-left: 10px;
 }
-.lists .playlist:nth-child(4n) {
-    margin-right: 0;
-}
-.playlist .listTitle {
+.playlist .tracks li {
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.685);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    font-size: 20px;
-    font-weight: 200;
-    text-align: center;
-    padding: 10px 8px;
-    margin-bottom: 5px;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    word-wrap:normal;
-    overflow:hidden;
-    z-index: 10;
-}
-.playlist .playBtn_wrap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #000000;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    opacity: 0;
     transition: .2s;
 }
-.playlist .playBtn_wrap.on {
-    opacity: .5;
+.playlist .tracks li:nth-child(1) {
+    z-index: 9;
+    left: 0;
 }
-.playlist .playBtn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate( -50%, -50%);
-    color: #ffffff;
-    -webkit-filter: drop-shadow( 0px 0px 5px rgba(0, 0, 0, .5));
-    filter: drop-shadow( 0 0 12px rgba(0, 0, 0, 0.5));
-    font-size: 120px;
-    cursor: pointer;
-    z-index: 2;
-    opacity: 0;
-    transition: .2s;
+.playlist .tracks li:nth-child(2) {
+    z-index: 8;
+    left: 20px;
 }
-.playlist .playBtn.on {
-    opacity: 1;
+.playlist .tracks li:nth-child(3) {
+    z-index: 7;
+    left: 40px;
 }
-        
-.playlist > .img_wrap {
-    position: absolute;
-    width: 230px;
-    height: 230px;
-    border-radius: 20px;
-    overflow: hidden;
-    z-index: 1;
-    transition: .5s;
+.playlist .tracks li:nth-child(4) {
+    z-index: 6;
+    left: 60px;
 }
-.playlist .img_wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.8);
+.playlist .tracks li:nth-child(1).on {
+    z-index: 99;
+    left: 0;
 }
-.playlist ul {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.4);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 10px;
-    padding-top: 30px;
-    transition: .5s;
-    z-index: 0;
+.playlist .tracks li:nth-child(2).on {
+    z-index: 98;
+    left: 40px;
 }
-.playlist ul.on {
-    transform: translateY( calc( 100% - 30px ) );
+.playlist .tracks li:nth-child(3).on {
+    z-index: 97;
+    left: 80px;
 }
-.playlist ul li {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    margin-top: 10px;
+.playlist .tracks li:nth-child(4).on {
+    z-index: 96;
+    left: 120px;
 }
-.playlist ul .img_wrap {
-    flex-shrink: 0;
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+.playlist .tracks .img_wrap {
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     overflow: hidden;
 }
-.playlist ul .img_wrap img {
+.playlist .tracks .img_wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transform: scale(1.8);
 }
-.playlist .music_info {
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
+.playlist .tracks .img_wrap.moreTracks {
+    background-color: #DEDEDE;
 }
-.playlist .music_info .title {
+.playlist .tracks .img_wrap.moreTracks p {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    font-family: var(--font-main-e);
+    font-weight: 900;
+    color: #fff;
+}
+.playlist .tracks .music_info {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate( -50%, calc( -100% - 5px ) );
+    width: 100px;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 1000;
+}
+.playlist .tracks .music_info .title {
     margin-bottom: 4px;
-    width: 155px;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    word-wrap:normal;
-    overflow:hidden;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
 }
-.playlist .music_info .artist {
+.playlist .tracks .music_info .artist {
     font-size: 12px;
+    font-weight: 400;
+}
+.playlist .tracks .music_info.on {
+    display: block;
+}
+.playlist .title {
+    text-align: left;
+    font-size: 18px;
+}
+.playlist .title a:hover {
+    text-decoration: underline;
+}
+.playlist .title .listTitle {
+    display: inline;
+}
+.playlist .title i {
+    font-size: 16px;
+    margin-left: 10px;
+}
+.playlist .menu {
+    position: relative;
+}
+.playlist .menu i {
+    font-size: 20px;
+    cursor: pointer;
+}
+.playlist .menu .dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    width: 200px;
+    padding: 8px;
+    border-radius: var(--border-radius-content);
+    background-color: #fff;
+    text-align: left;
+    z-index: 1;
+}
+.playlist .menu .dropdown li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.playlist .menu .dropdown li:hover {
+    background-color: var(--hover-gray);
+}
+.playlist .menu .dropdown i {
+    margin-right: 10px;
 }
 
+/* 플레이리스트 추가 모달 */
 .playlists .addPlaylistBtn {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30px;
+    width: 160px;
     height: 30px;
-    font-size: 20px;
-    border: 1px solid #000000;
+    font-size: 14px;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
     margin-left: auto;
-    margin-bottom: 20px;
     cursor: pointer;
 }
+.playlists .addPlaylistBtn i {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
 
 .myActivity table {
     width: 100%;
@@ -315,6 +335,7 @@
     display: flex;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
+    background-color: inherit;
     padding: 5px 10px;
     margin-top: 30px;
     margin-left: auto;
