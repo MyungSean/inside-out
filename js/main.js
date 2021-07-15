@@ -169,3 +169,8 @@ $('.modal').click(function() {
 $('.modal_content').click(function(e) {
     e.stopPropagation();
 })
+
+// 모달 로더
+$('.modal .loader').click(function(e) {
+    e.stopPropagation();
+})

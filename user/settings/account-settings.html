@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inside Out</title>
+
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/settings.css">
+    <link rel="stylesheet" href="/css/account-settings.css">
+  </head>
+  <body>
+    <div class="wrap">
+        <header></header>
+        <div class="container">
+            <div class="sidebar">
+                <nav class="setttings_menu">
+                    <ul>
+                        <a href="#">
+                            <li class="active">계정 설정</li>
+                        </a>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="content">
+                <h1>계정 설정</h1>
+                <div class="setting by_btn">
+                    <div class="setting_explain">
+                        <h2>계정 삭제</h2>
+                        <p>계정 및 계정 데이터 삭제</p>
+                    </div>
+                    <div class="setting_control">
+                        <button id="closeAccountBtn">계정 삭제</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal closeAccountModal">
+                <div class="modal_content">
+                    <p class="modal_title">계정 삭제</p>
+                    <div class="warning_msg">
+                        <p>계정을 삭제하면 작성한 글, 나의 플레이리스트들이 모두 삭제됩니다.<br>삭제한 계정은 복원할 수 없습니다.</p>
+                        <p>정말 계정 삭제를 진행하시겠습니까?</p>
+                        <button class="submitBtn">계정 삭제</button>
+                    </div>
+                </div>
+                    
+                <div class="loader">
+                    <i class="ri-loader-4-line"></i>
+                </div>
+            </div>
+
+        </div>
+        <footer></footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyBUIQhpDle9ZcA-IBwQEYy-lz8uM2RdFhQ",
+        authDomain: "inside-out-f6b7d.firebaseapp.com",
+        projectId: "inside-out-f6b7d",
+        storageBucket: "inside-out-f6b7d.appspot.com",
+        messagingSenderId: "42086150347",
+        appId: "1:42086150347:web:ee76f1b2fb15ec5cbb6b4e",
+        measurementId: "G-94VRFGG4R1"
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      const database = firebase.database();
+      const auth = firebase.auth();
+    </script>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/account-settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+/* 계정 삭제 모달 */
+.closeAccountModal .warning_msg p {
+    line-height: 30px;
+    font-size: 16px;
+    /* font-weight: 200; */
+    margin-bottom: 20px;
+}
+.closeAccountModal .submitBtn {
+    display: flex;
+    margin-left: auto;
+    padding: 5px 10px;
+    background-color: var(--emphasize-orange);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius-btn);
+    font-size: 16px;
+    cursor: pointer;
+}

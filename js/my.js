@@ -348,7 +348,7 @@ $('#makeNewPlaylist').click(function() {
 
 // 유저 메뉴
 $('.settingBtn').click(function() {
-    alert('준비중');
+    window.location.href = "/user/settings/account-settings.html";
 })
 
 // 프로필 수정

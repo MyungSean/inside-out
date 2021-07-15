@@ -1,0 +1,78 @@
+/* 레이아웃 */
+.container {
+    display: flex;
+    flex-flow: row wrap;
+    margin-top: 50px;
+}
+.sidebar {
+    width: 260px;
+}
+.content {
+    /* flex-grow: 1; */
+    width: 550px;
+}
+
+
+
+/* 설정 메뉴 리스트 */
+.setttings_menu a {
+    display: block;
+}
+.setttings_menu li:first-child {
+    padding-top: 0;
+}
+.setttings_menu li {
+    display: inline-block;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+.setttings_menu li.active {
+    border-bottom: 2px solid var(--border-color);
+}
+
+
+
+/* 설정 레이아웃 */
+.setting {
+    display: flex;
+    align-items: center;
+}
+
+/* 버튼형 설정 */
+.setting.by_btn {
+    flex-flow: row nowrap;
+}
+.setting.by_btn .setting_explain {
+    flex-grow: 1;
+}
+
+
+
+/* 설정 디자인 */
+.content h1 {
+    margin-bottom: 40px;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.setting {
+    margin-bottom: 40px;
+}
+.setting h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+.setting .setting_explain p {
+    font-size: 16px;
+}
+
+.setting .setting_control button {
+    padding: 5px 15px;
+    outline: none;
+    background-color: inherit;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-btn);
+    font-size: 16px;
+    cursor: pointer;
+}
