@@ -147,7 +147,7 @@ function getPlaylist(uid) {
                     </ul>
                 </td>
                 <td class="title">
-                    <a href="#">
+                    <a href="/user/playlist.html?list=${key}">
                         <p class="listTitle">${name}</p>
                     </a>
                     ${secretIcon}

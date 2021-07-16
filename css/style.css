@@ -129,6 +129,7 @@ header .board_nav {
 }
 header .board_nav a {
     padding: 10px;
+    margin: 0 5px;
     border-radius: 20px;
     transition: .1s;
     cursor: pointer;
@@ -254,16 +255,16 @@ header .user .user_menu ul {
     position: absolute;
     top: 70px;
     right: 0;
-    width: 100px;
+    width: 150px;
     background-color: #ffffff;
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 5px;
-    font-size: 14px;
+    padding: 7px;
+    font-size: 16px;
     z-index: 99;
 }
 header .user .user_menu ul li {
-    padding: 5px;
+    padding: 7px;
     border-radius: 5px;
     cursor: pointer;
     transition: .1s;
