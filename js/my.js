@@ -57,6 +57,7 @@ function getUserInfo(uid) {
 function getPlaylist(uid) {
     $('.playlists .lists table').html('');
     database.ref('users/'+uid+'/playlists').once('value').then(function(snapshot) {
+        console.log(snapshot.val());
         var user = auth.currentUser;
 
         for (const [key, value] of Object.entries(snapshot.val())) {
@@ -332,13 +333,23 @@ $('#makeNewPlaylist').click(function() {
                 return;
             }
         }
-        
-        database.ref('users/'+user.uid+'/playlists').push().set({
+
+        var key =  database.ref().push().getKey(); 
+        var upload_date = Date.now();
+        database.ref('users/'+user.uid+'/playlists/'+key).update({
             info: {
+                key: key,
                 name: newName,
+                upload_date: upload_date,
+                edit_date: false,
+                state: 'active',
+                views: 0,
+                likes: 0,
+                reply: "",
                 secret: secret
             }
         })
+
         $('#newPlaylistName').val("");
         $('.addPlaylistModal').hide();
         location.reload();

@@ -24,6 +24,9 @@ function setupHeader(user) {
 // 푸터 로드
 $('footer').load('/html/footer.html');
 
+// 플레이어 로드
+$('#own_player').load('/html/player.html')
+
 // 헤더 유저 메뉴 토글
 $(document).on("click", '.user_menu i', function(e){  
     e.stopPropagation();
@@ -112,6 +115,15 @@ function boardIdCheck(id) {
 }
 
 
+// 글자 수 체크
+function lengthCheck(e) {
+    var el_id = e.id;
+    var length = e.value.length;
+    // $('.comment_area p span').html(length);
+    $('#'+el_id).siblings('p').children('span').html(length);
+}
+
+
 // 밀리초를 얼마나 지났는지 반환
 function getPastTime(millisecond) {
     // 지난 시간 분단위로 구하기
@@ -141,6 +153,13 @@ function getPastTime(millisecond) {
         var time = year + '/' + month + '/' + date;
         return time;
     }
+}
+
+// 밀리초를 날짜로 반환
+function millisecondToDate(millisecond) {
+    var d = new Date(millisecond);
+    var date = d.toLocaleDateString();
+    return date;
 }
 
 // 초를 hh:mm:ss 형식으로 반환

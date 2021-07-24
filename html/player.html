@@ -1,0 +1,190 @@
+<div class="player_bar_wrap">
+    <div class="player_bar">
+        <div class="player_bar_progress_wrap">
+            <div class="progress"></div>
+            <div class="timeMarker">
+                <span>00:00</span>
+            </div>
+        </div>
+        <div class="player_bar_content">
+            <div class="control">
+                <i class="ri-skip-back-fill previousBtn"></i>
+                <i class="ri-play-fill playBtn active"></i>
+                <i class="ri-pause-fill pauseBtn"></i>
+                <i class="ri-skip-forward-fill nextBtn"></i>
+            </div>
+            <div class="track">
+                <p class="title"></p>
+                <p class="artist"></p>
+            </div>
+            <div class="timeInfo">
+                <p>
+                    <span class="currTime"></span> / <span class="totTime"></span>
+                </p>
+            </div>
+            <div class="video_toggle">
+                <i class="ri-youtube-fill video_toggleBtn"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="player"></div>
+
+<script>
+    $('footer').css('margin-bottom', '55px');
+
+    // 플레이어
+    function setPause() {
+        $('.replies .pause').removeClass('active');
+        $('.replies .pause').siblings('img').removeClass('active');
+        $('.replies .pause').siblings('.play').addClass('active');
+
+        $('.player_bar .pauseBtn').removeClass('active');
+        $('.player_bar .pauseBtn').siblings('.playBtn').addClass('active');
+    }
+    function setPlay() {
+        $('.replies .nowPlaying .play').removeClass('active');
+        $('.replies .nowPlaying .play').siblings('img').addClass('active');
+        $('.replies .nowPlaying .play').siblings('.pause').addClass('active');
+
+        $('.player_bar .playBtn').removeClass('active');
+        $('.player_bar .playBtn').siblings('.pauseBtn').addClass('active');
+    }
+
+    // 재생중인 곡 정보 표시
+    function showTrackInfo() {
+        var i = player.getPlaylistIndex();
+        if ( i == -1 ) {
+            var i = 0;
+        }
+        var title = playlist[i]['title'];
+        var artist = playlist[i]['artist'];
+
+        $('.player_bar .title').html(title);
+        $('.player_bar .artist').html(artist);
+    }
+
+    // 이전 곡, 다음 곡 활성화
+    function checkControlBtn() {
+        var i = player.getPlaylistIndex();
+        if ( i == -1 ) {
+            var i = 0;
+        }
+        var l = playlist.length - 1;
+
+        if ( i !== 0 ) {
+            $('.player_bar .previousBtn').addClass('active');
+        } else {
+            $('.player_bar .previousBtn').removeClass('active');
+        }
+        if ( i !== l ) {
+            $('.player_bar .nextBtn').addClass('active');
+        } else {
+            $('.player_bar .nextBtn').removeClass('active');
+        }
+    }
+
+    // 유튜브 iframe 컨트롤
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player ;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+        height: '281',
+        width: '500',
+        // videoId: 'M7lc1UVf-VE',
+        events: {
+            // 'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+        });
+    }
+
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    var done = false;
+    function onPlayerStateChange(event) {
+        if ( event.data == YT.PlayerState.ENDED ) {
+            setPause();
+            player.clearVideo();
+        } else if ( event.data == YT.PlayerState.PAUSED ) {
+            setPause();
+        } else if ( event.data == YT.PlayerState.PLAYING ) {
+            setPlay();
+            showTrackInfo();
+            checkControlBtn();
+        }
+    }
+
+
+
+    // 플레이어 바
+    // 유튜브 플레이어 컨트롤
+    $(document).on('click', '.player_bar .playBtn', function() {
+        if ( player.getVideoUrl() == 'https://www.youtube.com/watch' ) {
+            return
+        }
+        player.playVideo();
+    })
+    $(document).on('click', '.player_bar .pauseBtn', function() {
+        player.pauseVideo();
+    })
+    $(document).on('click', '.player_bar .nextBtn.active', function() {
+        player.nextVideo();
+    })
+    $(document).on('click', '.player_bar .previousBtn.active', function() {
+        player.previousVideo()
+    })
+
+    // 플레이어 progress bar
+    function markProgressBar() {
+        var progress = player.getCurrentTime() / player.getDuration() * 100;
+        $('.player_bar_progress_wrap .progress').css('width', progress + '%');
+    }
+    setInterval(markProgressBar, 100);
+
+    // 시간 정보 표시
+    function markTimeInfo() {
+        var currTime = player.getCurrentTime();
+        var totTime = player.getDuration();
+        
+        $('.player_bar .timeInfo .currTime').html(secondsToHMS(currTime, totTime));
+        $('.player_bar .timeInfo .totTime').html(secondsToHMS(totTime, totTime));
+    }
+    setInterval(markTimeInfo, 100);
+
+    $(document).on('click', '.player_bar_progress_wrap', function(e) {
+        var pageWidth = $(document).width();
+        var time = player.getDuration() / pageWidth * e.pageX;
+        player.seekTo(time, true);
+    })
+    $('.player_bar_progress_wrap').mousemove(function(e){
+        $('.timeMarker').css("left", e.pageX);
+        
+        var pageWidth = $(document).width();
+        var time = player.getDuration() / pageWidth * e.pageX;
+        var time = secondsToHMS(time, player.getDuration());
+        $(this).find('.timeMarker span').html(time);
+    });
+    $(document).ready(function() {
+        $('.player_bar_progress_wrap').hover(
+            function() {
+                $('.timeMarker').addClass('active');
+            }, function() {
+                $('.timeMarker').removeClass('active');    
+            }
+        );
+    })
+            
+        
+    // 유튜브 플레이어 토글
+    $(document).on('click', '.video_toggleBtn', function() {
+        $('#player').toggle();
+        $(this).toggleClass('active');
+    })
+</script>

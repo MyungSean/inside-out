@@ -13,7 +13,6 @@
     <div class="wrap">
         <header> </header>
         <div class="container">
-            <div id="player"></div>
             <div class="post">
                 <div class="post_info">
                     <h3></h3>
@@ -70,7 +69,7 @@
                                         <input type="text" id="artist" value="">
                                     </div>
                                     <div class="comment_area">
-                                        <input type="text" id="my_comment" placeholder="댓글 추가" maxlength="100" autocomplete="off" oninput="commentLengthCheck(this)">
+                                        <input type="text" id="my_comment" placeholder="댓글 추가" maxlength="100" autocomplete="off" oninput="lengthCheck(this)">
                                         <p><span>0</span>/100</p>
                                     </div>      
                                     <div>
@@ -124,7 +123,7 @@
                             <input type="text" id="edit_artist" value="">
                         </div>
                         <div class="comment_area">
-                            <input type="text" id="edit_my_comment" placeholder="댓글 추가" maxlength="100" autocomplete="off" oninput="commentLengthCheck(this)">
+                            <input type="text" id="edit_my_comment" placeholder="댓글 추가" maxlength="100" autocomplete="off" oninput="lengthCheck(this)">
                             <p><span>0</span>/100</p>
                         </div>      
                         <div>
@@ -139,47 +138,17 @@
             </div>
         </div>
 
-        <div class="player_bar_wrap">
-            <div class="player_bar">
-                <div class="player_bar_progress_wrap">
-                    <div class="progress"></div>
-                    <div class="timeMarker">
-                        <span>00:00</span>
-                    </div>
-                </div>
-                <div class="player_bar_content">
-                    <div class="control">
-                        <i class="ri-skip-back-fill backBtn"></i>
-                        <i class="ri-play-fill playBtn active"></i>
-                        <i class="ri-pause-fill pauseBtn"></i>
-                        <i class="ri-skip-forward-fill forwardBtn"></i>
-                    </div>
-                    <div class="track">
-                        <p class="title"></p>
-                        <p class="artist"></p>
-                    </div>
-                    <div class="timeInfo">
-                        <p>
-                            <span class="currTime"></span> / <span class="totTime"></span>
-                        </p>
-                    </div>
-                    <div class="video_toggle">
-                        <i class="ri-youtube-fill video_toggleBtn"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <footer></footer>
     </div>
-
+        
+    <div id="own_player"></div>
+    
     <script src="https://code.jquery.com/jquery-latest.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
     <script>
       var firebaseConfig = {
         apiKey: "AIzaSyBUIQhpDle9ZcA-IBwQEYy-lz8uM2RdFhQ",
@@ -194,8 +163,6 @@
       firebase.analytics();
       const database = firebase.database();
       const auth = firebase.auth();
-      const firestore = firebase.firestore();
-      firestore.settings({ timestampsInSnapshots: true });
     </script>
 
     <script src="/js/main.js"></script>

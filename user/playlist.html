@@ -12,10 +12,56 @@
     <div class="wrap">
         <header></header>
         <div class="container">
+          <div class="sidebar">
+            <div class="playlist_info">
+              <p class="name"></p>
+              <p class="upload_date">만든 날짜 : <span id="upload_date"></span></p>
+            </div>
+            <div class="playlist_menu">
+              <i class="ri-pencil-fill editBtn"></i>
+              <i class="ri-lock-unlock-fill toSecretBtn"></i>
+              <i class="ri-lock-fill toPublicBtn"></i>
+              <i class="ri-delete-bin-7-fill deletePlaylistBtn"></i>
+            </div>
+            <div class="playlist_maker">
+              <div class="profile">
+                <div class="img_wrap">
+                  <img src="/img/default_profile_img.jpg">
+                </div>
+                <p class="maker"></p>
+              </div>
+            </div>
+          </div>
+          <div class="playlist">
+            <div class="playlist_control">
+              <div>
+                <button class="playAllBtn">모두 재생 <i class="ri-play-fill"></i></button>
+              </div>
+            </div>
+            <ul class="tracks">
+            </ul>
+            <div class="noTracks">
+              <p>아직 플레이리스트에 곡이 담기지 않았습니다.</p>
+            </div>
+          </div>
+
+          <div class="modal editPlaylistInfoModal">
+            <div class="modal_content">
+                <p class="modal_title">플레이리스트 정보 수정</p>
+                <div class="editName">
+                  <label for="newName">플레이리스트 이름</label>
+                  <input type="text" id="newName" maxlength="150" oninput="lengthCheck(this)">
+                  <p><span>0</span>/150</p>
+                </div>
+                <button class="submitBtn">적용</button>
+            </div>
+          </div>
 
         </div>
         <footer></footer>
     </div>
+        
+      <div id="own_player"></div>
 
     <script src="https://code.jquery.com/jquery-latest.js"></script>
 

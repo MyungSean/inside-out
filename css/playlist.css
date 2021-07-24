@@ -1,0 +1,206 @@
+/* 레이아웃 */
+.container {
+    display: flex;
+    flex-flow: row wrap;
+    margin-top: 60px;
+}
+.sidebar {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 300px;
+}
+.playlist {
+    flex-grow: 1;
+}
+
+
+/* 플레이리스트 정보 */
+.playlist_info {
+    margin-bottom: 20px;
+}
+.playlist_info .name {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+.playlist_info .upload_date {
+    font-size: 12px;
+}
+.playlist_menu {
+    display: none;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+.playlist_menu i {
+    padding: 5px;
+    margin-right: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 20px;
+    transition: .1s;
+}
+.playlist_menu i:hover {
+    background-color: var(--hover-gray);
+}
+.playlist_menu .toSecretBtn,
+.playlist_menu .toPublicBtn {
+    display: none;
+}
+.playlist_maker .profile {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+.playlist_maker .profile .img_wrap {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.playlist_maker .profile .img_wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.playlist_maker .maker {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+
+/* 플레이리스트 컨트롤 */
+.playlist_control {
+    margin-bottom: 20px;
+}
+.playlist_control .playAllBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: inherit;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-btn);
+    font-size: 14px;
+    cursor: pointer;
+}
+.playlist_control .playAllBtn i {
+    font-size: 20px;
+}
+
+
+/* 트랙 */
+.tracks .track {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.tracks .track:last-child {
+    border-bottom: none;
+}
+.tracks .track .order p {
+    padding: 0 15px;
+    font-weight: 200;
+}
+.tracks .track .info {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: var(--border-radius-content);
+    cursor: pointer;
+    transition: .1s;
+}
+.tracks .track .info:hover {
+    background-color: var(--hover-gray);
+}
+.tracks .track .info .img_wrap {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
+}
+.tracks .track .info .img_wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.8);
+}
+.tracks .track .info .title {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.tracks .track .info .artist {
+    font-size: 14px;
+    font-weight: 200;
+}
+.tracks .track .menu {
+    padding: 0 16px;
+}
+.tracks .track .menu i {
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .1s;
+}
+.tracks .track .menu i:hover {
+    background-color: var(--hover-gray);
+}
+.tracks .track .menu ul {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: var(--border-radius-content);
+}
+.tracks .track .menu ul li {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 3px;
+    border-radius: var(--border-radius-btn);
+    font-size: 14px;
+    transition: .1s;
+    cursor: pointer;
+}
+.tracks .track .menu ul li:hover {
+    background-color: var(--hover-gray);
+}
+
+
+/* 모달 */
+/* 플레이리스트 정보 수정 모달 */
+.editPlaylistInfoModal .editName label {
+    display: block;
+    font-size: 14px;
+}
+.editPlaylistInfoModal .editName input {
+    width: 100%;
+    padding: 5px 0;
+    margin: 3px 0;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    outline: none;
+    font-size: 18px;
+}
+.editPlaylistInfoModal .editName p {
+    text-align: right;
+    font-size: 12px;
+}
+
+
+
+.noTracks {
+    display: none;
+}
+.noTracks.active {
+    display: block;
+}
