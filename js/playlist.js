@@ -134,13 +134,7 @@ function tracksNumbering() {
 // 전체 음악 재생
 $('.playAllBtn').click(function() {
     playlist = allTracks;
-    var videoIds = [];
-    for (let i = 0; i < allTracks.length; i++) {
-        const track = allTracks[i];
-        var videoId = track['videoId']
-        videoIds.push(videoId);
-    }
-    player.loadPlaylist(videoIds);
+    playMusic(playlist);
 })
 
 // 단일 곡 재생
@@ -150,8 +144,7 @@ $(document).on('click', '.tracks .info', function() {
     var artist = $(this).closest('.track').find('.artist').html();
 
     playlist = [{videoId: videoId, title: title, artist: artist}];
-    console.log(playlist);
-    player.loadVideoById(videoId, 0, "large");
+    playMusic(playlist);
 })
 
 

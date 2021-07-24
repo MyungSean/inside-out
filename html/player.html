@@ -35,20 +35,24 @@
 
     // 플레이어
     function setPause() {
+        // 플레이어
+        $('.player_bar .pauseBtn').removeClass('active');
+        $('.player_bar .pauseBtn').siblings('.playBtn').addClass('active');
+        
+        // 포스트 페이지 답장
         $('.replies .pause').removeClass('active');
         $('.replies .pause').siblings('img').removeClass('active');
         $('.replies .pause').siblings('.play').addClass('active');
-
-        $('.player_bar .pauseBtn').removeClass('active');
-        $('.player_bar .pauseBtn').siblings('.playBtn').addClass('active');
     }
     function setPlay() {
+        // 플레이어
+        $('.player_bar .playBtn').removeClass('active');
+        $('.player_bar .playBtn').siblings('.pauseBtn').addClass('active');
+        
+        // 포스트 페이지 답장
         $('.replies .nowPlaying .play').removeClass('active');
         $('.replies .nowPlaying .play').siblings('img').addClass('active');
         $('.replies .nowPlaying .play').siblings('.pause').addClass('active');
-
-        $('.player_bar .playBtn').removeClass('active');
-        $('.player_bar .playBtn').siblings('.pauseBtn').addClass('active');
     }
 
     // 재생중인 곡 정보 표시

@@ -115,6 +115,19 @@ function boardIdCheck(id) {
 }
 
 
+// 음악 재생
+function playMusic(playlist) {
+    var videoIds = [];
+
+    for (let i = 0; i < playlist.length; i++) {
+        const track = playlist[i];
+        var videoId = track['videoId']
+        videoIds.push(videoId);
+    }
+    player.loadPlaylist(videoIds);
+}
+
+
 // 글자 수 체크
 function lengthCheck(e) {
     var el_id = e.id;

@@ -4,6 +4,7 @@ const urlParams = url.searchParams;
 id = urlParams.get('id');
 no = urlParams.get('no');
 
+allTracks = [];
 database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).once('value').then(function(snapshot){
     // 존재하지 않는 게시물일 경우
     if ( snapshot.val() == null ) {
@@ -215,6 +216,8 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
             }
 
             $('.replies ul').prepend(li);
+
+            allTracks.unshift({videoId: videoId, title: title, artist:artist});
             
         }
 
@@ -441,6 +444,7 @@ $('.replies').on('click', '.play', function() {
     const curr_videoUrl = new URL(player.getVideoUrl());
     const urlParams = curr_videoUrl.searchParams;
     var curr_videoId = urlParams.get('v');
+
     var videoId = $(this).closest('li').attr('name');
     var title = $(this).closest('li').find('.title').html();
     var artist = $(this).closest('li').find('.artist').html();
@@ -448,14 +452,23 @@ $('.replies').on('click', '.play', function() {
     if ( curr_videoId == videoId) {
         player.playVideo();
     } else {
-        player.loadVideoById(videoId, 0, "large");
-        $('.player_bar .title').html(title);
-        $('.player_bar .artist').html(artist);
+        playlist = [{videoId: videoId, title: title, artist: artist}];
+        playMusic(playlist);
     }
-
 })
 $('.replies').on('click', '.pause', function() {
     player.pauseVideo();
+})
+
+// 전체 음악 재생
+$('.playAllBtn').click(function() {
+    $('.replies .nowPlaying').removeClass('nowPlaying')
+    $('.replies .pause').removeClass('active');
+    $('.replies .pause').siblings('img').removeClass('active');
+    $('.replies .pause').siblings('.play').addClass('active');
+
+    playlist = allTracks;
+    playMusic(playlist);
 })
 
 
@@ -640,7 +653,17 @@ $(document).on('click', '.delete_reply', function() {
         var replyId = $(this).closest('li').attr('id');
         database.ref('board/'+id+'/posts/'+postId+'/reply/'+replyId).remove()
         .then(function() {
-            window.location.reload();
+            $('#'+replyId).remove();
+            $('.reply_info span').html($('.replies li').length);
+
+            allTracks = [];
+
+            for (let i = 0; i < $('.replies li').length; i++) {
+                var videoId = $('.replies li').eq(i).attr('name');
+                var title = $('.replies li').eq(i).find('.title').html();
+                var artist = $('.replies li').eq(i).find('.artist').html();
+                allTracks.push({videoId: videoId, title: title, artist: artist});
+            }
         });
     }
 })

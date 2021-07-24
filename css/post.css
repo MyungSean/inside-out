@@ -188,6 +188,24 @@
     cursor: pointer;
 }
 
+.replies .playlist_control {
+    margin: 10px 0;
+}
+.replies .playlist_control .playAllBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: inherit;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-btn);
+    font-size: 14px;
+    cursor: pointer;
+}
+.replies .playlist_control .playAllBtn i {
+    font-size: 20px;
+}
+
 .replies ul {
     display: flex;
     flex-flow: row wrap;
