@@ -57,7 +57,7 @@
     position: absolute;
     right: 0;
     top: -40px;
-    border: 1px solid #000000;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
     float: right;
     padding: 6px;

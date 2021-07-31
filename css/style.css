@@ -21,12 +21,11 @@ time, mark, audio, video {
 }
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
-	display: block;
+    display: block;
 }
 body {
-	line-height: 1;
+    line-height: 1;
     background-color: #faf2e9;
-    /* color: rgb(37, 14, 3); */
 }
 ol, ul {
 	list-style: none;
@@ -48,11 +47,13 @@ a:visited,
 a:hover,
 a:active {
     text-decoration: none;
-    color: #000000;
+    /* color: #000000; */
 }
 
 * {
     box-sizing: border-box;
+    color: #211304;
+
 }
 
 
@@ -65,7 +66,7 @@ a:active {
     --border-radius-btn: 5px;
     --border-color: #8f8f8f;
     --emphasize-orange: #ff5e58;
-    --hover-gray: rgba(223, 223, 223, 0.7);
+    --hover-gray: #dfdfdfb3;
     --font-main-e: 'Montserrat';
     --font-main-k: 'Noto Sans KR';
 }
@@ -92,11 +93,17 @@ body, input, textarea, button {
     min-height: 100vh;
 }
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
     height: var(--header-height);
+    width: 100%;
+    z-index: 9;
 }
 .container {
     width: var(--content-width);
     margin: 0 auto;
+    margin-top: var(--header-height);
 }
 footer {
     margin-top: auto;
@@ -105,6 +112,12 @@ footer {
 
 
 /* header */
+header {
+    background-color: #FAF2E9;
+    /* border-bottom: 1px solid var(--border-color); */
+    /* -webkit-box-shadow: 0px 1px 17px 8px rgba(115,115,115,0.35); 
+    box-shadow: 0px 1px 17px 8px rgba(115,115,115,0.35); */
+}
 .header_wrap {
     width: var(--content-width);
     margin: 0 auto;
@@ -336,9 +349,10 @@ footer .site_info p {
     z-index: 99;
 }
 .player_bar {
-    background-color: #faf2e980;
+    background-color: #FAF2E9;
+    /* background-color: #faf2e980;
     -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); */
 }
 .player_bar_progress_wrap {
     position: relative;
