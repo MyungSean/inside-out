@@ -181,6 +181,101 @@ $('#edit_post').click( function(e){
     edit();
 });
 
+
+
+// 글쓰기 도우미
+
+// 글쓰기 배경음악
+// 유튜브 iframe 컨트롤
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var player ;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+    height: '281',
+    width: '500',
+    // videoId: 'M7lc1UVf-VE',
+    events: {
+        'onStateChange': onPlayerStateChange
+    }
+    });
+}
+
+function onPlayerStateChange(event) {
+    if ( event.data == YT.PlayerState.ENDED ) {
+        event.target.playVideo();
+    }
+}
+
+// 배경음악 재생
+$('.bgm').click(function() {
+    if ( $(this).hasClass('nowPlaying') ) {
+        $(this).removeClass('nowPlaying');
+        player.pauseVideo();
+    } else {
+        $('.bgm').removeClass('nowPlaying');
+        $(this).addClass('nowPlaying');
+        var videoId = $(this).attr('id');
+        player.loadVideoById(videoId);
+    }
+})
+
+// 글쓰기 가이드
+guide = '어떤 감정을 느끼고 있나요?\n구체적으로 표현하기 어렵다면 단어로 적어보세요. 위의 감정 목록에서 내가 가진 감정을 체크해 보는 게 도움이 될 거에요!\n\n왜 그런 감정을 느끼게 됐나요?\n사소한 이야기도 좋아요. 하나하나 얘기해주세요.\n\n지금의 감정과 상황을 어떻게 생각 하나요?\n그리고 지금 당신에게 필요한 건 무엇인가요?';
+$('.guide_info').hover(function() {
+    $('.guide').addClass('active');
+}, function() {
+    $('.guide').removeClass('active');
+});
+
+$('#toggleGuide').change(function() {
+    var text = $('#content').val();
+    if (this.checked) {
+        // 가이드 활성화
+        if ( text ) {
+            var r = confirm('모든 작성 내용이 삭제됩니다. 진행하시겠습니까?');
+            if( !r ) {
+                $(this).prop("checked", false);
+                return
+            }
+        }
+        $('#content').val(guide);
+        
+    } else {
+        // 가이드 비활성화
+        if ( text ) {
+            var r = confirm('모든 작성 내용이 삭제됩니다. 진행하시겠습니까?');
+            if( !r ) {
+                $(this).prop("checked", true);
+                return
+            }
+        }
+        $('#content').val('');
+    }
+})
+
+// 감정 목록
+$('.emotionsToggleBtn').click(function() {
+    $('.emotions').slideToggle();
+})
+$('.emotions li').click(function() {
+    $(this).toggleClass('active');
+    if ( $(this).hasClass('active') ) {
+        var span = '<span>'+$(this).html()+'</span>';
+        $('.selectedEmotions').append(span);
+    } else {
+        $( '.selectedEmotions span:contains('+$(this).html()+')' ).remove();
+    }
+})
+$('.selectedEmotions').on('click', 'span', function() {
+    $(this).remove();
+    $( '.emotions li:contains('+$(this).html()+')' ).removeClass('active');
+})
+
+
 // 목록으로 이동
 $('.backToListBtn').click(function() {
     window.location.href = "/board/list.html?id="+id;

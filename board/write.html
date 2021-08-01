@@ -16,6 +16,497 @@
             <div class="board_info">
                 <h2>ㅤ</h2>
             </div>
+            <div class="write_helper">
+                <div id="player"></div>
+                <div class="bgm_wrap">
+                    <p>글쓰며 듣는 음악</p>
+                    <div class="bgm" id="_DClKudgeD4">
+                        <span>Piano</span>
+                    </div>
+                    <div class="bgm" id="FjHGZj2IjBk">
+                        <span>Guitar</span>
+                    </div>
+                    <div class="bgm" id="ZI1Y326JIBk">
+                        <span>Writing ASMR</span>
+                    </div>
+                </div>
+                <div class="guide_wrap">
+                    <span>글쓰기 가이드</span>
+                    <label class="switch">
+                        <input type="checkbox" id="toggleGuide">
+                        <span class="slider round"></span>
+                    </label>
+                    <i class="ri-question-fill guide_info"></i>
+                    <div class="guide">
+                        <p>어떻게 글을 시작해야 할지 모르겠나요? 이 가이드가 당신의 이야기를 사람들에게 온전히 전달할 수 있도록 도와줄 거에요.</p>
+                    </div>
+                </div>
+                <div class="emotions_wrap">
+                    <div class="emotionsToggleBtn">
+                        <p>감정 목록</p>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                    <ul class="emotions">
+                        <span>걱정/긴장/두려움/불안</span>
+                        <li>걱정스러운</li>
+                        <li>겁나는</li>
+                        <li>경외하는</li>
+                        <li>굳어버린</li>
+                        <li>긴장된</li>
+                        <li>두려운</li>
+                        <li>떨리는</li>
+                        <li>무서운</li>
+                        <li>발이 떨어지지 않는</li>
+                        <li>불안한</li>
+                        <li>소름끼치는</li>
+                        <li>조마조마한</li>
+                        <li>숨을 죽이게 하는</li>
+                        <li>숨이 막힐 것 같은</li>
+                        <li>심장이 멎은 것 같은</li>
+                        <li>애 타는</li>
+                        <li>얼어붙은</li>
+                        <li>여유 없는</li>
+                        <li>염려하는</li>
+                        <li>조급한</li>
+                        <li>조바심 나는</li>
+                        <li>조심스러운</li>
+                        <li>초조한</li>
+
+                        <span>고민스러움/압박감/성가심</span>
+                        <li>심란한</li>
+                        <li>고민되는</li>
+                        <li>답답한</li>
+                        <li>성가신</li>
+                        <li>짜증스러운</li>
+                        <li>불편한</li>
+                        <li>힘겨운</li>
+                        <li>부담스러운</li>
+                        <li>난감한</li>
+                        <li>거슬리는</li>
+                        <li>신경이 날카로운</li>
+                        <li>귀찮은</li>
+                        <li>예민해진</li>
+                        <li>민감해진</li>
+
+                        <span>고통스러움/상처받음/외로움</span>
+                        <li>가슴이 찢어지는</li>
+                        <li>고독한</li>
+                        <li>고립된</li>
+                        <li>고통스러운</li>
+                        <li>괴로운</li>
+                        <li>비참한</li>
+                        <li>상처받은</li>
+                        <li>속상한</li>
+                        <li>쓸쓸한</li>
+                        <li>억울한</li>
+                        <li>억장이 무너지는</li>
+                        <li>외로운</li>
+                        <li>원통한</li>
+                        <li>참담한</li>
+                        <li>처량한</li>
+                        <li>처절한</li>
+                        <li>한스러운</li>
+
+                        <span>슬픔/절망/무기력</span>
+                        <li>기운 없는</li>
+                        <li>눈물이 나는</li>
+                        <li>막막한</li>
+                        <li>맥 빠진</li>
+                        <li>무기력한</li>
+                        <li>불행한</li>
+                        <li>상심한</li>
+                        <li>서글픈</li>
+                        <li>슬픈</li>
+                        <li>서러운</li>
+                        <li>암담한</li>
+                        <li>앞이 안 보이는</li>
+                        <li>우울한</li>
+                        <li>울고 싶은</li>
+                        <li>울적한</li>
+                        <li>위축된</li>
+                        <li>의기소침한</li>
+                        <li>의욕 없는</li>
+                        <li>절망하는</li>
+                        <li>주늑 든</li>
+                        <li>침울한</li>
+                        <li>코가 시큰한</li>
+                        <li>희망이 없는</li>
+                        <li>힘 빠진</li>
+                        <li>힘없는</li>
+
+                        <span>놀람/충격</span>
+                        <li>경악을 금치 못하는</li>
+                        <li>기막힌</li>
+                        <li>놀란</li>
+                        <li>덕컥하는</li>
+                        <li>아찔한</li>
+                        <li>움찔하는</li>
+                        <li>어안이 벙벙한</li>
+                        <li>충격적인</li>
+                        <li>하느이 무너지는</li>
+                        <li>할 말을 잃은</li>
+                        <li>황당한</li>
+
+                        <span>단절감/마비</span>
+                        <li>거리감이 느껴지는</li>
+                        <li>냉담한</li>
+                        <li>냉랭한</li>
+                        <li>넋이 나간</li>
+                        <li>단절된</li>
+                        <li>마비된</li>
+                        <li>마음이 닫힌</li>
+                        <li>멍한</li>
+                        <li>몽롱한</li>
+                        <li>무감각한</li>
+                        <li>무관심한</li>
+                        <li>무심한</li>
+                        <li>시큰둥한</li>
+                        <li>싸늘한</li>
+                        <li>얼이 빠진</li>
+                        <li>재미없는</li>
+                        <li>흥미 없는</li>
+
+                        <span>아쉬움/연민/허전함</span>
+                        <li>공허한</li>
+                        <li>그리운</li>
+                        <li>불쌍한</li>
+                        <li>상실감을 느끼는</li>
+                        <li>아쉬운</li>
+                        <li>안쓰러운</li>
+                        <li>안타까운</li>
+                        <li>애끓는</li>
+                        <li>애도하는</li>
+                        <li>애절한</li>
+                        <li>애처로운</li>
+                        <li>연민을 느끼는</li>
+                        <li>짠한</li>
+                        <li>착잡한</li>
+                        <li>허무한</li>
+                        <li>허전한</li>
+                        <li>허탈한</li>
+                        <li>후회하는</li>
+
+                        <span>지루함</span>
+                        <li>권태로운</li>
+                        <li>단조로운</li>
+                        <li>무료한</li>
+                        <li>식상한</li>
+                        <li>심심한</li>
+                        <li>지겨운</li>
+                        <li>지루한</li>
+
+                        <span>당황/수치심/죄책감</span>
+                        <li>겸연쩍은</li>
+                        <li>곤혹스러운</li>
+                        <li>난처한</li>
+                        <li>당혹스러운</li>
+                        <li>당황한</li>
+                        <li>마음이 무거운</li>
+                        <li>멋쩍은</li>
+                        <li>미안한</li>
+                        <li>민망한</li>
+                        <li>부끄러운</li>
+                        <li>수줍은</li>
+                        <li>수치스러운</li>
+                        <li>쑥스러운</li>
+                        <li>죄책감이 드는</li>
+                        <li>창피한</li>
+
+                        <span>부러움/간절함</span>
+                        <li>간절한</li>
+                        <li>못 견디는</li>
+                        <li>부러운</li>
+                        <li>샘 나는</li>
+                        <li>안달하는</li>
+                        <li>애 타는</li>
+                        <li>절실한</li>
+                        <li>조급한</li>
+                        <li>질투 나는</li>
+
+                        <span>피로감/지침</span>
+                        <li>기운 빠진</li>
+                        <li>녹초가 된</li>
+                        <li>소진된</li>
+                        <li>졸린</li>
+                        <li>지친</li>
+                        <li>처지는</li>
+                        <li>탈진한</li>
+                        <li>피곤한</li>
+                        <li>피로한</li>
+                        <li>힘든</li>
+
+                        <span>혐오감/미움</span>
+                        <li>거북한</li>
+                        <li>거부감이 느껴지는</li>
+                        <li>경멸스러운</li>
+                        <li>느끼한</li>
+                        <li>메스꺼운</li>
+                        <li>멸시하는</li>
+                        <li>모욕적인</li>
+                        <li>못마땅한</li>
+                        <li>모멸감을 느끼는</li>
+                        <li>미운</li>
+                        <li>밉살스러운</li>
+                        <li>반감을 느끼는</li>
+                        <li>불쾌한</li>
+                        <li>섬뜩한</li>
+                        <li>소름끼치는</li>
+                        <li>싫은</li>
+                        <li>싫증나는</li>
+                        <li>혐오스러운</li>
+                        <li>얄미운</li>
+                        <li>역겨운</li>
+                        <li>원한을 품은</li>
+                        <li>적개심을 느끼는</li>
+                        <li>적의를 느끼는</li>
+                        <li>증오하는</li>
+                        <li>질색하는</li>
+                        <li>치욕스러운</li>
+
+                        <span>분노/화</span>
+                        <li>화난</li>
+                        <li>분한</li>
+                        <li>울화가 치미는</li>
+                        <li>분개한</li>
+                        <li>격분한</li>
+                        <li>성난</li>
+                        <li>열 받은</li>
+                        <li>신경질 나는</li>
+                        <li>짜증나는</li>
+                        <li>약오른</li>
+                        <li>노여운</li>
+                        <li>노한</li>
+                        <li>격노한</li>
+                        <li>격양된</li>
+
+                        <span>불만족/좌절/서운함</span>
+                        <li>고까운</li>
+                        <li>기분 상한</li>
+                        <li>낙담한</li>
+                        <li>뒤틀린</li>
+                        <li>욕구불만인</li>
+                        <li>망연자실한</li>
+                        <li>불만인</li>
+                        <li>불만족한</li>
+                        <li>불쾌한</li>
+                        <li>서운한</li>
+                        <li>섭섭한</li>
+                        <li>시무룩한</li>
+                        <li>실망한</li>
+                        <li>심통 나는</li>
+                        <li>야속한</li>
+                        <li>뚱한</li>
+                        <li>원망스러운</li>
+                        <li>좌절하는</li>
+
+                        <span>불안정감/혼란/의혹</span>
+                        <li>개운치 않은</li>
+                        <li>경계심을 느끼는</li>
+                        <li>기분이 오락가락 하는</li>
+                        <li>동요되는</li>
+                        <li>마음이 안 놓이는</li>
+                        <li>미치 것 같은</li>
+                        <li>망설이는</li>
+                        <li>마음이 편치 않은</li>
+                        <li>마음이 어지러운</li>
+                        <li>미심쩍은</li>
+                        <li>불안정한</li>
+                        <li>불편한</li>
+                        <li>산란한</li>
+                        <li>산만한</li>
+                        <li>생소한</li>
+                        <li>신경 쓰이는</li>
+                        <li>아리송한</li>
+                        <li>안심이 안 되는</li>
+                        <li>안절부절못하는</li>
+                        <li>애증이 교차하는</li>
+                        <li>어리둥절한</li>
+                        <li>어쩔 줄 모르는</li>
+                        <li>얼떨떨한</li>
+                        <li>의구심이 드는</li>
+                        <li>의심스러운</li>
+                        <li>의아한</li>
+                        <li>의혹을 느끼는</li>
+                        <li>좋았다 싫었다 하는</li>
+                        <li>주저하는</li>
+                        <li>찜찜한</li>
+                        <li>혼란스러운</li>
+                        <li>혼미한</li>
+
+                        <span>감사/감동/감탄</span>
+                        <li>가슴 뭉클한</li>
+                        <li>감격한</li>
+                        <li>감동 받은</li>
+                        <li>감사하는</li>
+                        <li>경이로운</li>
+                        <li>고마운</li>
+                        <li>깜짝 놀란</li>
+                        <li>놀라운</li>
+                        <li>신기한</li>
+                        <li>찡한</li>
+
+                        <span>고양됨/흥분됨</span>
+                        <li>가슴이 터질 것 같은</li>
+                        <li>각성된</li>
+                        <li>고양된</li>
+                        <li>기쁨이 넘치는</li>
+                        <li>날아갈 것 같은</li>
+                        <li>들뜬</li>
+                        <li>뛸 듯이 기쁜</li>
+                        <li>만끽하는</li>
+                        <li>매혹된</li>
+                        <li>벅찬</li>
+                        <li>설레는</li>
+                        <li>신나는</li>
+                        <li>야릇한</li>
+                        <li>열렬한</li>
+                        <li>우쭐한</li>
+                        <li>자극 받은</li>
+                        <li>열정을 느끼는</li>
+                        <li>짜릿한</li>
+                        <li>쾌감을 느끼는</li>
+                        <li>통쾌한</li>
+                        <li>환희에 찬</li>
+                        <li>황홀한</li>
+                        <li>흥분되는</li>
+
+                        <span>사랑스러움/자비심</span>
+                        <li>다정한</li>
+                        <li>동정심을 느끼는</li>
+                        <li>따뜻한</li>
+                        <li>마음이 끌리는</li>
+                        <li>마음이 쓰이는</li>
+                        <li>마음이 통하는</li>
+                        <li>부드러운</li>
+                        <li>사랑스러운</li>
+                        <li>사랑이 넘치는</li>
+                        <li>애정을 느끼는</li>
+                        <li>애착이 가는</li>
+                        <li>애틋한</li>
+                        <li>온화한</li>
+                        <li>자비로운</li>
+                        <li>푸근한</li>
+                        <li>친근한</li>
+
+                        <span>안도감/차분함/평화로움</span>
+                        <li>가라앉은</li>
+                        <li>고요한</li>
+                        <li>긴장이 풀린</li>
+                        <li>단념한</li>
+                        <li>마음이 놓이는</li>
+                        <li>맑은</li>
+                        <li>안도하는</li>
+                        <li>안락한</li>
+                        <li>안심되는</li>
+                        <li>안정된</li>
+                        <li>유유자적하는</li>
+                        <li>이완된</li>
+                        <li>잔잔한</li>
+                        <li>잠잠한</li>
+                        <li>중심을 잡은</li>
+                        <li>진정된</li>
+                        <li>차분해진</li>
+                        <li>체념하는</li>
+                        <li>충만한</li>
+                        <li>침착한</li>
+                        <li>편안한</li>
+                        <li>평온한</li>
+                        <li>평화로운</li>
+                        <li>한가로운</li>
+
+                        <span>유쾌함//즐거움/만족/행복</span>
+                        <li>기꺼운</li>
+                        <li>기분 좋은</li>
+                        <li>기쁜</li>
+                        <li>만족하는</li>
+                        <li>명랑한</li>
+                        <li>반가운</li>
+                        <li>상쾌한</li>
+                        <li>여한이 없는</li>
+                        <li>유쾌한</li>
+                        <li>재미있는</li>
+                        <li>좋은</li>
+                        <li>즐거운</li>
+                        <li>즐기는</li>
+                        <li>충족된</li>
+                        <li>행복한</li>
+                        <li>흐뭇한</li>
+                        <li>흔쾌한</li>
+                        <li>흡족한</li>
+                        <li>흥이 난</li>
+
+                        <span>자부심/자신감</span>
+                        <li>긍지를 느끼는</li>
+                        <li>당당한</li>
+                        <li>뿌듯한</li>
+                        <li>의기양양한</li>
+                        <li>자랑스러운</li>
+                        <li>자부심을 느끼는</li>
+                        <li>자신 있는</li>
+                        <li>자신만만한</li>
+                        <li>확고한</li>
+                        <li>확신하는</li>
+
+                        <span>해방감</span>
+                        <li>개운한</li>
+                        <li>벗어난</li>
+                        <li>속 시원한</li>
+                        <li>짐을 벗은</li>
+                        <li>체증이 내려간</li>
+                        <li>해방된</li>
+                        <li>홀가분한</li>
+                        <li>졸린</li>
+                        <li>후련한</li>
+
+                        <span>활력/회복</span>
+                        <li>고무된</li>
+                        <li>기운 찬</li>
+                        <li>기운이 나는</li>
+                        <li>되살아난</li>
+                        <li>발랄한</li>
+                        <li>밝은</li>
+                        <li>살아있는</li>
+                        <li>상쾌한</li>
+                        <li>생기 있는</li>
+                        <li>생생한</li>
+                        <li>신선한</li>
+                        <li>힘찬</li>
+                        <li>열의가 생기는</li>
+                        <li>의욕이 넘치는</li>
+                        <li>쾌활ㄹ한</li>
+                        <li>활기찬</li>
+                        <li>회복된</li>
+                        <li>힘이 넘치는</li>
+
+                        <span>흥미/몰입</span>
+                        <li>관심이 가는</li>
+                        <li>궁금한</li>
+                        <li>넋이 빠진</li>
+                        <li>도취한</li>
+                        <li>마음을 뺏긴</li>
+                        <li>매료된</li>
+                        <li>몰입하는</li>
+                        <li>무아지경인</li>
+                        <li>열렬한</li>
+                        <li>열심인</li>
+                        <li>열중하는</li>
+                        <li>집중하는</li>
+                        <li>현혹된</li>
+                        <li>호기심 있는</li>
+                        <li>홀린</li>
+                        <li>흥미로운</li>
+
+                        <span>희망</span>
+                        <li>기대하는</li>
+                        <li>기운을 내는</li>
+                        <li>낙관하는</li>
+                        <li>용기를 얻은</li>
+                        <li>자신감을 얻은</li>
+                        <li>희망을 느끼는</li>
+                    </ul>
+                    <div class="selectedEmotions"></div>
+                </div>
+            </div>
             <div class="editor">
                 <div>
                     <input type="text" id="subject" placeholder="제목" autocomplete="off" maxlength="50">

@@ -6,13 +6,141 @@
     font-size: 30px;
     font-weight: 400;
 }
+
+.write_helper,
 .editor {
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-content);
     display: flex;
-    flex-flow: column wrap;
     padding: var(--content-padding);
 }
+.write_helper {
+    margin-bottom: 20px;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+.editor {
+    flex-flow: column wrap;
+}
+
+.write_helper .bgm_wrap {
+    display: flex;
+    flex-flow: row wrap;
+}
+.write_helper .bgm_wrap p {
+    margin-bottom: 10px;
+    flex: 1 100%;
+}
+.write_helper .bgm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-btn);
+    padding: 8px;
+    margin-right: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: .1s;
+}
+.write_helper .bgm span {
+    transition: .1s;
+}
+.write_helper .bgm.nowPlaying {
+    background-color: var(--emphasize-orange);
+    border: 1px solid var(--emphasize-orange);
+}
+.write_helper .bgm.nowPlaying span {
+    color: #fff;
+}
+.write_helper .guide_wrap {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.write_helper .guide_wrap label {
+    margin: 0 5px;
+}
+.write_helper .guide_info {
+    font-size: 20px;
+    cursor: pointer;
+}
+.write_helper .guide {
+    position: absolute;
+    display: none;
+    right: 0;
+    top: 45px;
+    width: 200px;
+    padding: 8px;
+    background-color: #fff;
+    line-height: 20px;
+    font-size: 14px;
+    border-radius: 10px;
+}
+.write_helper .guide.active {
+    display: block;
+}
+
+.write_helper .emotions_wrap {
+    flex: 1 100%;
+}
+.write_helper .emotionsToggleBtn {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    border-top: 1px solid var(--border-color);
+    padding-top: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.write_helper .emotionsToggleBtn i {
+    font-size: 20px;
+}
+.write_helper .emotions {
+    display: none;
+    max-height: 600px;
+    overflow: scroll;
+}
+.write_helper .emotions span {
+    display: block;
+    background-color: var(--hover-gray);
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 30px;
+    font-size: 14px;
+}
+.write_helper .emotions li {
+    display: inline-block;
+    margin: 4px;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .1s;
+}
+.write_helper .emotions li:hover {
+    background-color: var(--hover-gray);
+}
+.write_helper .emotions li.active {
+    background-color: var(--emphasize-orange);
+    color: #fff;
+}
+.write_helper .selectedEmotions span {
+    display: inline-block;
+    background-color: var(--emphasize-orange);
+    color: #fff;
+    margin: 4px;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+.write_helper .selectedEmotions span:first-child {
+    margin-top: 10px;
+}
+
 
 .editor > div {
     flex-grow: 1;
