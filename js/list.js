@@ -64,8 +64,9 @@ function loadPosts(total_posts, load_pages) {
                         ${name}
                     </a>
                 `;
-            }            if ( reply_cnt > 0 ) {
-                var reply_cnt = '<i class="ri-music-fill"></i>' + reply_cnt;
+            }
+            if ( reply_cnt > 0 ) {
+                var reply_cnt = `<span class="reply_cnt"><i class="ri-music-fill"></i>${reply_cnt}</span>`;
             } else {
                 var reply_cnt = "";
             }
@@ -75,8 +76,8 @@ function loadPosts(total_posts, load_pages) {
             <td>${number}</td>
             <td><a href="/board/post.html?id=music&no=${number}">${subject}</a>${reply_cnt}</td>
             <td>${name}</td>
-            <td>${getPastTime(upload_date)}</td>
-            <td>${views}</td>
+            <td><span class="mobile"><i class="ri-time-fill"></i></span>${getPastTime(upload_date)}</td>
+            <td><span class="mobile"><i class="ri-eye-fill"></i></span>${views}</td>
             <td>${likes}</td>
             </tr>`;
     

@@ -50,6 +50,15 @@ a:active {
     /* color: #000000; */
 }
 
+.mobile {
+    display: none;
+}
+@media screen and (max-width: 1000px) {
+    .mobile {
+        display: block;
+    }
+} 
+
 * {
     box-sizing: border-box;
     color: #211304;
@@ -60,6 +69,7 @@ a:active {
 /* 변수 */
 :root {
     --header-height: 70px; 
+    --header-height-mobile: 50px; 
     --content-padding: 30px;
     --content-width: 1000px;
     --border-radius-content: 10px;
@@ -100,6 +110,11 @@ header {
     width: 100%;
     z-index: 9;
 }
+.header_wrap {
+    width: var(--content-width);
+    height: 100%;
+    margin: 0 auto;
+}
 .container {
     width: var(--content-width);
     margin: 0 auto;
@@ -108,19 +123,30 @@ header {
 footer {
     margin-top: auto;
 }
+.footer_wrap {
+    width: var(--content-width);
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 1000px) {
+    .header_wrap {
+        width: 100%;
+    }
+    .container {
+        width: 100%;
+        padding: 0 10px;
+        margin-top: var(--header-height-mobile);
+    }
+    .footer_wrap {
+        width: 100%;
+    }
+} 
 
 
 
 /* header */
 header {
     background-color: #FAF2E9;
-    /* border-bottom: 1px solid var(--border-color); */
-    /* -webkit-box-shadow: 0px 1px 17px 8px rgba(115,115,115,0.35); 
-    box-shadow: 0px 1px 17px 8px rgba(115,115,115,0.35); */
-}
-.header_wrap {
-    width: var(--content-width);
-    margin: 0 auto;
 }
 header nav {
     position: relative;
@@ -129,7 +155,7 @@ header nav {
     justify-content: space-between;
     -webkit-align-items: center;
     align-items: center;
-    height: var(--header-height);
+    height: 100%;
 }
 header .home {
     font-family: var(--font-main-e), sans-serif;
@@ -137,17 +163,20 @@ header .home {
     font-weight: 800;
 }
 header .board_nav {
+    display: block;
+}
+header .links {
     display: flex;
     font-family: var(--font-main-e), sans-serif;
 }
-header .board_nav a {
+header .links a {
     padding: 10px;
     margin: 0 5px;
     border-radius: 20px;
     transition: .1s;
     cursor: pointer;
 }
-header .board_nav a:hover {
+header .links a:hover {
     background-color: var(--hover-gray);
 }
 header .user {
@@ -181,10 +210,7 @@ header .user .notice i:hover {
 }
 header .user .notice i .notice_cnt {
     display: none;
-}
-header .user .notice i .notice_cnt.active {
     position: absolute;
-    display: flex;
     justify-content: center;
     align-items: center;
     padding: 5px;
@@ -196,6 +222,9 @@ header .user .notice i .notice_cnt.active {
     background-color: var(--emphasize-orange);
     border-radius: 20px;
 }
+header .user .notice i .notice_cnt.active {
+    display: flex;
+}
 header .user .noticeModal {
     position: absolute;
     top: 70px;
@@ -204,7 +233,6 @@ header .user .noticeModal {
     height: 80vh;
     width: 350px;
     background-color: #fff;
-    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-content);
     padding: 0 8px;
     z-index: 99;
@@ -270,7 +298,6 @@ header .user .user_menu ul {
     right: 0;
     width: 150px;
     background-color: #ffffff;
-    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 7px;
     font-size: 16px;
@@ -285,16 +312,47 @@ header .user .user_menu ul li {
 header .user .user_menu ul li:hover {
     background-color: var(--hover-gray);
 }
+header .dropdownToggleBtn {
+    font-size: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+    header {
+        height: var(--header-height-mobile);
+        padding: 0 10px;
+    }
+    header .home {
+        font-size: 20px;
+    }
+    header .board_nav {
+        display: none;
+        position: absolute;
+        top: 50px;
+        background-color: #fff;
+        width: 100%;
+        padding: 5px 0;
+        border-radius: var(--border-radius-content);
+        -webkit-box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.26); 
+        box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.26);
+        font-size: 14px;
+    }
+    header .links {
+        flex-flow: column nowrap;
+    }
+    header .board_nav a {
+        padding: 10px;
+        border-radius: 10px;
+    }
+    header .user {
+        display: none;
+    }
+}
 
 
 
 /* footer */
 .footer_wrap {
-    width: var(--content-width);
     padding: 20px;
-    margin: 0 auto;
-    margin-top: auto;
-    margin-bottom: auto;
     text-align: center;
     font-size: 14px;
 }
@@ -307,10 +365,10 @@ footer .menu {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
+    margin: 15px 0;
 }
 footer .menu li {
     padding: 0 10px;
-    margin: 15px 0;
     border-right: 1px solid #000000;
 }
 footer .menu li:last-child {
@@ -328,7 +386,17 @@ footer .menu li a:hover {
 footer .site_info p {
     padding: 5px;
 }
-
+@media screen and (max-width: 1000px) {
+    .footer_wrap {
+        font-size: 12px;
+    }
+    footer .logo {
+        font-size: 18px;
+    }
+    footer .menu {
+        margin: 10px 0;
+    }
+}
 
 
 /* 플레이어 */
@@ -339,6 +407,8 @@ footer .site_info p {
     bottom: 90px;
     right: 20px;
     border-radius: 15px;
+    max-width: 500px;
+    max-height: 281px;
     z-index: 9;
 }
 
@@ -453,7 +523,39 @@ footer .site_info p {
     opacity: 1;
 }
 
+@media screen and (max-width: 1000px) {
+    #player {
+        bottom: 60px;
+        right: 10px;
+        width: calc( 100vw - 20px);
+        height: calc( (100vw - 20px) / 100 * 56.25 );
+    }
 
+    .player_bar_content {
+        width: 100%;
+        height: 50px;
+        padding: 0 10px;
+    }
+    .player_bar_content i {
+        font-size: 20px;
+    }
+    .player_bar .control {
+        width: 100px
+    }
+    .player_bar .track {
+        margin: 0 20px;
+    }
+    .player_bar .track .title {
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+    .player_bar .track .artist {
+        font-size: 12px;
+    }
+    .player_bar .timeInfo {
+        display: none;
+    }
+} 
 
 
 
@@ -475,7 +577,7 @@ footer .site_info p {
     transform: translate( -50%, -50%);
     background-color: #ffffff;
     padding: 30px;
-    border-radius: 20px;
+    border-radius: 15px;
     /* overflow: hidden; */
 }
 .modal_title {
@@ -525,6 +627,28 @@ footer .site_info p {
     -moz-animation:spin 1s linear infinite;
     animation:spin 1s linear infinite;
 }
+
+@media screen and (max-width: 1000px) {
+    .modal_content {
+        padding: 14px;
+        width: calc( 100% - 20px );
+    }
+    .modal_title {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+    
+    .modal .submitBtn {
+    }        
+} 
+
+
+/* 공통 디자인 */
+.dsdw {
+    -webkit-box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.26); 
+    box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.26);
+}
+
 
 
 /* 토글 스위치 */

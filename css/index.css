@@ -26,12 +26,37 @@
     margin-bottom: 100px;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
-    width: 200px;
+    width: 250px;
     height: 50px;
+    font-size: 18px;
     font-weight: 400;
 }
 .intro .continueBtn i {
     margin-left: 10px;
     margin-right: -10px;
     font-size: 30px;
+}
+
+@media screen and (max-width: 1000px) {
+    .intro .box {
+        font-size: 14px;
+        margin: 60px 0;
+    }
+    .intro .box img {
+        width: 200px;
+    }
+    .intro .img_title {
+        font-size: 20px;
+    }
+    .intro .continueBtn {
+        margin-bottom: 50px;
+        width: 200px;
+        height: 40px;
+        font-size: 16px;
+    }
+    .intro .continueBtn i {
+        margin-left: 8px;
+        margin-right: -10px;
+        font-size: 24px;
+    }
 }

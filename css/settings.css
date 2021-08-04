@@ -2,15 +2,25 @@
 .container {
     display: flex;
     flex-flow: row wrap;
-    margin-top: 50px;
 }
 .sidebar {
     width: 260px;
 }
 .content {
-    /* flex-grow: 1; */
     width: 550px;
 }
+
+@media screen and (max-width: 1000px) {
+    .container {
+        flex-flow: column wrap;
+    }
+    .sidebar {
+        width: 100%;
+    }
+    .content {
+        width: 100%;
+    }
+} 
 
 
 
@@ -30,6 +40,21 @@
 .setttings_menu li.active {
     border-bottom: 2px solid var(--border-color);
 }
+
+@media screen and (max-width: 1000px) {
+    .setttings_menu {
+        margin: 24px 0;
+    }
+    .setttings_menu a {
+        display: inline-block;
+    }
+    .setttings_menu li {
+        padding: 10px 0;
+        margin-bottom: 0;
+        margin-right: 16px;
+        font-size: 16px;
+    }
+} 
 
 
 
@@ -76,3 +101,23 @@
     font-size: 16px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 1000px) {
+    .content h1 {
+        margin-bottom: 24px;
+        font-size: 20px;
+    }
+    
+    .setting h2 {
+        margin-bottom: 8px;
+        font-size: 18px;
+    }
+    .setting .setting_explain p {
+        font-size: 14px;
+    }
+    
+    .setting .setting_control button {
+        padding: 4px 10px;
+        font-size: 14px;
+    }
+} 

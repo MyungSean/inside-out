@@ -11,12 +11,25 @@ function setupHeader(user) {
             })
 
             $('header .profile a').attr('href', '/user/my.html?u='+uid);
+
+            var html = `
+            <a href="/user/my.html?u=${uid}" class="mobile">My page</a>
+            <a href="/user/settings/account-settings.html" class="mobile">Settings</a>
+            <a href="#" class="logoutBtn">Logout</a>
+            `;
+            $('header .links').append(html);
         } else {
             var html = `
             <a href="/user/login.html">로그인</a>
             <a href="/user/register.html">가입하기</a>
             `;
             $('header .user').html(html);
+            
+            var html = `
+            <a href="/user/login.html" class="mobile">Login</a>
+            <a href="/user/register.html" class="mobile">Register</a>
+            `;
+            $('header .links').append(html);
         }
     });
 }
@@ -101,6 +114,11 @@ $(document).on('click', '.noticeModal li', function(){
             window.location.href = targetURL;
         })
     })
+})
+
+// 모바일 메뉴 토글 버튼
+$('header').on('click', '.dropdownToggleBtn', function() {
+    $('header .board_nav').fadeToggle(50)
 })
 
 

@@ -129,7 +129,7 @@ function getPlaylist(uid) {
                 var menu = `
                 <td class="menu">
                     <i class="ri-more-fill dropdownBtn"></i>
-                    <ul class="dropdown">
+                    <ul class="dropdown dsdw">
                         <li class="deletePlaylist">
                             <i class="ri-delete-bin-7-fill"></i>
                             <span>플레이리스트 삭제</span>
@@ -189,7 +189,11 @@ function getMyPosts() {
                 var name = "익명";
             }
             if ( reply_cnt > 0 ) {
-                var reply_cnt = '<i class="ri-music-fill"></i>' + reply_cnt;
+                var reply_cnt = `
+                <span class="reply_cnt">
+                    <i class="ri-music-fill"></i>${reply_cnt}
+                </span>
+                `;
             } else {
                 var reply_cnt = "";
             }
@@ -199,8 +203,8 @@ function getMyPosts() {
             <td>${number}</td>
             <td><a href="/board/post.html?id=music&no=${number}">${subject}</a>${reply_cnt}</td>
             <td>${name}</td>
-            <td>${getPastTime(upload_date)}</td>
-            <td>${views}</td>
+            <td><span class="mobile"><i class="ri-time-fill"></i></span>${getPastTime(upload_date)}</td>
+            <td><span class="mobile"><i class="ri-eye-fill"></i></span>${views}</td>
             <td>${likes}</td>
             </tr>`;
     
@@ -238,7 +242,11 @@ function getLikePosts() {
                     var name = "익명";
                 }
                 if ( reply_cnt > 0 ) {
-                    var reply_cnt = '<i class="ri-music-fill"></i>' + reply_cnt;
+                    var reply_cnt = `
+                    <span class="reply_cnt">
+                        <i class="ri-music-fill"></i>${reply_cnt}
+                    </span>
+                    `;                
                 } else {
                     var reply_cnt = "";
                 }
@@ -248,8 +256,8 @@ function getLikePosts() {
                 <td>${number}</td>
                 <td><a href="/board/post.html?id=music&no=${number}">${subject}</a>${reply_cnt}</td>
                 <td>${name}</td>
-                <td>${getPastTime(upload_date)}</td>
-                <td>${views}</td>
+                <td><span class="mobile"><i class="ri-time-fill"></i></span>${getPastTime(upload_date)}</td>
+                <td><span class="mobile"><i class="ri-eye-fill"></i></span>${views}</td>
                 <td>${likes}</td>
                 </tr>`;
                 

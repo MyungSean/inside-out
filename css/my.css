@@ -11,7 +11,6 @@
 .user_info .img_wrap {
     width: 120px;
     height: 120px;
-    /* margin-right: 10px; */
     border-radius: 50%;
     overflow: hidden;
 }
@@ -39,13 +38,36 @@
     width: 200px;
     padding: 5px 20px;
     margin: auto;
-    border-top: 1px solid #000000;
-    border-bottom: 1px solid #000000;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
 }
 .user_info .menu i {
     font-size: 20px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 1000px) {
+    .user_info {
+        margin: 20px 0;
+    }
+    .user_info .img_wrap {
+        width: 100px;
+        height: 100px;
+    }
+    .user_info .name {
+        font-size: 22px;
+        margin: 14px 0;
+    }
+
+    .user_info .menu {
+        width: 160px;
+        padding: 5px 20px;
+    }
+    .user_info .menu i {
+        font-size: 16px;
+    }
+} 
+
 
 
 .content {
@@ -58,8 +80,8 @@
     justify-content: space-between;
     padding: 3px 100px;
     margin-bottom: 20px;
-    border-top: 1px solid #000000;
-    border-bottom: 1px solid #000000;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     font-size: 16px;
 }
 .content .nav li {
@@ -75,6 +97,28 @@
 .content .nav li:hover {
     background-color: var(--hover-gray);
 }
+
+@media screen and (max-width: 1000px) {
+    .content .nav {
+        padding: 3px 10px;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+    .content .nav li {
+        padding: 8px 12px;
+        border-radius: 20px;
+        transition: .1s;
+        cursor: pointer;
+    }
+    .content .nav li.active {
+        background-color: var(--hover-gray);
+    
+    }
+    .content .nav li:hover {
+        background-color: var(--hover-gray);
+    }
+} 
+
 
 
 /* 플레이리스트 */
@@ -210,7 +254,7 @@
     position: absolute;
     right: 0;
     width: 200px;
-    padding: 8px;
+    padding: 4px;
     border-radius: var(--border-radius-content);
     background-color: #fff;
     text-align: left;
@@ -219,8 +263,10 @@
 .playlist .menu .dropdown li {
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
+    font-size: 14px;
+    transition: .1s;
     cursor: pointer;
 }
 .playlist .menu .dropdown li:hover {
@@ -247,6 +293,86 @@
     margin-left: 10px;
     font-size: 20px;
 }
+
+@media screen and (max-width: 1000px) {
+    .playlists tr td {
+        height: 70px;
+    }
+    .playlist .tracks {
+        width: 75px;
+    }
+    .playlist .tracks ul {
+        height: 60px;
+    }
+    .playlist .tracks li:nth-child(1) {
+        left: 0;
+    }
+    .playlist .tracks li:nth-child(2) {
+        left: 0;
+        opacity: 0;
+    }
+    .playlist .tracks li:nth-child(3) {
+        left: 0;
+        opacity: 0;
+    }
+    .playlist .tracks li:nth-child(4) {
+        left: 0;
+        opacity: 0;
+    }
+    .playlist .tracks li:nth-child(1).on {
+        left: 0;
+    }
+    .playlist .tracks li:nth-child(2).on {
+        left: 40px;
+        opacity: 1;
+    }
+    .playlist .tracks li:nth-child(3).on {
+        left: 80px;
+        opacity: 1;
+    }
+    .playlist .tracks li:nth-child(4).on {
+        left: 120px;
+        opacity: 1;
+    }
+    .playlist .tracks .img_wrap {
+        width: 60px;
+        height: 60px;
+    }
+    .playlist .title {
+        font-size: 16px;
+    }
+    .playlist .title .listTitle {
+        font-size: 14px;
+    }
+    .playlist .title i {
+        margin-left: 5px;
+    }
+    .playlist .menu i {
+        font-size: 18px;
+    }
+    .playlist .menu .dropdown {
+        width: 180px;
+    }
+    .playlist .menu .dropdown li {
+        font-size: 12px;
+    }
+    .playlist .menu .dropdown i {
+        margin-right: 6px;
+        font-size: 16px;
+    }
+    
+    /* 플레이리스트 추가 모달 */
+    .playlists .addPlaylistBtn {
+        width: 130px;
+        height: 30px;
+        font-size: 12px;
+    }
+    .playlists .addPlaylistBtn i {
+        margin-left: 6px;
+        font-size: 18px;
+    }
+} 
+
 
 
 .myActivity table {
@@ -282,6 +408,58 @@
 .myActivity tbody td a:hover {
     text-decoration: underline;
 }
+
+@media screen and (max-width: 1000px) {
+    .myActivity thead {
+        display: none;
+    }
+    .myActivity tbody tr {
+        position: relative;
+        display: flex;
+        flex-flow: row wrap;
+        padding: 8px 0;
+        font-size: 12px;
+        line-height: 20px;
+    }
+    .myActivity tbody tr td {
+        padding: 0;
+    }
+    .myActivity tbody td:nth-child(1) {
+        display: none;
+    }
+    .myActivity tbody td:nth-child(2) {
+        width: 1px;
+        flex: 1 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 6px;
+        margin-right: 30px;
+        font-size: 14px;
+    }
+    .myActivity tbody td:nth-child(6) {
+        display: none;
+    }
+    .myActivity tbody .reply_cnt {
+        position: absolute;
+        right: 0;
+    }
+    .myActivity tbody td span.mobile {
+        display: inline-block;
+        margin-left: 10px;
+        border-left: 1px solid var(--border-color);
+    }
+    .myActivity tbody td span.mobile i {
+        margin-left: 0;
+        padding-left: 10px;
+        padding-right: 4px;
+    }
+
+    .myActivity .writeBtn {
+        font-size: 14px;
+    }
+} 
+
 
 
 /* 내가 쓴 글 */
@@ -342,6 +520,31 @@
     font-size: 16px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 1000px) {
+    .addPlaylistModal .playlistName input[type=text] {
+        padding: 8px;
+        margin-bottom: 16px;
+        font-size: 16px;
+    }
+    .addPlaylistModal .playlistSecret input[type=checkbox] {
+        width: 16px;
+        height: 16px;
+        margin-right: 4px;
+    }
+    .addPlaylistModal .playlistSecret label {
+        font-size: 16px;
+    }
+    .addPlaylistModal .playlistSecret span {
+        font-size: 12px;
+    }
+    .addPlaylistModal #makeNewPlaylist {
+        padding: 4px 8px;
+        margin-top: 25px;
+        font-size: 14px;
+    }
+}
+
 
 /* 유저 정보 수정 모달 */
 .editUserInfoModal .modal_content {
@@ -438,4 +641,23 @@
     padding: 4px 10px;
     font-size: 14px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+    .editUserInfoModal .modal_content {
+        width: calc( 100vw - 20px );
+    }
+    .editUserInfoModal .drag_area p {
+        display: none;
+    }
+    .editUserInfoModal .drag_area.active {
+    }
+    .editUserInfoModal .drag_area i {
+        font-size: 80px;
+        margin-bottom: 0px;
+        opacity: .7;
+    }
+    .editUserInfoModal .imgPreview button {
+        padding: 4px 8px;
+    }
 }

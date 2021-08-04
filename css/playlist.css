@@ -17,6 +17,24 @@
     margin-left: 30px;
 }
 
+@media screen and (max-width: 1000px) {
+    .container {
+        flex-flow: column wrap;
+    }
+    .sidebar {
+        margin-top: 10px;
+    }
+    .playlist {
+        margin-top: 20px;
+    }
+    .sidebar {
+        width: 100%;
+    }
+    .playlist {
+        margin-left: 0;
+    }
+} 
+
 
 /* 플레이리스트 정보 */
 .playlist_info {
@@ -74,6 +92,34 @@
     font-size: 16px;
 }
 
+@media screen and (max-width: 1000px) {
+    .playlist_info {
+        margin-bottom: 10px;
+    }
+    .playlist_info .name {
+        font-size: 18px;
+    }
+    .playlist_info .upload_date {
+        display: none;
+    }
+    .playlist_menu {
+        padding: 4px 0;
+        margin-bottom: 10px;
+    }
+    .playlist_menu i {
+        margin-right: 14px;
+        font-size: 18px;
+    }
+    .playlist_maker .profile .img_wrap {
+        width: 40px;
+        height: 40px;
+    }
+    .playlist_maker .maker {
+        margin-bottom: 0;
+        font-size: 14px;
+    }    
+} 
+
 
 /* 플레이리스트 컨트롤 */
 .playlist_control {
@@ -93,6 +139,19 @@
 .playlist_control .playAllBtn i {
     font-size: 20px;
 }
+
+@media screen and (max-width: 1000px) {
+    .playlist_control {
+        margin-bottom: 0;
+    }
+    .playlist_control .playAllBtn {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+    .playlist_control .playAllBtn i {
+        font-size: 18px;
+    }
+} 
 
 
 /* 트랙 */
@@ -179,6 +238,40 @@
     background-color: var(--hover-gray);
 }
 
+@media screen and (max-width: 1000px) {
+    .tracks .track {
+        padding: 0;
+    }
+    .tracks .track .order p {
+        padding: 0 4px;
+        font-size: 12px;
+    }
+    .tracks .track .info .img_wrap {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+    .tracks .track .info .title {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    .tracks .track .info .artist {
+        font-size: 12px;
+    }
+    .tracks .track .menu {
+        padding: 0 10px;
+    }
+    .tracks .track .menu i {
+        font-size: 14px;
+    }
+    .tracks .track .menu ul {
+        padding: 4px;
+    }
+    .tracks .track .menu ul li {
+        font-size: 12px;
+    }
+} 
+
 
 /* 모달 */
 /* 플레이리스트 정보 수정 모달 */
@@ -198,6 +291,12 @@
 .editPlaylistInfoModal .editName p {
     text-align: right;
     font-size: 12px;
+}
+
+@media screen and (max-width: 1000px) {
+    .editPlaylistInfoModal .editName input {
+        font-size: 16px;
+    }
 }
 
 

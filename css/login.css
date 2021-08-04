@@ -5,11 +5,8 @@
 .login_area {
     display: flex;
     flex-flow: column wrap;
-    position: absolute;
-    top: 45vh;
-    left: 50vw;
     width: 360px;
-    transform: translate(-50%, -50%);
+    margin: 0 auto;
 }
 
 .login_area .logo {
@@ -58,7 +55,7 @@
   
 .login_area > span:before,
 .login_area > span:after {
-    background-color: #000;
+    background-color: var(--border-color);
     content: "";
     display: inline-block;
     height: 1px;
@@ -98,3 +95,31 @@
     flex-grow: 1;
     text-align: center;
 }
+
+@media screen and (max-width: 1000px) {
+    .login_area {
+        --btn-height: 40px;
+    }
+    
+    .login_area {
+        width: 100%;
+    }
+    
+    .login_area .logo {
+        font-size: 24px;
+    }
+    .login_area #login_form input {
+        padding: 0 8px;
+        font-size: 14px;
+    }
+    .login_area #login_form #login_submit {
+        font-size: 14px;
+    }
+              
+    .login_area .social_login div {
+        font-size: 14px;
+    }
+    .login_area .social_login i {
+        font-size: 22px;
+    }
+} 

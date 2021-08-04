@@ -7,11 +7,17 @@
     font-weight: 400;
 }
 
+@media screen and (max-width: 1000px) {
+    .board_info h2 {
+        font-size: 22px;
+    }
+} 
+
 .write_helper,
 .editor {
+    display: flex;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-content);
-    display: flex;
     padding: var(--content-padding);
 }
 .write_helper {
@@ -53,13 +59,13 @@
 .write_helper .bgm.nowPlaying span {
     color: #fff;
 }
+
 .write_helper .guide_wrap {
     position: relative;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
 }
-
 .write_helper .guide_wrap label {
     margin: 0 5px;
 }
@@ -141,6 +147,59 @@
     margin-top: 10px;
 }
 
+@media screen and (max-width: 1000px) {
+    .write_helper,
+    .editor {
+        border: 1px solid var(--border-color);
+        padding: 10px;
+    }
+    .write_helper {
+        margin-bottom: 10px;
+    }
+
+    .write_helper .bgm_wrap p {
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+    .write_helper .bgm {
+        padding: 4px;
+    }
+    
+    .write_helper .guide_wrap {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+    .write_helper .guide_info {
+        font-size: 18px;
+    }
+    .write_helper .guide {
+        left: 50%;
+        top: 30px;
+    }
+
+    .write_helper .emotionsToggleBtn {
+        font-size: 14px;
+    }
+    .write_helper .emotions {
+        max-height: 400px;
+    }
+    .write_helper .emotions span {
+        padding: 5px;
+        font-size: 14px;
+    }
+    .write_helper .emotions li {
+        margin: 2px;
+        font-size: 12px;
+    }
+    .write_helper .selectedEmotions span {
+        margin: 2px;
+        font-size: 12px;
+    }
+    .write_helper .selectedEmotions span:first-child {
+        margin-top: 10px;
+    }
+} 
+
 
 .editor > div {
     flex-grow: 1;
@@ -184,7 +243,7 @@
     padding: 5px 10px;
     font-size: 16px;
     background-color: inherit;
-    border: 1px solid #000000;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
     cursor: pointer;
 }
@@ -199,7 +258,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #000000;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
     padding: 8px 10px;
     margin-left: auto;
@@ -208,4 +267,38 @@
 .backToList > div i {
     font-size: 20px;
     margin-right: 5px;
+}
+
+@media screen and (max-width: 1000px) {
+    .editor #subject {
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+    .editor #content {
+        font-size: 14px;
+    }
+
+    .editor hr {
+        margin-bottom: 10px;
+    }
+
+    .editor label[for=anonymity] {
+        font-size: 14px;
+    }
+    .editor .option button {
+        padding: 4px 8px;
+        font-size: 14px;
+    }
+    .backToList {
+        margin-top: 10px;
+    }
+    .backToList > div {    
+        padding: 4px 8px;
+        font-size: 14px;
+    }
+    .backToList > div i {
+        font-size: 16px;
+        margin-right: 4px;
+    }
 }

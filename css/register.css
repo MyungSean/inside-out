@@ -1,9 +1,6 @@
 .signup_area {
     width: 500px;
-    position: absolute;
-    top: 45vh;
-    left: 50vw;
-    transform: translate(-50%, -50%);
+    margin: 0 auto;
 }
 
 .signup_area .logo {
@@ -52,7 +49,44 @@
     margin-left: auto;
     background-color: inherit;
     padding: 5px 10px;
-    border: 1px solid #000000;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
     cursor: pointer;
 }
+
+@media screen and (max-width: 1000px) {
+    .signup_area {
+        width: 100%;
+    }
+    
+    .signup_area .logo {
+        margin-bottom: 20px;
+    }
+    .signup_area h1 {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+    .signup_area h2 {
+        font-size: 18px;
+    }
+    
+    #signup_form > div {
+        flex-flow: column wrap;
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+    #signup_form label {
+        margin-bottom: 4px;
+        font-size: 14px;
+    }
+    #signup_form input {
+        width: 100%;
+        padding: 8px;
+        font-size: 12px;
+    }
+    #signup_form > div > span {
+        left: 0;
+        top: 55px;
+        font-size: 12px;
+    }    
+} 

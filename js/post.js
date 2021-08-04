@@ -66,7 +66,7 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
         var user = auth.currentUser;
         if ( user ) {
 
-            // 유저 상태 확인후 포스트 삭제 버튼 추가
+            // 유저 상태 확인후 포스트 수정, 삭제 버튼 추가
             if ( user.uid == uid ) {
                 var menu = `
                     <div class="edit_menu">
@@ -74,7 +74,7 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
                         <i class="ri-close-fill delete delete_post"></i>
                     </div>
                 `;
-                $('.post').append(menu);
+                $('.postMenu').append(menu);
             }            
 
             // 내가 좋아요 표시했는지 확인
@@ -138,13 +138,11 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
             }
 
             if ( user ) {
-                // 유저 상태 확인후 댓글 삭제 버튼 추가
+                // 유저 상태 확인후 댓글 수정, 삭제 버튼 추가
                 if ( user.uid == uid ) {           
                     var menu = `
-                        <div class="edit_menu">
-                            <i class="ri-pencil-fill edit edit_reply"></i>
-                            <i class="ri-close-fill delete delete_reply"></i>
-                        </div>
+                        <i class="ri-pencil-fill edit edit_reply"></i>
+                        <i class="ri-close-fill delete delete_reply"></i>
                     `;
                 } else {
                     var menu = "";
@@ -161,8 +159,7 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
 
             var li =
             `<li name="${videoId}" id="${key}">
-                ${menu}
-                <div class="reply_music">
+               <div class="reply_music">
                     <div>
                         <div class="img_wrap">
                             <img src="${thumbnail}" alt="${title} 썸네일">
@@ -179,6 +176,7 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
                         <i class="ri-heart-line likeBtn active"></i>
                         <i class="ri-heart-fill likeBtn"></i>
                         <i class="ri-share-forward-fill shareBtn"></i>
+                        ${menu}
                     </div>
                 </div>
                 <div class="reply_comment">

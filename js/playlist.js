@@ -74,7 +74,7 @@ database.ref('users').orderByChild('/playlists/'+listId+'/info/key').equalTo(lis
         var menu = `
         <div class="menu">
             <i class="ri-more-fill dropdownBtn"></i>
-            <ul class="dropdown">
+            <ul class="dropdown dsdw">
                 <li class="deleteTrack"><i class="ri-delete-bin-7-fill"></i><sapn>플레이리스트에서 삭제</span></li>
             </ul>
         </div>

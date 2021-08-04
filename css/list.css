@@ -46,6 +46,7 @@
 .board tbody td i {
     margin-left: 7px;
 }
+
 .board tbody td a:hover {
     text-decoration: underline;
 }
@@ -76,4 +77,67 @@
 }
 .page_nav span:last-child {
     margin-right: 0;
+}
+
+@media screen and (max-width: 1000px) {
+    .board_info {
+        margin-top: 20px;
+    }
+    .board_info h2 {
+        font-size: 20px;
+    }
+    .board_info p {
+        font-size: 14px;
+    }
+
+    .board thead {
+        display: none;
+    }
+    .board tr {
+        display: flex;
+        flex-flow: row wrap;
+        padding: 8px 0;
+        font-size: 12px;
+        line-height: 20px;
+    }
+    .board tbody tr td {
+        padding: 0;
+    }
+    .board td:nth-child(1) {
+        display: none;
+    }
+    .board td:nth-child(2) {
+        width: 1px;
+        flex: 1 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 6px;
+        margin-right: 30px;
+        font-size: 14px;
+    }
+    .board td:nth-child(2).deleted {
+        margin-bottom: 0;
+    }
+    .board td:nth-child(6) {
+        display: none;
+    }
+    .board .reply_cnt {
+        position: absolute;
+        right: 0;
+    }
+    .board td span.mobile {
+        display: inline-block;
+        margin-left: 10px;
+        border-left: 1px solid var(--border-color);
+    }
+    .board td span.mobile i {
+        margin-left: 0;
+        padding-left: 10px;
+        padding-right: 4px;
+    }
+
+    .board .writeBtn {
+        font-size: 14px;
+    }
 }
