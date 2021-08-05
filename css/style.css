@@ -158,6 +158,7 @@ header nav {
     height: 100%;
 }
 header .home {
+    position: relative;
     font-family: var(--font-main-e), sans-serif;
     font-size: 25px;
     font-weight: 800;

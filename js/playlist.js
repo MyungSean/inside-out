@@ -45,6 +45,7 @@ database.ref('users').orderByChild('/playlists/'+listId+'/info/key').equalTo(lis
         
         // 플레이리스트 정보 표시
         playlistName = info.name;
+        $(document).attr("title", playlistName + " | inside out");
         $('.playlist_info .name').html(playlistName);
 
         database.ref('users/'+uid).once('value').then(function(snapshot) {

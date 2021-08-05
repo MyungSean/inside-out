@@ -39,6 +39,9 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
             return;
         }
 
+        // 페이지 타이틀 변경
+        $(document).attr("title", subject + " | inside out");
+
         // 익명 처리
         if ( anonymity ) {
             var name = "익명";

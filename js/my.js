@@ -48,6 +48,7 @@ function getUserInfo(uid) {
         var name = snapshot.val().name;
         var photoURL = snapshot.val().photoURL;
 
+        $(document).attr("title", name + " | inside out");
         $('.user_info .name').html(name);
         $('.user_info .img_wrap img').attr('src', photoURL);
     })

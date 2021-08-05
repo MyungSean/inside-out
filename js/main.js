@@ -15,7 +15,7 @@ function setupHeader(user) {
             var html = `
             <a href="/user/my.html?u=${uid}" class="mobile">My page</a>
             <a href="/user/settings/account-settings.html" class="mobile">Settings</a>
-            <a href="#" class="logoutBtn">Logout</a>
+            <a href="#" class="logoutBtn mobile">Logout</a>
             `;
             $('header .links').append(html);
         } else {

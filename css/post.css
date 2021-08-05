@@ -130,7 +130,7 @@
 
 .my_reply form {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     margin-bottom: 20px;
 }
 .my_reply .search_area {
