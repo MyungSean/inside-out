@@ -61,6 +61,9 @@
 .post .likes i.active {
     display: inline-block;
 }
+.post .likes i.ri-heart-fill {
+    color: var(--emphasize-orange);
+}
 .post .likes span {
     margin-left: 3px;
 }
@@ -236,8 +239,7 @@
     margin-left: 10px;
     padding: 5px 10px;
     font-size: 14px;
-    background-color: inherit;
-    border: 1px solid #000000;
+    border: none;
     border-radius: var(--border-radius-btn);
     cursor: pointer;
 }
@@ -250,8 +252,7 @@
     justify-content: center;
     align-items: center;
     padding: 5px 10px;
-    background-color: inherit;
-    border: 1px solid var(--border-color);
+    border: none;
     border-radius: var(--border-radius-btn);
     font-size: 14px;
     cursor: pointer;
@@ -351,6 +352,9 @@
 }
 .reply_music .likeBtn.active {
     display: block;
+}
+.reply_music .likeBtn.ri-heart-fill {
+    color: var(--emphasize-orange);
 }
 
 .reply_comment {

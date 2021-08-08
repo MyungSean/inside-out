@@ -1,0 +1,36 @@
+/* 준비중 알림 - 삭제 예정 */
+.notice_area {
+    margin-top: 100px;
+    text-align: center;
+}
+.notice_area img {
+    width: 300px;
+}
+.notice_area .ready {
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: 700;
+}
+.notice_area .description {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 200;
+}
+@media screen and (max-width: 1000px) {
+    .notice_area {
+        margin-top: 40px;
+    }
+    .notice_area img {
+        width: 70%;
+        max-width: 300px;
+    }
+    .notice_area .ready {
+        font-size: 24px;
+    }
+    .notice_area .description {
+        margin: 0 20px;
+        margin-top: 16px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+}

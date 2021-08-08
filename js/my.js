@@ -58,7 +58,6 @@ function getUserInfo(uid) {
 function getPlaylist(uid) {
     $('.playlists .lists table').html('');
     database.ref('users/'+uid+'/playlists').once('value').then(function(snapshot) {
-        console.log(snapshot.val());
         var user = auth.currentUser;
 
         for (const [key, value] of Object.entries(snapshot.val())) {
@@ -445,8 +444,7 @@ function updateName() {
     
     const user = firebase.auth().currentUser;
     user.updateProfile({
-        displayName: name,
-        photoURL: "https://example.com/jane-q-user/profile.jpg"
+        displayName: name
     }).then(() => {
     }).catch((error) => {
         console.log(error);
@@ -532,6 +530,7 @@ $('.user_info').on('click', '.editBtn', function() {
 
     const user = auth.currentUser;
     var name = user.displayName;
+    console.log(name);
     $('#newUserName').val(name);
 
     $('.editUserInfoModal').fadeIn(100);    

@@ -95,8 +95,6 @@
 .setting .setting_control button {
     padding: 5px 15px;
     outline: none;
-    background-color: inherit;
-    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
     font-size: 16px;
     cursor: pointer;

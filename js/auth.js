@@ -130,10 +130,17 @@ $('#signup_form #signup_submit').click(function(e) {
 
         database.ref('users/'+uid).set({
             name: name,
+            email: email,
             photoUrl: false
         })
         .then(function() {
-            window.location.href = "/";
+            result.user.updateProfile({
+                displayName: name
+            }).then(() => {
+                window.location.href = "/";
+            }).catch((error) => {
+                console.log(error);
+            });  
         })
     })
     .catch((error) => {
@@ -165,6 +172,7 @@ $('.social_login_btn').click(function() {
             if ( snapshot.val() == null ) {
                 database.ref('users/'+uid).update({
                     name: name,
+                    email: user.email,
                     photoURL: photoURL
                 })
                 .then(function() {

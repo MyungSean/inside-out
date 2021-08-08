@@ -1,3 +1,7 @@
+.signup_wrap {
+    margin-top: 80px;
+}
+
 .signup_area {
     width: 500px;
     margin: 0 auto;
@@ -47,7 +51,6 @@
 #signup_form #signup_submit {
     display: flex;
     margin-left: auto;
-    background-color: inherit;
     padding: 5px 10px;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
@@ -55,6 +58,10 @@
 }
 
 @media screen and (max-width: 1000px) {
+    .signup_wrap {
+        margin-top: 20px;
+    }
+    
     .signup_area {
         width: 100%;
     }

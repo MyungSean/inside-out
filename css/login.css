@@ -2,6 +2,10 @@
     --btn-height: 45px;
 }
 
+.login_wrap {
+    padding-top: 80px;
+}
+
 .login_area {
     display: flex;
     flex-flow: column wrap;
@@ -32,6 +36,8 @@
     height: var(--btn-height);
     font-size: 18px;
     background-color: inherit;
+    background-color: var(--text-dark-brown);
+    color: var(--background-ivory);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
     cursor: pointer;
@@ -95,8 +101,16 @@
     flex-grow: 1;
     text-align: center;
 }
+.login_area .registerBtn {
+    background-color: var(--text-dark-brown);
+    color: var(--background-ivory);
+}
 
 @media screen and (max-width: 1000px) {
+    .login_wrap {
+        padding-top: 20px;
+    }
+
     .login_area {
         --btn-height: 40px;
     }

@@ -20,8 +20,8 @@ function setupHeader(user) {
             $('header .links').append(html);
         } else {
             var html = `
-            <a href="/user/login.html">로그인</a>
-            <a href="/user/register.html">가입하기</a>
+            <a href="/user/login.html">Log in</a>
+            <a href="/user/register.html">Sign up</a>
             `;
             $('header .user').html(html);
             
@@ -47,7 +47,7 @@ $(document).on("click", '.user_menu i', function(e){
 })
 
 // 헤더 알림 토글
-$(document).on("click", '.notice i', function(e){  
+$(document).on("click", '#notification_toggle', function(e){  
     e.stopPropagation();
     $('header .notice .noticeModal').fadeToggle(50);
 })
@@ -62,6 +62,17 @@ $(document).on("click", function(e){
     }
 });
 
+
+// 알림 갯수 업데이트
+function updateNoticeLength() {
+    var length = $('.noticeModal li').not('.checked').length;
+    if ( length == 0 ) {
+        $('.notice_cnt').removeClass('active');
+    } else {
+        $('.notice_cnt').addClass('active');
+        $('.notice_cnt').html(length);
+    }
+}
 
 // 알림 표시
 function getNtotification(user) {
@@ -82,9 +93,12 @@ function getNtotification(user) {
         
         var li = `
         <li id="${key}" class="${checked}">
-        <p class="title">${title}</p>
-        <p class="description">${description}</p>
-        <p class="date">${getPastTime(date)}</p>
+            <p class="title">${title}</p>
+            <p class="description">${description}</p>
+            <p class="date">${getPastTime(date)}</p>
+            <div class="deleteNotice_wrap">
+                <i class="ri-close-fill deleteNoticeBtn"></i>
+            </div>
         </li>
         `;
         
@@ -100,7 +114,14 @@ function getNtotification(user) {
     })
 }
 
-// 알림에 클릭 이벤트
+// 알람 삭제 버튼 표시
+$(document).on('mouseenter','.noticeModal li', function (e) {
+    $(this).find('.deleteNotice_wrap').fadeIn(100);
+}).on('mouseleave','.noticeModal li',  function(){
+    $(this).find('.deleteNotice_wrap').fadeOut(100);
+});
+
+// 알림 클릭 이벤트
 $(document).on('click', '.noticeModal li', function(){
     console.log(1);
     var user = auth.currentUser;
@@ -115,6 +136,52 @@ $(document).on('click', '.noticeModal li', function(){
         })
     })
 })
+
+// 알림 삭제 기능
+// 알림 선택 삭제
+$(document).on('click', '.noticeModal .deleteNotice_wrap', function(e) {
+    e.stopPropagation();
+})
+$(document).on('click', '.noticeModal .deleteNoticeBtn', function(e) {
+    e.stopPropagation();
+
+    user = auth.currentUser;
+    uid = user.uid;
+    
+    var noticeId = $(this).closest('li').attr('id');
+    database.ref('users/'+uid+'/notifications/'+noticeId).remove();
+    $(this).closest('li').remove();
+    updateNoticeLength();
+})
+
+// 읽은 알림 삭제
+$(document).on('click', '.noticeModal .deleteCheckedBtn', function(e) {
+    e.stopPropagation();
+
+    user = auth.currentUser;
+    uid = user.uid;
+
+    var targets = $('.noticeModal li.checked');
+
+    for (let i = 0; i < targets.length; i++) {
+        const id = targets[i].id;
+        database.ref('users/'+uid+'/notifications/'+id).remove();
+        targets[i].remove();
+    }
+    updateNoticeLength();
+})
+// 모든 알림 삭제
+$(document).on('click', '.noticeModal .deleteAllBtn', function(e) {
+    e.stopPropagation();
+
+    user = auth.currentUser;
+    uid = user.uid;
+
+    database.ref('users/'+uid+'/notifications').remove();
+    $('.noticeModal li').remove();
+    updateNoticeLength();
+})
+
 
 // 모바일 메뉴 토글 버튼
 $('header').on('click', '.dropdownToggleBtn', function() {

@@ -511,9 +511,7 @@
 }
 .addPlaylistModal #makeNewPlaylist {
     display: flex;
-    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
-    background-color: inherit;
     padding: 5px 10px;
     margin-top: 30px;
     margin-left: auto;
@@ -633,9 +631,7 @@
 }
 .editUserInfoModal .submitBtn {
     display: flex;
-    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-btn);
-    background-color: inherit;
     margin-top: 20px;
     margin-left: auto;
     padding: 4px 10px;

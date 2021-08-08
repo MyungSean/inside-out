@@ -30,6 +30,9 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
         var content = childSnapshot.val().content;
         var number = childSnapshot.val().number;
         var likes = childSnapshot.val().likes;
+        if (likes) {
+            var likes_cnt = Object.keys(likes).length;
+        }
         var views = childSnapshot.val().views;
         var state = childSnapshot.val().state;
 
@@ -59,7 +62,7 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
         $('.views').html(views);
         $('.upload_date').html(getPastTime(upload_date));
         $('.content').html(content);
-        $('#post_likes').html(likes);
+        $('#post_likes').html(likes_cnt);
         
         // 수정 확인
         if ( edit_date ) {
@@ -81,17 +84,10 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
             }            
 
             // 내가 좋아요 표시했는지 확인
-            database.ref('users/'+user.uid+'/likes/posts').once('value').then(function(snapshot) {
-                var postId = $('#postId').val();
-                // console.log(Object.keys(snapshot.val()));
-                var postIds = Object.keys(snapshot.val());
-                for (let i = 0; i < postIds.length; i++) {
-                    const target_id = postIds[i];
-                    if ( target_id == postId ) {
-                        $('.post .ri-heart-line').removeClass('active');
-                        $('.post .ri-heart-fill').addClass('active');
-                        break;
-                    }
+            database.ref('board/'+id+'/posts/'+postId+'/likes/'+user.uid).once('value').then(function(snapshot) {
+                if ( snapshot.val() === true ) {
+                    $('.post .ri-heart-line').removeClass('active');
+                    $('.post .ri-heart-fill').addClass('active');
                 }
             })
         } else {
@@ -160,6 +156,16 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
                 var edit_indicator = '';
             }
 
+            var fillBtn = '';
+            var lineBtn = 'active';
+            if ( user ) {
+                // 내가 좋아요 표시 했는지 확인
+                if ( likes && likes[user.uid] ) {
+                    var fillBtn = 'active';
+                    var lineBtn = '';
+                }
+            }
+
             var li =
             `<li name="${videoId}" id="${key}">
                <div class="reply_music">
@@ -176,8 +182,8 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
                     </div>
                     <div class="btns">
                         <i class="ri-play-list-add-fill listAddBtn"></i>
-                        <i class="ri-heart-line likeBtn active"></i>
-                        <i class="ri-heart-fill likeBtn"></i>
+                        <i class="ri-heart-line likeBtn ${lineBtn}"></i>
+                        <i class="ri-heart-fill likeBtn ${fillBtn}"></i>
                         <i class="ri-share-forward-fill shareBtn"></i>
                         ${menu}
                     </div>
@@ -195,26 +201,6 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
                     </div>
                 </div>
             </li>`;
-
-            if ( user ) {     
-                // 내가 좋아요 표시했는지 확인
-                var postId = $('#postId').val();
-                database.ref('users/'+user.uid+'/likes/replies/'+postId).once('value').then(function(snapshot) {
-                    if ( snapshot.val() == null ) {
-                        return;
-                    }
-                    // console.log(Object.keys(snapshot.val()));
-                    var postIds = Object.keys(snapshot.val());
-                    for (let i = 0; i < postIds.length; i++) {
-                        const target_id = postIds[i];
-                        if ( target_id == key ) {
-                            $('.replies #'+target_id+' .ri-heart-line').removeClass('active');
-                            $('.replies #'+target_id+' .ri-heart-fill').addClass('active');
-                            break;
-                        }
-                    }
-                })
-            }
 
             $('.replies ul').prepend(li);
 
@@ -336,13 +322,13 @@ $('.post .ri-heart-line').click(function() {
     $('.post .ri-heart-fill').addClass('active');
 
     var postId = $('#postId').val();
-    database.ref('board/'+id+'/posts/'+postId).update({
-        likes: firebase.database.ServerValue.increment(1)
-    })
     var user = auth.currentUser;
     var uid = user.uid;
     database.ref('users/'+uid+'/likes/posts').update({
         [postId]: true
+    })
+    database.ref('board/'+id+'/posts/'+postId+'/likes').update({
+        [uid]: true
     })
 
     var likes = $('#post_likes').html();
@@ -354,12 +340,10 @@ $('.post .ri-heart-fill').click(function() {
     $('.post .ri-heart-fill').removeClass('active');
 
     var postId = $('#postId').val();
-    database.ref('board/'+id+'/posts/'+postId).update({
-        likes: firebase.database.ServerValue.increment(-1)
-    })
     var user = auth.currentUser;
     var uid = user.uid;
     database.ref('users/'+uid+'/likes/posts/'+postId).remove();
+    database.ref('board/'+id+'/posts/'+postId+'/likes/'+uid).remove()
 
     var likes = $('#post_likes').html();
     var likes = Number(likes) - 1;
@@ -412,8 +396,8 @@ $('#submit_reply').click(function(e) {
         uid: uid,
         name: name,
         anonymity: anonymity,
-        likes: 0,
-        reports: 0,
+        likes: false,
+        reports: false,
         upload_date: upload_date,
         edit_date: false
     })
@@ -497,7 +481,7 @@ $('.replies').on('click', '.listAddBtn', function() {
         if ( snapshot.val() == null ) {
             var div = `
                 <div class="noPlaylist">
-                    <p>플레이리스트가 없습니다. <a href="/user/my.html">내 페이지</a>에서 새로운 플레이리스트를 만드세요.</p>
+                    <p>플레이리스트가 없습니다. <a href="/user/my.html?u=${user.uid}">내 페이지</a>에서 새로운 플레이리스트를 만드세요.</p>
                 </div>
             `
             $('.addToPlaylistModal .playlists').append(div);
@@ -576,13 +560,13 @@ $('.replies').on('click', '.ri-heart-line', function() {
     
     var postId = $('#postId').val();
     var replyId = $(this).closest('li').attr('id');
-    database.ref('board/'+id+'/posts/'+postId+'/reply/'+replyId).update({
-        likes: firebase.database.ServerValue.increment(1)
-    })
     var user = auth.currentUser;
     var uid = user.uid;
     database.ref('users/'+uid+'/likes/replies/'+postId).update({
         [replyId]: true
+    })
+    database.ref('board/'+id+'/posts/'+postId+'/reply/'+replyId+'/likes').update({
+        [uid]: true
     })
 })
 $('.replies').on('click', '.ri-heart-fill', function() {
@@ -591,12 +575,10 @@ $('.replies').on('click', '.ri-heart-fill', function() {
     
     var postId = $('#postId').val();
     var replyId = $(this).closest('li').attr('id');
-    database.ref('board/'+id+'/posts/'+postId+'/reply/'+replyId).update({
-        likes: firebase.database.ServerValue.increment(-1)
-    })
     var user = auth.currentUser;
     var uid = user.uid;
     database.ref('users/'+uid+'/likes/replies/'+postId+'/'+replyId).remove();
+    database.ref('board/'+id+'/posts/'+postId+'/reply/'+replyId+'/likes/'+uid).remove();
 })
 
 
