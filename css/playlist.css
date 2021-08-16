@@ -305,3 +305,8 @@
 .noTracks.active {
     display: block;
 }
+@media screen and (max-width: 1000px) {
+    .noTracks {
+        padding: 20px 0;
+    }
+}
