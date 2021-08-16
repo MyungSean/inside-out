@@ -216,28 +216,27 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
 // 댓글 입력을 위한 음악 검색
 function addMusicList() {
     $('#search_result').show();
-    $('#search_result li').remove();
-  
+    
     let musicKeyWord = $('#keyword').val();
     if ( musicKeyWord == "" ) {
+        $('#search_result li').remove();
         $('#search_result .noResult').show();
         return
-    } else {
-        $('#search_result .noResult').hide();
     }
-    
+
     $.ajax({
         type: 'GET',
         url: 'http://ws.audioscrobbler.com/2.0/?method=track.search&track='+musicKeyWord+'&api_key=d5863450a3f919d547deb174efa27363&format=json',
         success: function (response) {
+            $('#search_result li').remove();
+        
             let musicList = response["results"]["trackmatches"]["track"];
             if ( musicList.length == 0 ) {
                 $('#search_result .noResult').show();
                 return
-            } else {
-                $('#search_result .noResult').hide();
             }
             
+            $('#search_result .noResult').hide();
             for (let i = 0; i < musicList.length; i++) {
                 // let albumImg = musicList[i]["image"][0]["#text"]
                 let albumTitle = musicList[i]["name"]
