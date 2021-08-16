@@ -1,0 +1,3 @@
+User-agent: *
+Allow:/
+Sitemap: https://inside-out.kr/sitemap.xml

@@ -55,13 +55,13 @@
                     <form>
                         <div class="search_area">
                             <div class="search_bar">
-                                <input type="text" id="keyword" placeholder="추가할 음악 검색하기" onkeyup="addMusicList()">
+                                <input type="text" id="keyword" placeholder="추가할 음악 검색하기" onkeyup="addMusicList()" autocomplete="off">
                                 <i class="ri-close-line" id="close_search_result"></i>
                             </div>
-                            <ul id="search_result">
-                                <li class="noResult">
+                            <ul id="search_result" class="dsdw">
+                                <div class="noResult">
                                     <p>검색 결과가 없습니다.</p>
-                                </li>
+                                </div>
                             </ul>
                             <div class="video_confirm">
                                 <div class="embed_youtube"></div>

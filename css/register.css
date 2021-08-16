@@ -16,9 +16,6 @@
     font-size: 30px;
     margin-bottom: 5px;
 }
-.signup_area h2 {
-    font-size: 20px;
-}
 
 #signup_form > div {
     position: relative;
@@ -72,9 +69,6 @@
     .signup_area h1 {
         font-size: 24px;
         margin-bottom: 5px;
-    }
-    .signup_area h2 {
-        font-size: 18px;
     }
     
     #signup_form > div {

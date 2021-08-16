@@ -216,17 +216,24 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
 // 댓글 입력을 위한 음악 검색
 function addMusicList() {
     $('#search_result').show();
-    $('#search_result li').not('li.noResult').remove();
+    $('#search_result li').remove();
+  
     let musicKeyWord = $('#keyword').val();
+    if ( musicKeyWord == "" ) {
+        $('#search_result .noResult').show();
+        return
+    } else {
+        $('#search_result .noResult').hide();
+    }
     
     $.ajax({
         type: 'GET',
         url: 'http://ws.audioscrobbler.com/2.0/?method=track.search&track='+musicKeyWord+'&api_key=d5863450a3f919d547deb174efa27363&format=json',
         success: function (response) {
             let musicList = response["results"]["trackmatches"]["track"];
-            
             if ( musicList.length == 0 ) {
                 $('#search_result .noResult').show();
+                return
             } else {
                 $('#search_result .noResult').hide();
             }
@@ -243,6 +250,10 @@ function addMusicList() {
 
                 $('#search_result').append(li);
             }
+        },
+        error: function (error) {
+            console.log(error);
+            $('#search_result').hide();
         }
     })
 }

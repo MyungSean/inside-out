@@ -103,7 +103,8 @@
     }
     .post .content {
         font-size: 14px;
-        line-height: 18px;
+        line-height: 20px;
+        /* padding: 0 10px; */
     }
     .post .postMenu {
         margin-top: 10px;
@@ -158,19 +159,19 @@
     display: none;
     position: absolute;
     width: 100%;
-    max-height: 500px;
+    max-height: 400px;
     overflow: scroll;
-    border: 1px solid black;
-    border-radius: 0 0 var(--border-radius-content) var(--border-radius-content);
+    border-radius: var(--border-radius-content);
     background-color: #ffffff;
-    padding: 10px;
-    margin-bottom: 70px;
+    padding: 8px;
+    margin-top: 10px;
     font-size: 14px;
-    z-index: 1;
+    z-index: 99;
 }
 .my_reply #search_result li {
     border-bottom: 1px solid rgb(224, 224, 224);
-    padding: 10px 5px;
+    border-radius: var(--border-radius-btn);
+    padding: 10px 6px;
     transition: .1s;
     cursor: pointer;
 }
@@ -403,7 +404,8 @@
     }
     
     .reply_info p {
-        margin-bottom: 10px;
+        margin-bottom: 6px;
+        font-size: 12px;
     }
 
     .my_reply  form {
@@ -437,7 +439,6 @@
 
     .replies .playlist_control .playAllBtn {
         padding: 4px 8px;
-        background-color: inherit;
         border: 1px solid var(--border-color);
         border-radius: var(--border-radius-btn);
         font-size: 12px;
@@ -482,6 +483,7 @@
 
 .noResult {
     display: none;
+    padding: 8px;
 }
 
 
