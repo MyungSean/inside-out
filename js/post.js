@@ -286,15 +286,19 @@ function searchMusic(artist, title) {
     })
 }
 
-// 로그인된 유저만 댓글 추가 가능
+// 음악 추가
 $('#keyword').focus(function() {
     var user = auth.currentUser;
+    // 로그인된 유저만 댓글 추가 가능
     if ( user ) {
         var uid = user.uid;
         database.ref('users/'+uid).once('value').then(function(snapshot) {
             var name = snapshot.val().name;
             $('#name').val(name);
-        })    
+        })
+
+        // 직접 링크 추가 숨기기
+        $('.search_link').removeClass('active');
     } else {
         alert('로그인 후에 음악을 남기실 수 있습니다.');
         $('#keyword').blur();
@@ -308,12 +312,12 @@ $('#search_result').on('click', 'li', function() {
     $('#artist').val(artist);
     $('#title').val(title);
     $('#search_result').hide();
-    $('.search_bar').hide();
-    $('.comment_area').show();
+    $('.search_wrap').hide();
 })
 $('#close_search_result').click(function() {
     $('#search_result').hide();
     $('#keyword').val("");
+    $('.search_link').addClass('active');
 })
 
 $('.video_confirm').on('click', '.cancelBtn', function() {
@@ -323,7 +327,61 @@ $('.video_confirm').on('click', '.cancelBtn', function() {
     $('#videoId').val("");
     $('#thumbnail').val("");
     $('.video_confirm').hide();
-    $('.search_bar').show();
+    $('.search_wrap').show();
+    $('.search_link').addClass('active');
+})
+
+// 직접 링크 추가
+$('.search_link button').click(function(e) {
+    e.preventDefault();
+
+    var user = auth.currentUser;
+    // 로그인된 유저만 댓글 추가 가능
+    if ( user ) {
+        var uid = user.uid;
+        database.ref('users/'+uid).once('value').then(function(snapshot) {
+            var name = snapshot.val().name;
+            $('#name').val(name);
+        })
+
+        $('.searchByLinkModal').fadeIn(100);
+    } else {
+        alert('로그인 후에 음악을 남기실 수 있습니다.');
+    }
+})
+
+// 유튜브 url에서 video id 찾기
+function youtube_parser(url){
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    var match = url.match(regExp);
+    return (match&&match[7].length==11)? match[7] : false;
+}
+
+$('.searchByLinkModal .submitBtn').click(function() {
+    var targetLink = $('#targetLink').val();
+    if ( targetLink == "" ) {
+        alert('링크를 입력해주세요.');
+        return
+    }
+
+    let videoId = youtube_parser(targetLink);
+    if ( videoId ) {
+        let thumbnail = "https://i.ytimg.com/vi/"+videoId+"/hqdefault.jpg";
+    
+        var iframe = 
+        `<iframe src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    
+        $('.embed_youtube').html(iframe);
+        $('#videoId').val(videoId);
+        $('#thumbnail').val(thumbnail);
+
+        $('.search_wrap').hide();
+        $('.video_confirm').css('display', 'flex');
+
+        $('.searchByLinkModal').fadeOut(100);
+    } else {
+        alert('유효하지 않은 링크입니다.');
+    }
 })
 
 // 게시글 좋아요
@@ -666,7 +724,6 @@ $(document).on('click', '.edit_reply', function() {
     var postId = $('#postId').val();
     var replyId = $(this).closest('li').attr('id');
     $('#edit_replyId').val(replyId);
-    console.log(postId, replyId, id);
     database.ref('board/'+id+'/posts/'+postId+'/reply/'+replyId).once('value').then(function(snapshot) {
         var title = snapshot.val().title;
         var artist = snapshot.val().artist;

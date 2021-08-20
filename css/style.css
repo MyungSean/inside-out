@@ -98,6 +98,8 @@ button {
     background-color: var(--text-dark-brown);
     color: var(--background-ivory);
     border: none;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
 }
 .modal button {
     color: #fff;
@@ -641,6 +643,13 @@ footer .site_info p {
     background: none;
 } */
 
+.modal input[type=text] {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-btn);
+    width: 100%;
+    padding: 8px;
+}
+
 .modal .submitBtn {
     display: flex;
     margin-left: auto;
@@ -648,7 +657,8 @@ footer .site_info p {
     border-radius: var(--border-radius-btn);
     /* border: 1px solid var(--border-color); */
     /* background-color: inherit; */
-    padding: 3px 10px;
+    padding: 4px 12px;
+    font-size: 14px;
     cursor: pointer;
 }
 

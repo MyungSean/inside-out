@@ -54,9 +54,14 @@
                 <div class="my_reply">
                     <form>
                         <div class="search_area">
-                            <div class="search_bar">
-                                <input type="text" id="keyword" placeholder="추가할 음악 검색하기" onkeyup="addMusicList()" autocomplete="off">
-                                <i class="ri-close-line" id="close_search_result"></i>
+                            <div class="search_wrap">
+                                <div class="search_bar">
+                                    <input type="text" id="keyword" placeholder="추가할 음악 검색하기" onkeyup="addMusicList()" autocomplete="off">
+                                    <i class="ri-close-line" id="close_search_result"></i>
+                                </div>
+                                <div class="search_link active">
+                                    <button>직접 입력</button>
+                                </div>
                             </div>
                             <ul id="search_result" class="dsdw">
                                 <div class="noResult">
@@ -68,11 +73,11 @@
                                 <div class="video_info">
                                     <div>
                                         <label for="title">title</label>
-                                        <input type="text" id="title" value="">
+                                        <input type="text" id="title" value="" placeholder="제목을 입력해주세요">
                                     </div>
                                     <div>
                                         <label for="artist">artist</label>
-                                        <input type="text" id="artist" value="">
+                                        <input type="text" id="artist" value="" placeholder="아티스트를 입력해주세요">
                                     </div>
                                     <div class="comment_area">
                                         <input type="text" id="my_comment" placeholder="댓글 추가" maxlength="100" autocomplete="off" oninput="lengthCheck(this)">
@@ -107,6 +112,20 @@
                 <p>해당 게시물이 존재하지 않습니다.</p>
             </div>
 
+            <div class="modal searchByLinkModal">
+                <div class="modal_content">
+                    <p class="modal_title">직접 링크 입력</p>
+                    <div>
+                        <input type="text" id="targetLink" placeholder="유튜브 링크를 입력해주세요.">
+                        <p class="exampleLink">
+                            https://www.youtube.com/watch?v=abcd1234<br>
+                            https://youtu.be/abcd1234
+                        </p>
+                    </div>
+                    <button class="submitBtn">검색</button>
+                </div>
+            </div>
+
             <div class="modal addToPlaylistModal">
                 <input type="hidden" id="targetVideoId">
                 <input type="hidden" id="targetTitle">
@@ -118,6 +137,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="modal editReplyModal">
                 <input type="hidden" id="edit_replyId">
                 <div class="modal_content">
@@ -134,7 +154,7 @@
                         <div class="comment_area">
                             <input type="text" id="edit_my_comment" placeholder="댓글 추가" maxlength="100" autocomplete="off" oninput="lengthCheck(this)">
                             <p><span>0</span>/100</p>
-                        </div>      
+                        </div>
                         <div>
                             <label for="edit_anonymity">익명</label>
                             <input type="checkbox" id="edit_anonymity">
