@@ -166,10 +166,23 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
                 }
             }
 
+            // 게시글 작성자가 좋아요 표시한 댓글 표시
+            if ( likes && likes[uid] ) {
+                var writerHeart = `
+                    <div class="writerHeart">
+                        <i class="ri-heart-fill"></i>
+                        <p class="dsdw">글쓴이가 좋아요를 남겼습니다</p>
+                    </div>
+                `;
+            } else {
+                var writerHeart = "";
+            }
+
             var li =
             `<li name="${videoId}" id="${key}">
                <div class="reply_music">
-                    <div>
+                    ${writerHeart}
+                    <div class="track_info">
                         <div class="img_wrap">
                             <img src="${thumbnail}" alt="${title} 썸네일">
                             <i class="ri-play-fill play active"></i>
@@ -212,6 +225,13 @@ database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).on
         
     });
 })
+
+// 글쓴이가 좋아요한 댓글 표시
+$(document).on('mouseenter','.writerHeart i', function () {
+    $(this).closest(".writerHeart").find("p").fadeIn(50);
+}).on('mouseleave','.writerHeart i',  function(){
+    $(this).closest(".writerHeart").find("p").fadeOut(50)
+});
 
 // 댓글 입력을 위한 음악 검색
 function addMusicList() {
@@ -617,7 +637,7 @@ function applyPlaylist(e) {
 
 
 // 댓글 좋아요
-$('.replies').on('click', '.ri-heart-line', function() {
+$('.replies').on('click', '.btns .ri-heart-line', function() {
     var user = auth.currentUser;
     if ( !user ) {
         alert('로그인 후 이용하실 수 있습니다.');
@@ -637,7 +657,7 @@ $('.replies').on('click', '.ri-heart-line', function() {
         [uid]: true
     })
 })
-$('.replies').on('click', '.ri-heart-fill', function() {
+$('.replies').on('click', '.btns .ri-heart-fill', function() {
     $(this).closest('li').find('.ri-heart-line').addClass('active');
     $(this).closest('li').find('.ri-heart-fill').removeClass('active');
     

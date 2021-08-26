@@ -248,6 +248,14 @@
 .editor .option #edit_post {
     display: none;
 }
+
+.editor .note p {
+    font-size: 14px;
+    color: rgb(134, 134, 134);
+    line-height: 22px;
+    margin-bottom: 10px;
+}
+
 .backToList {
     margin-top: 20px;
     display: flex;
@@ -288,6 +296,13 @@
         padding: 4px 8px;
         font-size: 14px;
     }
+
+    .editor .note p {
+        font-size: 10px;
+        line-height: 16px;
+        margin-bottom: 12px;
+    }
+
     .backToList {
         margin-top: 10px;
     }
@@ -300,3 +315,4 @@
         margin-right: 4px;
     }
 }
+

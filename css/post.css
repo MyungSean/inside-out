@@ -313,7 +313,29 @@
     flex-direction: column;
     font-family: var(--font-main-e), sans-serif;
 }
-.reply_music > div:first-child {
+.reply_music .writerHeart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: right;
+    width: 100%;
+}
+.reply_music .writerHeart i {
+    color: var(--emphasize-orange);
+    font-size: 20px;
+    cursor: pointer;
+}
+.reply_music .writerHeart p {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    padding: 8px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.reply_music .track_info {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -621,11 +643,10 @@
     font-weight: 400;
 }
 .editReplyModal .video_info input[type=text] {
-    border: none;
     border-bottom: 1px solid var(--border-color);
     outline: none;
     width: 100%;
-    padding: 8px 0;
+    margin-top: 4px;
     margin-bottom: 20px;
 }
 .editReplyModal .comment_area {
@@ -638,7 +659,7 @@
     text-align: right;
     font-size: 12px;
     color: rgb(160, 160, 160);
-    margin-top: 5px;
+    margin-top: 8px;
 }
 .editReplyModal .video_info .btns {
     flex-grow: 1;
