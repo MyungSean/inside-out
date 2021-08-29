@@ -114,6 +114,23 @@ button {
 @-webkit-keyframes spinCD { 100% { -webkit-transform: rotate(360deg) scale(1.8); } }
 @keyframes spinCD { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg) scale(1.8); } }
 
+/* 둥둥 애니메이션 */
+@keyframes float {
+	0% {
+		/* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
+		transform: translatey(0px);
+	}
+	50% {
+		/* box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2); */
+        /* filter: drop-shadow(0px 20px 5px rgba(78, 71, 71, 0.2)); */
+        transform: translatey(-10px);
+	}
+	100% {
+		/* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
+		transform: translatey(0px);
+	}
+}
+
 
 /* 레이아웃 */
 .wrap {
@@ -406,11 +423,11 @@ header .dropdownToggleBtn {
 .footer_wrap {
     padding: 20px;
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
 }
 footer .logo {
     font-family: var(--font-main-e);
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 800;
 }
 footer .menu {
@@ -420,15 +437,15 @@ footer .menu {
     margin: 15px 0;
 }
 footer .menu li {
-    padding: 0 10px;
-    border-right: 1px solid #000000;
+    padding: 0 4px;
+    border-right: 1px solid rgb(175, 175, 175);
 }
 footer .menu li:last-child {
     border-right: none;
 }
 footer .menu li a {
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 4px 8px;
     border-radius: 20px;
     transition: .1s;
 }
@@ -440,13 +457,14 @@ footer .site_info p {
 }
 @media screen and (max-width: 1000px) {
     .footer_wrap {
-        font-size: 12px;
+        padding: 10px;
+        font-size: 10px;
     }
     footer .logo {
         font-size: 18px;
     }
     footer .menu {
-        margin: 10px 0;
+        margin: 8px 0;
     }
 }
 
@@ -776,3 +794,23 @@ footer .site_info p {
   .slider.round:before {
     border-radius: 50%;
   }
+
+
+
+  /* 유튜브 iframe */
+  .video_container {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+}
+ 
+.video_container iframe,
+.video_container object,
+.video_container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}

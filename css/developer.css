@@ -1,0 +1,414 @@
+.area {
+    margin-bottom: 80px;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+@media screen and (max-width: 1000px) {
+    .area {
+        margin-bottom: 50px;
+    }
+    
+    h2 {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+} 
+
+/* 새소식 */
+.news_area .news {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-content);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.news .news-heading {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.news .news-heading .title {
+    font-size: 20px;
+}
+.news .news-heading .date {
+    font-size: 14px;
+    font-weight: 200;
+    color: rgb(129, 129, 129);
+}
+.news .news-body {
+    display: none;
+    border-top: 1px solid var(--border-color);
+    margin-top: 10px;
+    line-height: 22px;
+    text-align: justify;
+}
+.news .news-body p {
+    margin: 10px;
+}
+.news .news-body iframe {
+    border-radius: 10px;
+    /* margin: 10px 0; */
+}
+@media screen and (max-width: 1000px) {
+    .news_area .news {
+        padding: 8px;
+    }
+    .news .news-heading .title {
+        font-size: 16px;
+    }
+    .news .news-heading .date {
+        font-size: 12px;
+    }
+    .news .news-body {
+        padding-top: 8px;
+        margin-top: 8px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+} 
+
+
+/* 개발자 */
+.developer_wrap {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 100px;
+    /* width: 800px; */
+    margin: 80px auto;
+}
+.developer_area .section {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 30px;
+
+}
+.developer_area .text {
+    flex-grow: 1;
+}
+
+.developer_area .section img {
+    width: 350px;
+    animation: float 4s ease-in-out infinite;
+}
+.developer_area h3 {
+    font-size: 35px;
+    font-weight: 600;
+}
+.developer_area .description {
+    margin: 30px 0;
+    font-size: 18px;
+    line-height: 25px;
+}
+.developer_area .description .insideOut {
+    font-family: var(--font-main-e);
+    font-weight: 900;
+}
+.developer_area .description a {
+    text-decoration: underline;
+}
+
+.developer_area .donationModalBtn {
+    display: inline-block;
+    background-color: var(--text-dark-brown);
+    color: var(--background-ivory);
+    padding: 10px 24px;
+    border: 3px solid var(--text-dark-brown);
+    border-radius: 50px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 900;
+    font-family: var(--font-main-e);
+    cursor: pointer;
+    transition: .2s;
+}
+.developer_area .donationModalBtn:hover  {
+    background-color: var(--background-ivory);
+    color: var(--text-dark-brown);
+}
+.donationModalBtn span {
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 200;
+}
+
+.developer_area .thanksTo h4 {
+    margin-bottom: 10px;
+    font-family: var(--font-main-e);
+} 
+.developer_area .thanksTo .supporters {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 120px;
+}
+.developer_area .thanksTo .supporter {
+    height: 100%;
+}
+.developer_area .thanksTo .supporter a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.developer_area .thanksTo .supporter img {
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+    margin-right: 6px;
+}
+.developer_area .thanksTo .supporter p {
+    /* font-family: var(--font-main-e); */
+    font-weight: 600;
+    font-size: 20px;
+    word-spacing: -2px;
+}
+
+@media screen and (max-width: 1000px) {
+    .developer_wrap {
+        gap: 50px;
+        margin: 20px auto;
+    }
+    .developer_area .section {
+        flex-flow: column nowrap;
+        justify-content: center;
+    }
+    .developer_area .section.donation {
+        flex-flow: column-reverse nowrap;
+    }
+    
+    .developer_area .section img {
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+    }
+    .developer_area h3 {
+        font-size: 25px;
+    }
+    .developer_area .description {
+        margin: 20px 0;
+        font-size: 16px;
+        line-height: 20px;
+    }
+    
+    .developer_area .donationModalBtn {
+        display: block;
+        padding: 8px 20px;
+        font-size: 18px;
+    }
+    .donationModalBtn span {
+        font-size: 12px;
+    }
+
+    .developer_area .thanksTo h4 {
+        margin-bottom: 4px;
+        font-size: 14px;
+    }    
+    .developer_area .thanksTo .supporters {
+        height: 45px;
+        padding: 10px 0;
+    }
+    .developer_area .thanksTo .supporter img {
+        margin-right: 2px;
+    }
+    .developer_area .thanksTo .supporter p {
+        font-weight: 600;
+        font-size: 16px;
+    }    
+} 
+
+
+
+/* 코멘트 */
+.comment_area {
+    position: relative;
+    padding: 50px 0;
+}
+
+.comment_area_background {
+    /* display: none; */
+    position: absolute;
+    background-color: var(--text-dark-brown);
+    background-color: #d1bda7;
+    top: 0;
+    transform: translateX( calc( (1000px - 100vw)/2 ) );
+    width: 100vw;
+    height: 100%;
+    z-index: -99;
+}
+
+.comment_area h2 {
+    /* color: var(--background-ivory); */
+}
+
+.comment_container {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 30px;
+}
+
+.writeComment {
+    flex-basis: 430px;
+    flex-shrink: 0;
+}
+.writeComment textarea {
+    display: block;
+    padding: 10px;
+    width: 100%;
+    height: 160px;
+    resize: none;
+    border: none;
+    border-radius: 10px;
+}
+.writeComment .writerInfo {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 10px;
+}
+.writeComment #name {
+    flex-grow: 1;
+    margin-right: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+}
+.writeComment button {
+    padding: 4px 25px;
+    font-size: 16px;
+    border-radius: 10px;
+    /* background-color: #fff;
+    color: var(--text-dark-brown); */
+}
+
+.comments_wrap {
+    flex-grow: 1;
+}
+.comments {
+    max-height: 500px;
+    overflow-y: auto;
+}
+.comments .comment {
+    background-color: #fff;
+    padding: 14px;
+    margin-bottom: 14px;
+    line-height: 22px;
+    border-radius: 10px;
+}
+.comments .comment .name {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 1000px) {
+    .comment_area {
+        padding: 40px 0;
+    }
+    
+    .comment_area_background {
+        transform: translateX( -20px );
+    }
+    
+    .comment_container {
+        flex-flow: column nowrap;
+        /* gap: 30px; */
+    }
+    
+    .writeComment {
+        flex-basis: inherit;
+    }
+    .writeComment textarea {
+        height: 100px;
+    }
+    .writeComment button {
+        padding: 4px 20px;
+        font-size: 14px;
+    }
+    
+    .comments {
+        max-height: 400px;
+    }
+    .comments .comment {
+        padding: 10px;
+        margin-bottom: 10px;
+        line-height: 20px;
+        font-size: 14px;
+    }
+    .comments .comment .name {
+        margin-bottom: 0;
+        font-size: 12px;
+    }    
+} 
+
+
+
+/* 모달 */
+/* 후원 모달 */
+.donationModal .donationChannel {
+    text-align: center;
+}
+
+.donationModal h4 {
+    margin-bottom: 10px;
+    /* font-family: var(--font-main-e); */
+}
+.donationModal .kakaoPay {
+    margin-bottom: 25px;
+}
+
+.donationModal #qr {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    width: 120px;
+}
+.donationModal #donateBtn {
+    display: block;
+    margin: 0 auto;
+    width: 90px;
+}
+
+.donationModal .account {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+.donationModal .account p {
+    position: relative;
+    display: inline-block;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-content);
+    padding: 10px 14px;
+    margin-right: 5px;
+    font-size: 14px;
+    overflow: hidden;
+}
+.donationModal .account p span:first-child {
+    margin-right: 10px;
+}
+.donationModal .copyBtn {
+    padding: 0 14px;
+    border-radius: 10px;
+}
+.donationModal .copied {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background-color: var(--emphasize-orange);
+    color: #fff;
+    font-size: 14px;
+}
