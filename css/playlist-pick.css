@@ -1,36 +1,264 @@
-/* 준비중 알림 - 삭제 예정 */
-.notice_area {
-    margin-top: 100px;
-    text-align: center;
+/* 페이지 정보 */
+.board_info {
+    margin-top: 80px;
+    margin-bottom: 30px;
 }
-.notice_area img {
-    width: 300px;
+.board_info h2 {
+    font-family: var(--font-main-e), sans-serif;
+    font-size: 24px;
 }
-.notice_area .ready {
-    margin-top: 10px;
-    font-size: 30px;
-    font-weight: 700;
+.board_info p {
+    padding: 8px 0;
+    font-weight: 400;
 }
-.notice_area .description {
-    margin-top: 20px;
-    font-size: 20px;
-    font-weight: 200;
-}
+
 @media screen and (max-width: 1000px) {
-    .notice_area {
-        margin-top: 40px;
+    .board_info {
+        margin-top: 20px;
     }
-    .notice_area img {
-        width: 70%;
-        max-width: 300px;
+    .board_info h2 {
+        font-size: 20px;
     }
-    .notice_area .ready {
-        font-size: 24px;
+    .board_info p {
+        font-size: 14px;
     }
-    .notice_area .description {
-        margin: 0 20px;
-        margin-top: 16px;
+}
+
+
+/* 플레이리스트 */
+.playlists {
+    position: relative;
+    display: flex;
+    gap: 12.5px;
+    flex-flow: row wrap;
+}
+.playlist_wrap {
+    width: 325px;
+}
+.playlist_overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0000007e;
+    z-index: 99;
+}
+.playlist {
+    position: relative;
+    padding: 10px;
+    width: 100%;
+    border-radius: var(--border-radius-content);
+    background-color: #FFF;
+    /* transition: .4s; */
+    z-index: 1;
+}
+.playlist.active {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    z-index: 101;
+}
+.playlist .video_container {
+    display: none;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.playlist .thumbnail {
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.playlist .closeBtn {
+    display: none;
+    position: absolute;
+    top: -50px;
+    right: 0;
+    font-size: 35px;
+    border-radius: 50%;
+    padding: 3px;
+    background-color: #fff;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.playlist .playlistInfo {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 10px;
+    overflow: hidden;
+}
+.playlist .title {
+    flex: 1 0 100%;
+    font-size: 18px;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    /* transition: .4s; */
+}
+.playlist .playlistControl {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 40px;
+    margin-left: 10px;
+}
+.playlist .playlistControl .btn {
+    position: relative;
+}
+.playlist .playlistControl i {
+    font-size: 25px;
+    cursor: pointer;
+}
+.playlist .playlistControl .label {
+    display: none;
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background-color: #fff;
+    padding: 4px;
+    border-radius: 10px;
+}
+.playlist .playlistControl .heart-line-btn,
+.playlist .playlistControl .heart-fill-btn {
+    display: none;
+}
+.playlist .playlistControl .heart-line-btn.active,
+.playlist .playlistControl .heart-fill-btn.active {
+    display: block;
+}
+.playlist .playlistControl .heart-fill-btn i {
+    color: var(--emphasize-orange);
+}
+.playlist .playlistControl .likesCnt {
+    text-align: right;
+    margin-right: -35px;
+}
+
+@media screen and (max-width: 1000px) {
+    .playlists {
+        flex-flow: column wrap;
+    }
+    .playlist_wrap {
+        width: 100%;
+    }
+    .playlist {
+        padding: 10px;
+    }
+    .playlist.active {
+        width: calc(100% - 20px);
+    }
+    .playlist .closeBtn {
+        top: -38px;
+        font-size: 25px;
+    }
+    
+    .playlist .title {
         font-size: 16px;
-        line-height: 20px;
+    }
+    .playlist .playlistControl {
+        gap: 18px;
+    }
+    .playlist .playlistControl i {
+        font-size: 20px;
+    }
+    .playlist .playlistControl .label {
+        bottom: 28px;
+        padding: 4px;
+        font-size: 12px;
+    }
+    .playlist .playlistControl .likesCnt {
+        margin-right: -18px;
+        font-size: 12px;
+    }
+}
+
+
+
+/* 유튜브 구독 배지 */
+.subscribeBadge_wrap {
+    position: fixed;
+    bottom: 0;
+    width: var(--content-width);
+    margin: 0 auto;
+    z-index: 1;
+}
+.subscribeBadge {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    bottom: 50px;
+    width: 90px;
+    height: 90px;
+    border-radius: 100px;
+    background-color: #fff;
+    overflow: hidden;
+    transition: .4s;
+    transition-delay: .5s;
+}
+.subscribeBadge.on {
+    width: 230px;
+    transition-delay: 0s;
+}
+.subscribeBadge button {
+    display: none;
+    background-color: #CC0000;
+    padding: 5px 12px;
+    margin: 20px;
+    font-size: 16px;
+    white-space: nowrap;
+}
+.subscribeBadge button.on {
+    display: block;
+}
+.subscribeBadge .img_wrap {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 3px solid #CC0000;
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    overflow: hidden;
+}
+.subscribeBadge img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+@media screen and (max-width: 1000px) {
+    .subscribeBadge_wrap {
+        width: 100%;
+    }
+    .subscribeBadge {
+        right: -60px;
+        bottom: 30px;
+        width: 75px;
+        height: 75px;
+        transition-delay: 0s;
+    }
+    .subscribeBadge.active {
+        right: 40px;
+    }
+    .subscribeBadge.on {
+        width: 200px;
+    }
+    .subscribeBadge button {
+        padding: 4px 10px;
+        margin: 20px;
+        font-size: 14px;
+    }
+    .subscribeBadge .img_wrap {
+        width: 75px;
+        height: 75px;
     }
 }

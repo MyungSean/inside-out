@@ -798,7 +798,7 @@ footer .site_info p {
 
 
   /* 유튜브 iframe */
-  .video_container {
+.video_container {
 	position: relative;
 	padding-bottom: 56.25%;
 	height: 0;
