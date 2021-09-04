@@ -50,6 +50,9 @@ h2 {
 .news .news-body p {
     margin: 10px;
 }
+.news .news-body a  {
+    text-decoration: underline;
+}
 .news .news-body iframe {
     border-radius: 10px;
     /* margin: 10px 0; */
