@@ -178,6 +178,11 @@ function getMyPosts() {
             var upload_date = childSnapshot.val().upload_date;
             var views = childSnapshot.val().views;
             var likes = childSnapshot.val().likes;
+            if ( likes ) {
+                likes_cnt = Object.keys(likes).length;
+            } else {
+                likes_cnt = 0;
+            }
 
             // 삭제된 게시물 표시하지 않기
             var state = childSnapshot.val().state;
@@ -205,7 +210,7 @@ function getMyPosts() {
             <td>${name}</td>
             <td><span class="mobile"><i class="ri-time-fill"></i></span>${getPastTime(upload_date)}</td>
             <td><span class="mobile"><i class="ri-eye-fill"></i></span>${views}</td>
-            <td>${likes}</td>
+            <td>${likes_cnt}</td>
             </tr>`;
     
             $('.myPosts table tbody').prepend(tr);
@@ -231,6 +236,11 @@ function getLikePosts() {
                 var upload_date = snapshot.val().upload_date;
                 var views = snapshot.val().views;
                 var likes = snapshot.val().likes;
+                if ( likes ) {
+                    likes_cnt = Object.keys(likes).length;
+                } else {
+                    likes_cnt = 0;
+                }
                 
                 // 삭제된 게시물 표시하지 않기
                 var state = snapshot.val().state;
@@ -258,7 +268,7 @@ function getLikePosts() {
                 <td>${name}</td>
                 <td><span class="mobile"><i class="ri-time-fill"></i></span>${getPastTime(upload_date)}</td>
                 <td><span class="mobile"><i class="ri-eye-fill"></i></span>${views}</td>
-                <td>${likes}</td>
+                <td>${likes_cnt}</td>
                 </tr>`;
                 
                 $('.likePosts table tbody').prepend(tr);
