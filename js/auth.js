@@ -12,7 +12,7 @@ auth.onAuthStateChanged(user => {
             if ( !isSubscribed ) {
                 // 팝업창 제한 시간 지났는지 확인
                 var now = new Date();
-                var gap = now.getTime() - parseInt(localStorage.getItem('webpushModalLastShown'));
+                var gap = now.getTime() - Number(localStorage.getItem('webpushModalLastShown'));
                 console.log( gap / 1000 );
                 if ( gap / 1000 > 5 ) {
 
