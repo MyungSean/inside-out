@@ -110,6 +110,9 @@
       firestore.settings({ timestampsInSnapshots: true });
     </script>
 
+    <!-- web push notification -->
+    <script src="https://cdn.flarelane.com/WebSDK.js" charset="UTF-8"></script>
+
     <script src="/js/main.js"></script>
     <script src="/js/auth.js"></script>
 
@@ -155,28 +158,26 @@
       });
     </script>
 
-    <!-- web push notification -->
-    <script src="https://cdn.flarelane.com/WebSDK.js" charset="UTF-8"></script>
     <script>
-        FlareLane.initialize({ projectId: "db10f4ce-3428-4426-9a37-2fe17a1d873b" });
-        $.ajax({
-          method: "POST",
-          url: "https://api.flarelane.com/v1/projects/db10f4ce-3428-4426-9a37-2fe17a1d873b/notifications",
-          headers: { 'Authorization': '_Uc9kAWcXj4m5oR4Y_JGS' },
-          contentType: "application/json",
-          data: JSON.stringify({ targetType: "device", targetIds: ["7bf9becd-c902-49be-a8b6-f700165f9fd3"], title: "title", body: "body" }),
-          dataType: "json",
-        })
-        .done(function() {
-          console.log('done');
-        })
-        .fail(function(xhr, status, errorThrown) {
-          console.log();("오류명: " + errorThrown + "<br>")
-          console.log();("상태: " + status);
-        })
-        .always(function(xhr, status) {
-          console.log('ajax 요청 완료');
-        });
+        // FlareLane.initialize({ projectId: "db10f4ce-3428-4426-9a37-2fe17a1d873b" });
+        // $.ajax({
+        //   method: "POST",
+        //   url: "https://api.flarelane.com/v1/projects/db10f4ce-3428-4426-9a37-2fe17a1d873b/notifications",
+        //   headers: { Authorization: 'Bearer _Uc9kAWcXj4m5oR4Y_JGS' },
+        //   contentType: "application/json; charset=utf-8",
+        //   data: JSON.stringify({ targetType: "device", targetIds: ["bffacaa5-6612-43ae-949a-3a8898ae9ce1"], title: "title", body: "body" }),
+        //   dataType: "json",
+        // })
+        // .done(function() {
+        //   console.log('done');
+        // })
+        // .fail(function(xhr, status, errorThrown) {
+        //   console.log();("오류명: " + errorThrown + "<br>")
+        //   console.log();("상태: " + status);
+        // })
+        // .always(function(xhr, status) {
+        //   console.log('ajax 요청 완료');
+        // });
     </script>
 
 </body>

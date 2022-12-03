@@ -1,8 +1,15 @@
+// 웹푸시 SDK 초기화
+FlareLane.initialize({ projectId: "db10f4ce-3428-4426-9a37-2fe17a1d873b" });
+
 // 유저 상태 확인
 auth.onAuthStateChanged(user => {
     if (user) {
         console.log('user logged in: ', user);
         getNtotification(user);
+
+        // 웹푸시 유저 아이디 설정
+        FlareLane.setUserId("sampleUid");
+        console.log(0);
     } else {
         console.log('user logged out');
     }
