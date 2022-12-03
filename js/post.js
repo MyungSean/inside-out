@@ -514,18 +514,19 @@ $('#submit_reply').click(function(e) {
                             url: "https://api.flarelane.com/v1/projects/db10f4ce-3428-4426-9a37-2fe17a1d873b/notifications",
                             headers: { Authorization: 'Bearer _Uc9kAWcXj4m5oR4Y_JGS' },
                             contentType: "application/json; charset=utf-8",
-                            data: JSON.stringify({ targetType: "userId", targetIds: [uid], title: "내 글에 새로운 음악이 달렸습니다", body: artist+" - "+title }),
+                            data: JSON.stringify({ targetType: "userId", targetIds: [uid], title: "내 글에 새로운 음악이 달렸습니다", body: artist+" - "+title, url: url }),
                             dataType: "json",
                         })
-                        // .done(function() {
-                        //     console.log('done');
-                        // })
+                        .done(function() {
+                            console.log('done');
+                        })
                         .fail(function(xhr, status, errorThrown) {
                             console.log();("오류명: " + errorThrown + "<br>")
                             console.log();("상태: " + status);
                         })
                         .always(function() {
-                            window.location.reload();
+                            console.log('전송 요청');
+                            // window.location.reload();
                         })
                     })
                 })
