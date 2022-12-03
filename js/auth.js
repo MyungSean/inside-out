@@ -10,8 +10,48 @@ auth.onAuthStateChanged(user => {
         FlareLane.getIsSubscribed((isSubscribed) => {
             console.log(isSubscribed);
             if ( !isSubscribed ) {
-                FlareLane.setIsSubscribed(true);
-                console.log('subscribed');
+                // 팝업창 제한 시간 지났는지 확인
+                var now = new Date();
+                var gap = now.getTime() - parseInt(localStorage.getItem('webpushModalLastShown'));
+                console.log( gap / 1000 );
+                if ( gap / 1000 > 5 ) {
+
+                    // 알림 허용 팝업창 띄우기
+                    var modal = `
+                    <div class="modal webpushModal active">
+                        <div class="modal_content">
+                            <p class="modal_title">알림 받기</p>
+                            <div class="subscribe">
+                                <p>알림을 허용하면 당신을 위한 댓글과 소식을 놓치지 않을 수 있어요!</p>
+                                <div class="btns">
+                                    <button class="laterBtn">다음에</button>
+                                    <button class="subscribeBtn">알림 받기</button>
+                                </div>
+                            </div>
+                        </div>
+                            
+                        <div class="loader">
+                            <i class="ri-loader-4-line"></i>
+                        </div>
+                    </div>
+                    `;
+
+                    $('body').prepend(modal);
+                    $('.webpushModal').fadeIn();
+                    $('.webpushModal .laterBtn').click(function() {
+                        $('.webpushModal').fadeOut();
+                        // 로컬스토리지에 팝업창 제한 시간 설정
+                        var date = new Date();
+                        date = date.getTime();
+                        localStorage.setItem('webpushModalLastShown', date);
+                    })
+                    $('.webpushModal .subscribeBtn').click(function() {
+                        // FlareLane.setIsSubscribed(true);
+                        localStorage.setItem('webpushModalLastShown', 0);
+                        console.log('subscribed');
+                    })
+                    
+                }
             }
         });
 

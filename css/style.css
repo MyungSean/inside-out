@@ -720,6 +720,29 @@ footer .site_info p {
     }        
 } 
 
+/* web push modal */
+.webpushModal .subscribe p {
+    padding: 1.5em 0;
+    margin-bottom: 1em;
+    word-break: keep-all;
+    line-height: 1.4em;
+}
+.webpushModal .subscribe .btns {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    gap: 1em;
+}
+.webpushModal .subscribe button {
+    padding: .6em 2em;
+    font-size: 1em;
+}
+.webpushModal .subscribe .laterBtn {
+    background-color: inherit;
+    color: var(--text-dark-brown);
+}
+
+
 
 /* 공통 디자인 */
 .dsdw {
