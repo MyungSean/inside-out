@@ -46,8 +46,9 @@ auth.onAuthStateChanged(user => {
                         localStorage.setItem('webpushModalLastShown', date);
                     })
                     $('.webpushModal .subscribeBtn').click(function() {
-                        // FlareLane.setIsSubscribed(true);
+                        FlareLane.setIsSubscribed(true);
                         localStorage.setItem('webpushModalLastShown', 0);
+                        $('.webpushModal').fadeOut();
                         console.log('subscribed');
                     })
                     
