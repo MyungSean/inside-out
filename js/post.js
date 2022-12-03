@@ -517,16 +517,12 @@ $('#submit_reply').click(function(e) {
                             data: JSON.stringify({ targetType: "userId", targetIds: [uid], title: "내 글에 새로운 음악이 달렸습니다", body: artist+" - "+title, url: url }),
                             dataType: "json",
                         })
-                        .done(function() {
-                            console.log('done');
-                        })
                         .fail(function(xhr, status, errorThrown) {
                             console.log();("오류명: " + errorThrown + "<br>")
                             console.log();("상태: " + status);
                         })
                         .always(function() {
-                            console.log('전송 요청');
-                            // window.location.reload();
+                            window.location.reload();
                         })
                     })
                 })

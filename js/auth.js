@@ -4,13 +4,20 @@ FlareLane.initialize({ projectId: "db10f4ce-3428-4426-9a37-2fe17a1d873b" });
 // 유저 상태 확인
 auth.onAuthStateChanged(user => {
     if (user) {
-        // console.log('user logged in: ', user);
         getNtotification(user);
+
+        // 웹푸시 알림 동의 받기
+        FlareLane.getIsSubscribed((isSubscribed) => {
+            console.log(isSubscribed);
+            if ( !isSubscribed ) {
+                FlareLane.setIsSubscribed(true);
+                console.log('subscribed');
+            }
+        });
 
         // 웹푸시 유저 아이디 설정
         FlareLane.setUserId(user.uid);
     } else {
-        console.log('user logged out');
         FlareLane.setUserId(null);
     }
     
