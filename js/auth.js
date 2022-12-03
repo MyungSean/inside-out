@@ -8,10 +8,10 @@ auth.onAuthStateChanged(user => {
         getNtotification(user);
 
         // 웹푸시 유저 아이디 설정
-        FlareLane.setUserId("sampleUid");
-        console.log(0);
+        FlareLane.setUserId(user.uid);
     } else {
         console.log('user logged out');
+        FlareLane.setUserId(null);
     }
     
     user = firebase.auth().currentUser;

@@ -490,6 +490,7 @@ $('#submit_reply').click(function(e) {
         edit_date: false
     })
     .then(function() {
+        // 데이터베이스에 알림 추가
         database.ref('board/'+id+'/posts/'+postId).once('value').then(function(snapshot) {
             var author = snapshot.val().uid;
             database.ref('users/'+author+'/notifications').push().set({
@@ -501,7 +502,34 @@ $('#submit_reply').click(function(e) {
                 date: Date.now()
             })
             .then(function() {
-                window.location.reload();
+                // 글 작성자에게 웹푸시 전송
+                database.ref('board/'+id+'/posts').orderByChild('number').equalTo(Number(no)).once('value').then(function(snapshot){                
+                    snapshot.forEach(childSnapshot => {
+                        var uid = childSnapshot.val().uid;
+                        console.log(uid);
+                        console.log(artist);
+
+                        $.ajax({
+                            method: "POST",
+                            url: "https://api.flarelane.com/v1/projects/db10f4ce-3428-4426-9a37-2fe17a1d873b/notifications",
+                            headers: { Authorization: 'Bearer _Uc9kAWcXj4m5oR4Y_JGS' },
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify({ targetType: "userId", targetIds: [uid], title: "내 글에 새로운 음악이 달렸습니다", body: artist+" - "+title }),
+                            dataType: "json",
+                        })
+                        .done(function() {
+                            console.log('done');
+                        })
+                        .fail(function(xhr, status, errorThrown) {
+                            console.log();("오류명: " + errorThrown + "<br>")
+                            console.log();("상태: " + status);
+                        })
+                        .always(function() {
+                            console.log('전송 요청');
+                            // window.location.reload();
+                        })
+                    })
+                })
             })
         })
     })
