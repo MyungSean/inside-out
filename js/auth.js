@@ -8,13 +8,11 @@ auth.onAuthStateChanged(user => {
 
         // 웹푸시 알림 동의 받기
         FlareLane.getIsSubscribed((isSubscribed) => {
-            console.log(isSubscribed);
             if ( !isSubscribed ) {
                 // 팝업창 제한 시간 지났는지 확인
                 var now = new Date();
                 var gap = now.getTime() - Number(localStorage.getItem('webpushModalLastShown'));
-                console.log( gap / 1000 );
-                if ( gap / 1000 > 5 ) {
+                if ( gap / 1000 / 60 / 60 /24 > 3 ) { // 3일동안 보지 않기
 
                     // 알림 허용 팝업창 띄우기
                     var modal = `
@@ -49,7 +47,6 @@ auth.onAuthStateChanged(user => {
                         FlareLane.setIsSubscribed(true);
                         localStorage.setItem('webpushModalLastShown', 0);
                         $('.webpushModal').fadeOut();
-                        console.log('subscribed');
                     })
                     
                 }
